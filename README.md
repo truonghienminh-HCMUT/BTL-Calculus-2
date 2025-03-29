@@ -37,6 +37,16 @@ Sinh viên đọc thật kỹ và thực hiện đúng và đủ các yêu cầu
     1. Hình ảnh, đồ họa, videos mô phỏng rõ ràng, sắc nét, âm thanh rõ ràng.
     2. Nếu SV sử dụng word hoặc phần mềm soạn thảo tương đương cần nộp pdf và source word kèm theo. Khuyến khích sử dụng latex nhưng không bắt buộc. Nếu sử dụng latex nộp rất cả file sources và pdf.
 
+# ⚠ Lưu ý chung: 
+- Báo cáo không được vượt quá 20 trang, lý tưởng nhất là từ 7 đến 10 trang.
+- Nội dung cần được trình bày mạch lạc, ngắn gọn nhưng đầy đủ, khuyến khích tư duy sáng tạo và tự giác. Báo cáo sẽ được kiểm tra đạo văn để đảm bảo tính trung thực.
+- Có thể sử dụng công cụ AI hỗ trợ, nhưng cần ghi rõ mức độ sử dụng theo thang điểm giảng viên quy định.
+- Phải hiểu rõ mã nguồn và có thể sử dụng bất kỳ ngôn ngữ lập trình nào phù hợp.
+- Báo cáo có thể được soạn thảo bằng LaTeX hoặc Word, và cần nộp cả file nguồn cùng với file PDF tương ứng.
+- Bản in phải in hai mặt, sử dụng màu, không cần đóng thành cuốn hoặc làm bìa cứng, trình bày như một báo cáo thông thường.
+- Hình ảnh minh họa phải ở định dạng vector (.eps, .pdf), không sử dụng ảnh chụp màn hình.
+- Cần hiểu rõ các suy luận và mô hình mô phỏng, đồng thời trình bày video demo một cách chi tiết và rõ ràng.
+
 <div align="center"><h2>⚡Hạn nộp: Hết ngày 24/05/2025⚡</h2></div>
 
 Chi tiết đề cương xem trong [đề cương](./BTL_DECUONGCHITIET_HK242.pdf).
