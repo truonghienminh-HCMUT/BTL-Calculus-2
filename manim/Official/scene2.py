@@ -1,4 +1,5 @@
 from manim import *
+import textwrap
 
 config.media_width = "100%"
 VIETNAMESE_TEMPLATE = TexTemplate(
@@ -55,17 +56,17 @@ class Main(CustomThreeDScene):
             y_length=6,
             z_length=6,
         )
-        x_label = Tex(r"x").set_color(RED).scale(0.7)
-        y_label = Tex(r"y").set_color(GREEN).scale(0.7)
-        z_label = Tex(r"z").set_color(BLUE).scale(0.7)
-        x_label.move_to(axes.c2p(10.5, 0, 0))
-        y_label.move_to(axes.c2p(0, 10.5, 0))
-        z_label.move_to(axes.c2p(0, 0, 7.5))
+        x_label = Tex(r"x").set_color(RED).scale(0.8)
+        y_label = Tex(r"y").set_color(GREEN).scale(0.8)
+        z_label = Tex(r"z").set_color(BLUE).scale(0.8)
+        x_label.move_to(axes.c2p(axes.x_range[1] + axes.x_range[2], 0, 0))
+        y_label.move_to(axes.c2p(0, axes.y_range[1] + axes.y_range[2], 0))
+        z_label.move_to(axes.c2p(0, 0, axes.z_range[1] + axes.z_range[2]))
         
         axes_center = axes.c2p((axes.x_range[0]+axes.x_range[1])/2, (axes.y_range[0]+axes.y_range[1])/2, (axes.z_range[0]+axes.z_range[1])/2)
 
         self.set_camera_orientation(phi=0, theta=-90 * DEGREES, frame_center = 10 * OUT)
-        self.play(Write(axes), run_time=0.7)
+        self.play(Write(axes), run_time=0.4)
         self.move_camera(phi=70 * DEGREES, frame_center = axes_center, zoom=0.5)
         self.wait(0.01)
         self.move_camera(theta=45 * DEGREES, frame_center = axes_center, zoom=0.7)
@@ -156,27 +157,52 @@ class Main(CustomThreeDScene):
             stroke_width=1.5
         )
         self.play(
-            FadeOut(surface, shift = DOWN * 0.5),
+            FadeOut(surface, shift = DOWN * 5, run_time = 1.5),
             FadeIn(surface_over_D, shift = DOWN * 0.5),
-            run_time = 1.5
         )
         self.wait(5)
 
         # Di chuyển sao cho trục về bên trái màn hình (vẫn quay)
         # Để phần bên phải màn hình có thể viết lý thuyết
+        self.move_camera(phi=70 * DEGREES, theta=0 * DEGREES, zoom=0.7)
         self.stop_ambient_camera_rotation()
-        self.set_camera_orientation(phi=70 * DEGREES, theta=45 * DEGREES, frame_center = axes_center, zoom=0.7)
+        # self.set_camera_orientation(phi=70 * DEGREES, theta=0 * DEGREES, frame_center = axes_center, zoom=0.7)
 
         # Group lại để di chuyển
         label_domain_D.clear_updaters()
         group3d = VGroup(axes, x_label, y_label, z_label, domain_D, label_a, label_b, label_c, label_d, label_domain_D, surface_over_D, dashed_lines_to_D, projection_lines)
-        label_domain_D.add_updater(lambda m: m.move_to(domain_D.get_center()))
-        scale = 0.5
-        target = UP + LEFT
+        scale = 1
         self.play(
-            group3d.animate.scale(scale).move_to(target),
+            group3d.animate.scale(scale).to_edge(DOWN, buff = -5),
             run_time=2
         )
-        self.wait(1)
+        # self.begin_ambient_camera_rotation(rate = PI/10)
+        self.wait(0.5)
+        # In chữ
+        theory_description = Tex(
+            r"\parbox{6cm}{" 
+            r"Hãy nhìn vào miền $\mathcal{D}$ là hình chiếu vuông góc của hàm $z = f(x, y)$ lên mặt phẳng Oxy. "
+            r"Tại đây chiếu vuông góc miền $\mathcal{D}$ lên trục Ox ta có được miền $[a, b]$, và chiếu lên Oy, ta có được miền $[c, d]$."
+            r"}",
+            font_size=40,
+            color=WHITE,
+            tex_environment=None
+        )
+
+        theory_group = VGroup(theory_description).arrange(
+            DOWN,
+            aligned_edge=LEFT,
+            buff=0.3
+        )
+        theory_group.to_edge(RIGHT, buff=1)
+
+        set_fixed(theory_group)
+
+        self.play(Write(theory_group), run_time=2)
+
+        self.wait(8)
+
+
+
 
 
