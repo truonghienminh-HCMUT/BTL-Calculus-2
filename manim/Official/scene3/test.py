@@ -32,10 +32,47 @@ class ChiaNho(MovingCameraScene):
             Tex("b").next_to(ax.c2p(9, 0), DOWN, buff=0.3),
         )
 
+        x_labels1 = VGroup(
+            MathTex("x_{1}").next_to(ax.c2p(2, 0), DOWN, buff=0.4),
+            MathTex("x_{i-1}").next_to(ax.c2p(5, 0), DOWN, buff=0.3),
+            MathTex("x_{i}").next_to(ax.c2p(6, 0), DOWN, buff=0.3),
+        )
+
         y_labels = VGroup(
             Tex("c").next_to(ax.c2p(0, 1), LEFT, buff=0.3),
             Tex("d").next_to(ax.c2p(0, 9), LEFT, buff=0.3),
         )
+
+        y_labels1 = VGroup(
+            MathTex("y_{1}").next_to(ax.c2p(0, 2), LEFT, buff=0.3),
+            MathTex("y_{j-1}").next_to(ax.c2p(0, 5), LEFT, buff=0.3),
+            MathTex("y_{j}").next_to(ax.c2p(0, 6), LEFT, buff=0.3),
+        )
+
+        left_bar_x = Line(UP * (-1.9), DOWN * 2.2).shift(LEFT * (3.82))
+        right_bar_x = Line(UP * (-1.9), DOWN * 2.2).shift(LEFT * (2.73))
+
+        arrow_x = DoubleArrow(
+            start=LEFT * 3.75,
+            end=LEFT  * 2.6,
+            buff=0.05,
+            stroke_width=1,
+            max_tip_length_to_length_ratio=0.1  # làm đầu mũi tên nhỏ lại
+        )
+        arrow_x.move_to([-3.28, -2.05, 0])
+
+        top_bar_y = Line(LEFT * 4.6, LEFT * 4.3).shift(UP * 2.45)
+        bottom_bar_y = Line(LEFT * 4.6, LEFT * 4.3).shift(UP * 1.91)
+
+        arrow_y = DoubleArrow(
+            start=UP * 0.5,
+            end=UP  * 1.5,
+            buff=0.05,
+            stroke_width=1,
+            max_tip_length_to_length_ratio=0.1  # làm đầu mũi tên nhỏ lại
+        )
+        arrow_y.move_to([-4.45, 2, 0])
+
 
         verticalline1 = Line(start=[-3.82, -2.45, 0], end=[-3.83, 2.44, 0], color=RED, stroke_width=2)#tạo đường thẳng, số 1 tính từ trái qua
         verticalline2 = Line(start=[-2.73, -2.45, 0], end=[-2.73, 2.44, 0], color=RED, stroke_width=2)
@@ -229,15 +266,56 @@ class ChiaNho(MovingCameraScene):
             stroke_opacity=1.0  # Độ trong suốt đường viền (1.0 = không trong suốt)
         )
         rect.shift(RIGHT*(1.1) + UP*0.55)#hình chữ nhật nằm ngang màu xanh lấy từ miền D ra 
-        length = Line(start=[-0.57, 3.25, 0], end=[0.58, 3.25, 0], color=RED, stroke_width=5)
-        weight = Line(start=[0.56, 3.27, 0], end=[0.56, 2.73, 0], color=YELLOW, stroke_width=5)
+        rect1 = Rectangle(
+            width=1.1, 
+            height=0.5,
+            fill_color=BLUE,
+            fill_opacity=0.5,  # Độ trong suốt phần tô màu
+            stroke_opacity=1.0  # Độ trong suốt đường viền (1.0 = không trong suốt)
+        )
+        rect1.shift(RIGHT*(1.1) + UP*0.55)
+        dotxiyi = Circle(radius=0.01, color=BLUE, fill_opacity=1)
+        dotxiyi.move_to([1.65, 0.8, 0])
+        dotxiyi1 = Circle(radius=0.1, color=BLUE, fill_opacity=1)
+        dotxiyi1.move_to([1.65, 0.8, 0])
+
+        tex1 = MathTex(r"D_{ij}", color=WHITE)
+        tex1.scale(0.8)
+        tex1.move_to([-1, 3, 0])
+
+        text2 = MathTex(r"(x_{i}, y_{j})", color=WHITE)
+        text2.scale(0.8)
+        text2.move_to([1.6, 3, 0])
+
+        text3 = MathTex(r"(x_{ij}*, y_{ij}*)", color=WHITE)    
+        text3.scale(0.8)
+        text3.move_to([4, 3, 0])
+
+        text11 = MathTex(r"\Delta x = \frac{b-a}{m}", color=BLUE) 
+        text11.scale(0.8)
+        text11.move_to([-3.2, -1.2, 0])
+
+        text22 = MathTex(r"\Delta y = \frac{d-c}{n}", color=BLUE)
+        text22.scale(0.8)
+        text22.move_to([-2.8, 2.2, 0])
         
         self.play(Create(ax), run_time=2)
         self.play(Create(labels), run_time=1)
+        self.play(Create(left_bar_x), Create(right_bar_x), Create(arrow_x), run_time=1)
+        self.play(FadeIn(text11), run_time=1)
+        self.wait(0.5)
+        self.play(Create(top_bar_y), Create(bottom_bar_y), Create(arrow_y), run_time=1)
+        self.play(FadeIn(text22), run_time=1)
+        self.wait(0.5)
+        self.play(Uncreate(left_bar_x), Uncreate(right_bar_x), Uncreate(arrow_x), Uncreate(text11),Uncreate(top_bar_y), Uncreate(bottom_bar_y), Uncreate(arrow_y), Uncreate(text22), run_time=1)
+        self.wait(0.5)
+
         self.play(Create(x_labels), Create(y_labels), run_time=1)
         self.wait(0.5)
+        self.play(Create(x_labels1), run_time=1)
         self.play(Create(verticalline1), Create(verticalline2), Create(verticalline3), Create(verticalline4), Create(verticalline5), Create(verticalline6), Create(verticalline7), Create(verticalline8), Create(verticalline9),run_time=2)
         self.wait(0.5)
+        self.play(Create(y_labels1), run_time=1)
         self.play(Create(horizontalline1), Create(horizontalline2), Create(horizontalline3), Create(horizontalline4), Create(horizontalline5), Create(horizontalline6), Create(horizontalline7), Create(horizontalline8), Create(horizontalline9), run_time=2)
         self.play(Create(verticalline11), Create(verticalline22), Create(verticalline33), Create(verticalline44), Create(verticalline55), Create(verticalline66), Create(verticalline77), Create(verticalline88), Create(verticalline99),run_time=0.5)
         self.play(Create(horizontalline11), Create(horizontalline22), Create(horizontalline33), Create(horizontalline44), Create(horizontalline55), Create(horizontalline66), Create(horizontalline77), Create(horizontalline88), Create(horizontalline99), run_time=0.5)
@@ -260,11 +338,19 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(dot48), Create(dot55), Create(dot62), run_time=0.2)
         self.play(Create(dot56), Create(dot63), run_time=0.2)
         self.play(Create(dot64), run_time=0.2)
-        self.play(Create(rect), run_time=2)
+        self.play(Create(rect), Create(rect1), Create(dotxiyi), run_time=2)
         self.wait(0.5)
-        self.play(rect.animate.move_to(UP*3))
+        self.play(rect.animate.move_to(UP*3), run_time=2)
+        self.play(FadeIn(tex1), run_time=2)
         self.wait(0.5)
-        self.play(Create(length), Create(weight), run_time=2)
+        self.play(Transform(dotxiyi, dotxiyi1), run_time=2)
+        self.play(dotxiyi1.animate.move_to(UP*3 + RIGHT*2.5), run_time=2)
+        self.play(FadeIn(text2), run_time=2)
+        self.wait(0.5)
+        self.play(dot29.animate.move_to(UP*3 + RIGHT*5.2), run_time=2)
+        self.play(FadeIn(text3), run_time=2)
+        self.wait(0.5)
+
 
         def update_curve(mob):
             mob.move_to(moving_dot.get_center())
