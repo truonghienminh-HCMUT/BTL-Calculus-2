@@ -15,6 +15,8 @@ VIETNAMESE_TEMPLATE = TexTemplate(
 # Set the default TeX template
 config.tex_template = VIETNAMESE_TEMPLATE
 
+config.frame_rate = 60
+
 class ChiaNho(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
