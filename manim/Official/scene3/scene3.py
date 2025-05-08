@@ -331,7 +331,7 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(dot6), Create(dot13), Create(dot20), Create(dot27), Create(dot34), Create(dot41), run_time=0.2)
         self.play(Create(dot7), Create(dot14), Create(dot21), Create(dot28), Create(dot35), Create(dot42), Create(dot49), run_time=0.2)       
         self.play(Create(dot8), Create(dot15), Create(dot22), Create(dot29), Create(dot36), Create(dot43), Create(dot50), Create(dot57), run_time=0.2)
-        self.play(Create(dot9), Create(dot16), Create(dot23), Create(dot30), Create(dot37), Create(dot44), Create(dot51), Create(dot58), run_time=0.2)
+        self.play(Create(dot16), Create(dot23), Create(dot30), Create(dot37), Create(dot44), Create(dot51), Create(dot58), run_time=0.2)
         self.play(Create(dot24), Create(dot31), Create(dot38), Create(dot45), Create(dot52), Create(dot59), run_time=0.2)
         self.play(Create(dot32), Create(dot39), Create(dot46), Create(dot53), Create(dot60), run_time=0.2)
         self.play(Create(dot40), Create(dot47), Create(dot54), Create(dot61), run_time=0.2)
