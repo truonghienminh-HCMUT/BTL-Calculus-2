@@ -56,9 +56,10 @@ class Main(CustomThreeDScene):
             y_length=6,
             z_length=6,
         )
-        x_label = Tex(r"x").set_color(RED).scale(0.8)
-        y_label = Tex(r"y").set_color(GREEN).scale(0.8)
-        z_label = Tex(r"z").set_color(BLUE).scale(0.8)
+        x_label = MathTex(r"x").set_color(RED).scale(0.8)
+        y_label = MathTex(r"y").set_color(GREEN).scale(0.8)
+        z_label = MathTex(r"z").set_color(BLUE).scale(0.8)
+
         x_label.move_to(axes.c2p(axes.x_range[1] + axes.x_range[2], 0, 0))
         y_label.move_to(axes.c2p(0, axes.y_range[1] + axes.y_range[2], 0))
         z_label.move_to(axes.c2p(0, 0, axes.z_range[1] + axes.z_range[2]))
