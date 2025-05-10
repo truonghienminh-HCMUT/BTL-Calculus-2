@@ -20,12 +20,15 @@ config.frame_rate = 60
 class ChiaNho(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
+
+        color_00ffff = "#00ffff"
+        color_7cfc00 = "#cc00ff"
          
         Text1 = Tex("Tọa độ Descartes").to_edge(UP * 7,  buff=0.5).scale(1)
         Text1.shift((UP * 3), LEFT * 3)
         Text2 = Tex("Tọa độ cực").to_edge(UP * 7,  buff=0.5).scale(1)
         Text2.shift((UP * 3), RIGHT * 3)
-        Text1.set_color_by_gradient(BLUE_E, TEAL_B, GREEN)
+        Text1.set_color_by_gradient(color_00ffff, color_7cfc00)
         Text2.set_color_by_gradient(RED, ORANGE, YELLOW)
         axes = Axes(
             x_range=[-5, 5, 1],  # [min, max, step]
@@ -157,11 +160,11 @@ class ChiaNho(MovingCameraScene):
         self.wait(1)
         self.play(r1.animate.move_to([2.5, 0.5, 0]), r2.animate.move_to([1.2, -0.3, 0]), Write(sin), Write(cos), angle_label1.animate.move_to([3.1, 0.54, 0]), angle_label2.animate.move_to([1.85, -0.27, 0]))
         self.wait(1)
-        self.play(Uncreate(sin), Uncreate(cos), Uncreate(angle_label1), Uncreate(angle_label2), Uncreate(r1), Uncreate(r2))
+        self.play(Unwrite(sin), Unwrite(cos), Uncreate(angle_label1), Uncreate(angle_label2), Unwrite(r1), Unwrite(r2))
         self.play(Transform(dot, dot1), Uncreate(dashed_line_x), Uncreate(dashed_line_y), Transform(line1, line11), Transform(angle, angle1), angle_label.animate.move_to([1, 0.3, 0]), r.animate.move_to([1.48, 1, 0]))
-        self.play( Create(circle1), Create(circle2), Create(circle3), Create(circle4), Transform(Text1, Text2), Create(dot1),)
+        self.play(Create(circle1), Create(circle2), Create(circle3), Create(circle4), Transform(Text1, Text2), Create(dot1),)
         self.play(Create(pi4), Create(pi34), Create(pi54), Create(pi74))
-        self.play(Create(textpi4), Create(textpi34), Create(textpi54), Create(textpi74), Create(textpi2), Create(textpi), Create(textpi32), Create(text0))
+        self.play(Write(textpi4), Write(textpi34), Write(textpi54), Write(textpi74), Write(textpi2), Write(textpi), Write(textpi32), Write(text0))
         self.wait(1)
 
 
