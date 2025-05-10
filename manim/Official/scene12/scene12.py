@@ -71,8 +71,6 @@ class ChiaNho(MovingCameraScene):
         half_circle_equation2 = MathTex("x^2 + y^2 = 1").to_edge(UP * (0),  buff=0.5).scale(0.5)
         half_circle_equation2.shift(RIGHT * (3.6))
 
-
-
         # Hiển thị tất cả cùng lúc
         self.play(
             LaggedStart(
