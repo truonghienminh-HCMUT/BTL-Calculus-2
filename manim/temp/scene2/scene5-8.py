@@ -248,6 +248,7 @@ class Main(CustomThreeDScene):
         self.wait(5)
         self.play(Unwrite(theory_group_1), run_time=0.5)
         self.wait(0.5)
+        self.play(Uncreate(group3d), run_time=0.5)
 
 
 
