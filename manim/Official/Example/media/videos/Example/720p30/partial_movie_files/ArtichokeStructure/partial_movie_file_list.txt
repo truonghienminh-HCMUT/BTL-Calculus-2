@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/Example/media/videos/Example/720p30/partial_movie_files/ArtichokeStructure/1128320712_4198332383_3949647141.mp4'

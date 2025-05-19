@@ -1,0 +1,3 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/Example/media/videos/Example/720p30/partial_movie_files/ArtichokeBud/1144671285_2245397157_3398211399.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/Example/media/videos/Example/720p30/partial_movie_files/ArtichokeBud/3984042278_945030808_3418325024.mp4'

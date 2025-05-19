@@ -1,0 +1,4 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/Example/media/videos/Example/720p30/partial_movie_files/AtisoDalatFull/3684075453_2709363802_223132457.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/Example/media/videos/Example/720p30/partial_movie_files/AtisoDalatFull/23114_4198332383_3171146831.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/Example/media/videos/Example/720p30/partial_movie_files/AtisoDalatFull/526201285_1305130819_2375220172.mp4'

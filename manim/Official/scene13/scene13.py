@@ -107,20 +107,27 @@ class ChiaNho(MovingCameraScene):
 
         line1 = Line(start=[2.197, 1.46, 0], end=[0, 0, 0], color=YELLOW, stroke_width=5)
         line11 = Line(start=[1.96, 1, 0], end=[0, 0, 0], color=YELLOW, stroke_width=5)
+        line2 = Line(start=[2.197, 0, 0], end=[0, 0, 0], color=YELLOW, stroke_width=5)
         r = Tex(r"r").scale(0.7).set_color_by_gradient(YELLOW)
         r.move_to([1.2, 1.2, 0])
         r1 = r.copy()
         r2 = r.copy()
 
+        dotxoay = Dot(line2.get_start(), color=RED)  # Đánh dấu điểm cần xoay
+        
+        # Nhóm đường thẳng và dấu chấm để cùng di chuyển
+        moving_part = VGroup(line2.copy(), dot)
+
 
         angle = Angle(
-             x_line, line1,
+            x_line, line1,
             radius=0.9,
             color=BLUE,
             quadrant=(1,-1),  # Chọn phần tư
             other_angle=False,  # Vẽ góc lớn hơn 180°
             fill_opacity=0.5   # Độ trong suốt
         )
+           
         angle_label = MathTex(r"\theta").scale(0.7).set_color_by_gradient(BLUE)
         angle_label.move_to([1.2, 0.3, 0])
         angle_label1 = angle_label.copy()
@@ -133,17 +140,17 @@ class ChiaNho(MovingCameraScene):
             other_angle=False,  # Vẽ góc lớn hơn 180°
             fill_opacity=0.5   # Độ trong suốt
         )
-        
 
         sin = MathTex(r"\sin").scale(0.7).set_color_by_gradient(RED)
-        sin.move_to([2.8, 0.54, 0])
+        sin.move_to([2.8, 0.73, 0])
         cos = MathTex(r"\cos").scale(0.7).set_color_by_gradient(RED)
-        cos.move_to([1.51, -0.3, 0])
+        cos.move_to([1.12, -0.3, 0])
 
         circle1 = Circle(radius=0.74, color=WHITE)
         circle2 = Circle(radius=1.47, color=WHITE)
         circle3 = Circle(radius=2.2, color=WHITE)
         circle4 = Circle(radius=2.93, color=WHITE)
+        
 
         self.play(Write(Text1))
         self.wait(1)
@@ -158,14 +165,51 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(angle))
         self.play(Write(angle_label))
         self.wait(1)
-        self.play(r1.animate.move_to([2.5, 0.5, 0]), r2.animate.move_to([1.2, -0.3, 0]), Write(sin), Write(cos), angle_label1.animate.move_to([3.1, 0.54, 0]), angle_label2.animate.move_to([1.85, -0.27, 0]))
+        self.play(r1.animate.move_to([2.5, 0.7, 0]), r2.animate.move_to([0.8, -0.3, 0]), Write(sin), Write(cos), angle_label1.animate.move_to([3.1, 0.73, 0]), angle_label2.animate.move_to([1.46, -0.27, 0]))
         self.wait(1)
         self.play(Unwrite(sin), Unwrite(cos), Uncreate(angle_label1), Uncreate(angle_label2), Unwrite(r1), Unwrite(r2))
-        self.play(Transform(dot, dot1), Uncreate(dashed_line_x), Uncreate(dashed_line_y), Transform(line1, line11), Transform(angle, angle1), angle_label.animate.move_to([1, 0.3, 0]), r.animate.move_to([1.48, 1, 0]))
-        self.play(Create(circle1), Create(circle2), Create(circle3), Create(circle4), Transform(Text1, Text2), Create(dot1),)
+        self.play(Transform(dot, dot1), Uncreate(dashed_line_x), Uncreate(dashed_line_y), Transform(line1, line11), angle_label.animate.move_to([1.1, 0.3, 0]), r.animate.move_to([1.48, 1, 0]), Transform(angle, angle1))
+        self.play(Create(circle1), Create(circle2), Create(circle3), Create(circle4), Transform(Text1, Text2), Create(dot1))
         self.play(Create(pi4), Create(pi34), Create(pi54), Create(pi74))
         self.play(Write(textpi4), Write(textpi34), Write(textpi54), Write(textpi74), Write(textpi2), Write(textpi), Write(textpi32), Write(text0))
         self.wait(1)
+        self.play(dot.animate.move_to([2.197, 0, 0]), dot1.animate.move_to([2.197, 0, 0]), Transform(line1, line2))
+        self.add(moving_part)
+        self.play( Uncreate(line1), Uncreate(angle_label), Uncreate(r), Uncreate(angle))
+        self.play(Uncreate(dot1))
+
+        # Phase 1: Xoay nhanh (0 → PI, 2 giây)
+        self.play(
+            Rotating(
+                moving_part,
+                radians=PI,
+                about_point=ORIGIN,
+                run_time=2,
+                rate_func=rush_into,  # Nhanh dần
+            )
+       )
+
+        # Phase 2: Xoay chậm (PI → 1.5PI, 2 giây)
+        self.play(
+            Rotating(
+                moving_part,
+                radians=0.5 * PI,
+                about_point=ORIGIN,
+                run_time=2,
+                rate_func=slow_into,  # Chậm dần
+            )
+       )
+
+        # Phase 3: Xoay nhanh tiếp (1.5PI → 2PI, 1 giây)
+        self.play(
+            Rotating(
+                moving_part,
+                radians=0.5 * PI,
+                about_point=ORIGIN,
+                run_time=1,
+                rate_func=rush_from,  # Nhanh dần về cuối
+           )
+       )
 
 
 

@@ -56,10 +56,19 @@ class ChiaNho(MovingCameraScene):
         left_line = Line(origin, outer_arc.point_from_proportion(0))
         right_line = Line(origin, outer_arc.point_from_proportion(1))
 
-        # Tạo vùng D tô màu
-        #region = VGroup(outer_arc, right_line, inner_arc, left_line).set_fill(RED, opacity=0.5).set_stroke(BLUE)
+        outer_points = [b * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(alpha, beta, 30)]
+        inner_points = [a * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(beta, alpha, 30)]
 
-        part = VGroup(outer_arc, inner_arc, left_line, right_line)
+        region_points = outer_points + inner_points
+        region = VMobject()
+        region.set_points_as_corners(region_points)
+        region.set_fill(RED, opacity=0.5)
+        region.set_stroke(BLUE)
+
+        # Tạo vùng D tô màu
+        region = VGroup(outer_arc, right_line, inner_arc, left_line).set_fill(RED, opacity=0.5).set_stroke(BLUE)
+
+        part = VGroup(outer_arc, inner_arc, left_line, right_line, region)
         part.shift(LEFT * 0)
 
         
