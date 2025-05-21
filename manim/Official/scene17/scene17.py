@@ -106,8 +106,6 @@ class ChiaNho(MovingCameraScene):
         outer_arc.set_color(RED)
         inner_arc.set_color(RED)
 
-        # Tạo vùng D tô màu
-
         x_axis_point = axes1.c2p(1, 0)
         x_axis_line_1 = Line(origin, x_axis_point, color=RED)
         angle_alpha = Angle(
