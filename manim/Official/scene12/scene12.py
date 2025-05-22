@@ -107,7 +107,8 @@ class ChiaNho(MovingCameraScene):
 
 
         # Hiển thị tất cả cùng lúc
-        self.play(Write(text[0]), FadeIn(text[1]), Write(text[2]), run_time=2)
+        self.play(Write(text[0]), run_time=2)
+        self.play(FadeIn(text[1]), Write(text[2]), run_time=1)
         self.play(
             LaggedStart(
                 Create(axes1),
