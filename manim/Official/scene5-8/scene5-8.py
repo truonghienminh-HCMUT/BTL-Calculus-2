@@ -184,7 +184,7 @@ class Main(CustomThreeDScene):
         self.move_camera(phi=70 * DEGREES, theta=0 * DEGREES, zoom=0.7)
         self.stop_ambient_camera_rotation()
         # self.set_camera_orientation(phi=70 * DEGREES, theta=0 * DEGREES, frame_center = axes_center, zoom=0.7)
-
+    
         # Group lại để di chuyển
         label_domain_D.clear_updaters()
         group3d = VGroup(axes, x_label, y_label, z_label, domain_D, label_a, label_b, label_c, label_d, label_domain_D, surface_over_D, dashed_lines_to_D, projection_lines)
