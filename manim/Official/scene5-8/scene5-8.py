@@ -100,10 +100,10 @@ class Main(CustomThreeDScene):
         pt_b = axes.c2p(b, 0, 0)
         pt_c = axes.c2p(0, c, 0)
         pt_d = axes.c2p(0, d, 0)
-        label_a = Tex(r"a", font_size = 30).next_to(pt_a, DOWN, buff = 0.15)
-        label_b = Tex(r"b", font_size = 30).next_to(pt_b, DOWN, buff = 0.15)
-        label_c = Tex(r"c", font_size = 30).next_to(pt_c, LEFT, buff = 0.15)
-        label_d = Tex(r"d", font_size = 30).next_to(pt_d, LEFT, buff = 0.15)
+        label_a = Tex(r"a", font_size = 30).next_to(pt_a, DOWN, buff = 0.2)
+        label_b = Tex(r"b", font_size = 30).next_to(pt_b, DOWN, buff = 0.2)
+        label_c = Tex(r"c", font_size = 30).next_to(pt_c, LEFT, buff = 0.2)
+        label_d = Tex(r"d", font_size = 30).next_to(pt_d, LEFT, buff = 0.2)
         for label in [label_a, label_b, label_c, label_d]:
             self.add_fixed_orientation_mobjects(label)
         
@@ -216,10 +216,10 @@ class Main(CustomThreeDScene):
 
         self.play(Write(theory_group_0), run_time=2)
         self.wait(7)
-        self.play(Unwrite(theory_group_0), run_time=1.5)
+        self.play(Unwrite(theory_group_0), FadeOut(group3d), run_time=1.5)
         self.wait(0.5)
 
-        self.play(FadeOut(group3d))
+        # self.play(FadeOut(group3d))
         sub_1_2 = Tex(r"\textbf{1.2 Giải quyết bài toán}", font_size=60)
         set_fixed(sub_1_2)
         self.play(Write(sub_1_2), run_time=1)
@@ -316,6 +316,8 @@ class Main(CustomThreeDScene):
         self.wait(8)
 
         self.play(Unwrite(theory_group_2), run_time=1.5)
+
+        self.wait(2)
 
 
 
