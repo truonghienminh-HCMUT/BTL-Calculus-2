@@ -94,6 +94,13 @@ class ChiaNho(MovingCameraScene):
         textpi32.move_to([-0.5, -3.3, 0]).shift(LEFT * 2.5)
         text0 = MathTex(r"0").scale(0.7).set_color_by_gradient(WHITE)
         text0.move_to([3.17, 0.3, 0]).shift(LEFT * 2.5)
+        x_1 = MathTex(r"x_1").scale(0.7).set_color_by_gradient(YELLOW)
+        x_1.move_to(axes.c2p(3, 0)).shift(DOWN * 0.5)
+        y_1 = MathTex(r"y_1").scale(0.7).set_color_by_gradient(YELLOW)
+        y_1.move_to(axes.c2p(0, 2)).shift(LEFT * 0.5)
+
+
+
 
         x_line = Line(start=[0, 0, 0], end=[5, 0, 0], color=RED, stroke_width=5)
 
@@ -108,9 +115,11 @@ class ChiaNho(MovingCameraScene):
         dot1.move_to([1.96, 1, 0])
         dot1.shift(LEFT * 2.5)
 
-        Toado = MathTex(r"(3,2)").scale(0.7).set_color_by_gradient(YELLOW)
-        Toado.move_to([2.7, 1.9, 0])
-        Toado.shift(LEFT * 2.5)
+        Px1y1 = MathTex(r"P(x_1, y_1)").scale(0.7).set_color_by_gradient(YELLOW)
+        Px1y1.move_to([2.5, 1.9, 0])
+        Px1y1.shift(LEFT * 2.5)
+        Px1y1_copy = Px1y1.copy()
+        Px1y1_copy.shift(LEFT * 1)
 
         line1 = Line(start=[2.197, 1.46, 0], end=[0, 0, 0], color=YELLOW, stroke_width=5).shift(LEFT * 2.5)
         line11 = Line(start=[1.96, 1, 0], end=[0, 0, 0], color=YELLOW, stroke_width=5).shift(LEFT * 2.5)
@@ -196,9 +205,9 @@ class ChiaNho(MovingCameraScene):
             font_size=30
         )
 
-        Text_2_scene13[2].set_color(ORANGE)
+        Text_2_scene13[2].set_color(RED)
         Text_2_scene13[5].set_color(color_00ffff)
-        Text_2_scene13[7].set_color(ORANGE)
+        Text_2_scene13[7].set_color(RED)
 
         Text_2_scene13[0].shift(RIGHT * 6.5 + UP * 2)
         Text_2_scene13[1].shift(RIGHT * 1.2 + UP * 1.62)
@@ -209,8 +218,43 @@ class ChiaNho(MovingCameraScene):
         Text_2_scene13[6].shift(RIGHT * 6.2 + UP * 1.58)
         Text_2_scene13[7].shift(RIGHT * 1.7 + UP * 1.18)
         Text_2_scene13[8].shift(RIGHT * 1.7 + UP * 1.18)
-        
 
+        Text_3_scene13 = Tex(
+            r"Hệ toạ độ cực",#0
+            r" $(r,\varphi)$",#1
+            r" xác định một điểm",#2
+            r" có toạ độ",#3
+            r" $P(x_1, y_1)$",#4
+            r"như",#5
+            r" sau:",#6
+            r"$r^2=x^2+y^2$",
+            font_size=30
+        )
+
+        Text_3_scene13[1].set_color(YELLOW)
+        Text_3_scene13[4].set_color(YELLOW)
+
+
+        Text_3_scene13[0].shift(RIGHT * 4.5 + UP * 2)
+        Text_3_scene13[1].shift(RIGHT * 4.5 + UP * 2)
+        Text_3_scene13[2].shift(RIGHT * 4.5 + UP * 2)
+        Text_3_scene13[3].shift(RIGHT * 4.5 + UP * 2)
+        Text_3_scene13[4].shift(RIGHT * -0.3 + UP * 1.64)
+        Text_3_scene13[5].shift(RIGHT * -0.25 + UP * 1.64)
+        Text_3_scene13[6].shift(RIGHT * 5.3 + UP * 2.02)
+
+        Text_4_scene13 = MathTex(r"r^2=x_1^2+y_1^2").scale(1)
+        Text_4_scene13.shift(RIGHT * 3.5 + UP * 1)
+        Text_4_scene13.set_color(BLUE)
+        Text_5_scene13 = MathTex(r"x_1=rcos\varphi").scale(1)
+        Text_5_scene13.shift(RIGHT * 3.5 + UP * 0.4)
+        Text_5_scene13.set_color(BLUE)
+        Text_6_scene13 = MathTex(r"y_1=rsin\varphi").scale(1)
+        Text_6_scene13.shift(RIGHT * 3.5 + UP * -0.1)
+        Text_6_scene13.set_color(BLUE)
+        Text_7_scene13 = MathTex(r"tan\varphi =\frac{y_1}{x_1}")
+        Text_7_scene13.shift(RIGHT * 3.5 + UP * -0.9)
+        Text_7_scene13.set_color(BLUE)
         
         self.play(Write(Text_1_scene13[0]), Write(Text_1_scene13[1]), run_time=2)
         self.play(Write(Text_1_scene13[2]), Write(Text_1_scene13[3]), Write(Text1), run_time=2)
@@ -220,14 +264,23 @@ class ChiaNho(MovingCameraScene):
         self.wait(1)
         self.play(Create(dot))
         #self.play(Create(toado))
-        self.play(Create(dashed_line_y), Create(dashed_line_x), Create(Toado))
+        self.play(Create(dashed_line_y), Create(dashed_line_x), Create(Px1y1))
         self.wait(1)
         self.play(Unwrite(Text_1_scene13[0]), Unwrite(Text_1_scene13[1]), Unwrite(Text_1_scene13[2]), Unwrite(Text_1_scene13[3]), Unwrite(Text_1_scene13[4]), Unwrite(Text_1_scene13[5]) )
         self.play(Write(Text_2_scene13[0]), Write(Text_2_scene13[1]), Write(Text_2_scene13[2]), Write(Text_2_scene13[3]), Write(Text_2_scene13[4]), 
                 Write(Text_2_scene13[5]), Write(Text_2_scene13[6]), Write(Text_2_scene13[7]), Write(Text_2_scene13[8]),
                  run_time=2)
-        self.play(Create(line1), Create(r), Uncreate(Toado), FadeOut(x_numbers), FadeOut(y_numbers), Create(axes1) )
-        self.play(dashed_line_x.animate.shift(DOWN * 1.46))
+        self.play(Create(line1), Create(r), FadeOut(x_numbers), FadeOut(y_numbers), Create(axes1), Create(x_1), Create(y_1) )
+        self.play(Unwrite(Text_2_scene13[0]), Unwrite(Text_2_scene13[1]), Unwrite(Text_2_scene13[2]), Unwrite(Text_2_scene13[3]), Unwrite(Text_2_scene13[4]), 
+                Unwrite(Text_2_scene13[5]), Unwrite(Text_2_scene13[6]), Unwrite(Text_2_scene13[7]), Unwrite(Text_2_scene13[8]),
+                run_time=2)
+        self.play(Write(Text_3_scene13[0]), Write(Text_3_scene13[1]), Write(Text_3_scene13[2]), Write(Text_3_scene13[3]), Create(Px1y1_copy),
+                Transform(Px1y1, Text_3_scene13[4]), Write(Text_3_scene13[5]), Write(Text_3_scene13[6]),
+                run_time=2)
+        self.play(Unwrite(Text_3_scene13[0]), Unwrite(Text_3_scene13[1]), Unwrite(Text_3_scene13[2]), Unwrite(Text_3_scene13[3]), Uncreate(Px1y1),
+                Unwrite(Text_3_scene13[4]), Unwrite(Text_3_scene13[5]), Unwrite(Text_3_scene13[6]))
+        self.play(Write(Text_4_scene13), Write(Text_5_scene13), Write(Text_6_scene13), Write(Text_7_scene13), run_time=1)
+        self.play(dashed_line_x.animate.shift(DOWN * 1.46), Unwrite(Px1y1_copy), Unwrite(x_1), Unwrite(y_1))
         self.play(Create(angle))
         self.play(Write(angle_label))
         self.wait(1)
