@@ -88,12 +88,12 @@ class Main(CustomThreeDScene):
             u_range = [a, b],
             v_range = [c, d],
             resolution = (32, 32),
-            fill_opacity = 0.7,
+            fill_opacity = 0.5,
             fill_color = color_e158d0,
             stroke_width = 0.5,
             checkerboard_colors = [color_e158d0, color_88bdef]
         )
-        self.play(Create(surface_over_D), run_time = 2)
+        self.play(Create(surface_over_D), run_time = 1)
         self.wait(1)
 
         # Vẽ miền D
@@ -127,8 +127,8 @@ class Main(CustomThreeDScene):
         group3d.add(grid_lines)
         # self.wait()
 
-        dot_x = a + 0.5
-        dot_y = c + 0.5
+        dot_x = a + 0.5 + 2
+        dot_y = c + 0.5 + 2
         # Chọn ra 1 ô để một dấu chấm nhỏ ở giữa và kéo ô vuông chứa nó lên đến surface thành 1 khối hình hộp chữ nhật đứng thể hiện thể tích tích phân
         center_dot_on_base = Sphere(axes.c2p(dot_x, dot_y, 0), color = color_88bdef, radius = 0.08, fill_opacity = 1)
         self.play(Create(center_dot_on_base), run_time = 0.5)
@@ -233,5 +233,28 @@ class Main(CustomThreeDScene):
 
         self.move_camera(frame_center=axes_center + (DOWN * -5.0), run_time=1.25)
         self.wait(2)
+        
+        paragraph_string = r"""
+        \begin{minipage}{0.7\textwidth}
+        Chúng ta có thể xấp xỉ được thể tích $V$ cần tìm, 
+        bằng cách tính tổng các thể tích hình 
+        hộp chữ nhật nhỏ với đáy là $D_{ij}$ có diện tích 
+        $\Delta A = \Delta x \Delta y$ và chiều cao là $f(x_{ij}^*, y_{ij}^*)$, 
+        với $(x_{ij}^*, y_{ij}^*)$ là điểm được chọn trên miền D. 
+        Thể tích hình hộp chữ nhật nhỏ khi này bằng: \\[1em]
+        \centering
+        $f(x_{ij}^*, y_{ij}^*)\Delta A = f(x_{ij}^*, y_{ij}^*)\Delta x \Delta y$
+        \end{minipage}
+        """
 
+        paragraph_tex = Tex(
+            paragraph_string,
+            font_size = 32,
+            tex_template = VIETNAMESE_TEMPLATE
+        )
+
+        paragraph_tex.to_edge(RIGHT, buff = 0.5)
+        set_fixed(paragraph_tex)
+        self.play(Write(paragraph_tex), run_time = 4)
+        self.wait(3)
 

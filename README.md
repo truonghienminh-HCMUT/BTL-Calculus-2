@@ -47,6 +47,6 @@ Sinh viên đọc thật kỹ và thực hiện đúng và đủ các yêu cầu
 - Hình ảnh minh họa phải ở định dạng vector (.eps, .pdf), không sử dụng ảnh chụp màn hình.
 - Cần hiểu rõ các suy luận và mô hình mô phỏng, đồng thời trình bày video demo một cách chi tiết và rõ ràng.
 
-<div align="center"><h2>⚡Hạn nộp: Hết ngày 24/05/2025⚡</h2></div>
+<div align="center"><h2>⚡Hạn nộp: Hết ngày 27/05/2025⚡</h2></div>
 
 Chi tiết đề cương xem trong [đề cương](./BTL_DECUONGCHITIET_HK242.pdf).
