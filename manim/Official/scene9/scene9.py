@@ -63,17 +63,25 @@ class ChiaNho(MovingCameraScene):
         )
         arrow_x.move_to([-3.28, -2.05, 0])
 
+        # Thanh ngang (theo trục y)
         top_bar_y = Line(LEFT * 4.6, LEFT * 4.3).shift(UP * 2.45)
         bottom_bar_y = Line(LEFT * 4.6, LEFT * 4.3).shift(UP * 1.91)
 
+        # Lấy tọa độ y
+        y_top = top_bar_y.get_y()
+        y_bottom = bottom_bar_y.get_y()
+
+        # Lấy hoành độ trung bình (để đặt mũi tên)
+        x_pos = top_bar_y.get_center()[0]  # hoặc dùng -4.45 nếu bạn muốn cố định
+
+        # Mũi tên
         arrow_y = DoubleArrow(
-            start=UP * 0.5,
-            end=UP  * 1.5,
-            buff=0.05,
-            stroke_width=1,
-            max_tip_length_to_length_ratio=0.1  # làm đầu mũi tên nhỏ lại
+            start=[x_pos, bottom_bar_y.get_y(), 0],
+            end=[x_pos, top_bar_y.get_y(), 0],
+            buff=0.0,
+            stroke_width=1.2,
+            max_tip_length_to_length_ratio=0.1
         )
-        arrow_y.move_to([-4.45, 2, 0])
 
 
         verticalline1 = Line(start=[-3.82, -2.45, 0], end=[-3.83, 2.44, 0], color=RED, stroke_width=2)#tạo đường thẳng, số 1 tính từ trái qua
@@ -293,24 +301,80 @@ class ChiaNho(MovingCameraScene):
         text3.scale(0.8)
         text3.move_to([4, 3, 0])
 
-        text11 = MathTex(r"\Delta x = \frac{b-a}{m}", color=BLUE) 
+        text11 = MathTex(r"\Delta x = \frac{b-a}{m}", color=RED) 
         text11.scale(0.8)
         text11.move_to([-3.2, -1.2, 0])
 
-        text22 = MathTex(r"\Delta y = \frac{d-c}{n}", color=BLUE)
+        text22 = MathTex(r"\Delta y = \frac{d-c}{n}", color=RED)
         text22.scale(0.8)
         text22.move_to([-2.8, 2.2, 0])
+
+
+        Text_1_scene9 = MathTex(
+            r"\text{Để tính được thể tích của }",  # phần 0
+            r"\Omega",                             # phần 1
+            r"\text{, chúng ta xử lí}",#phần 3
+            r"\text{ miền }",      # phần 4
+            r"D",                                  # phần 5
+            font_size=40
+        )
+
+        Text_1_scene9[1].set_color(YELLOW)
+        Text_1_scene9[3].set_color(YELLOW)
+        Text_1_scene9[4].set_color(YELLOW)
+
+        Text_2_scene9 = MathTex(
+            r"\text{Chúng ta chia đoạn}",     # 0
+            r"\ [a, b]",                      # 1
+            r"\text{ thành}",                 # 2
+            r"\ \text{m}",                    # 3
+            r"\text{ đoạn nhỏ với độ dài}",   # 4
+            font_size=30
+        ).shift(UP * 1 + RIGHT * 1.7)
+
+        Text_2_scene9[3].set_color(YELLOW)
+        Text_3_scene9 = MathTex(
+            r"\ \Delta x = \frac{b - a}{m}",  # 0
+            r"\text{ và chia đoạn}",          # 1
+            r"\ [c, d]",                      # 2
+            r"\text{ thành}",                 # 3
+            r"\ \text{n}",                    # 4
+            r"\text{ đoạn nhỏ với độ dài}",   # 5
+            r"\ \Delta y = \frac{d - c}{n} .",# 6
+            font_size=30
+        ).shift(RIGHT * 1.7)
+        Text_3_scene9[0].set_color(RED)
+        Text_3_scene9[4].set_color(YELLOW)
+        Text_3_scene9[6].set_color(RED)
+
+        Text_3_0_copy_scene9 =Text_3_scene9[0].copy()
+        Text_3_6_copy_scene9 = Text_3_scene9[6].copy()
+
+        Text_4_scene9 = MathTex(
+            r"\text{Khi đó,}",
+            r"\text{ miền D}",
+            r"\text{ được chia thành những hình chữ nhật nhỏ với diện tích}",
+            r"\ \Delta x. \Delta y.",
+            font_size=32
+        ).shift(RIGHT  * 1 + UP * 3.2)
+
+        Text_4_scene9[1].set_color(YELLOW)
+        Text_4_scene9[3].set_color(RED)
+
         
-        self.play(Create(ax), run_time=2)
+        self.play(Write(Text_1_scene9), run_time=2)
+        self.play(Transform(Text_1_scene9, ax), run_time=2)
         self.play(Create(labels), run_time=1)
+        self.play(Write(Text_2_scene9), Write(Text_3_scene9), run_time=2)
         self.play(Create(left_bar_x), Create(right_bar_x), Create(arrow_x), run_time=1)
-        self.play(FadeIn(text11), run_time=1)
+        self.play(Transform(Text_3_0_copy_scene9, text11), run_time=1)
         self.wait(0.5)
         self.play(Create(top_bar_y), Create(bottom_bar_y), Create(arrow_y), run_time=1)
-        self.play(FadeIn(text22), run_time=1)
+        self.play(Transform(Text_3_6_copy_scene9, (text22)), run_time=1)
         self.wait(0.5)
-        self.play(Uncreate(left_bar_x), Uncreate(right_bar_x), Uncreate(arrow_x), Uncreate(text11),Uncreate(top_bar_y), Uncreate(bottom_bar_y), Uncreate(arrow_y), Uncreate(text22), run_time=1)
-        self.wait(0.5)
+        self.play(Uncreate(left_bar_x), Uncreate(right_bar_x), Uncreate(arrow_x), Uncreate(text11),Uncreate(top_bar_y), Uncreate(bottom_bar_y), Uncreate(arrow_y), Uncreate(text22),
+                Unwrite(Text_2_scene9), Unwrite(Text_3_scene9), Unwrite(Text_3_0_copy_scene9), Unwrite(Text_3_6_copy_scene9), run_time=1)
+        self.wait(0.5) 
 
         self.play(Create(x_labels), Create(y_labels), run_time=1)
         self.wait(0.5)
@@ -321,7 +385,7 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(horizontalline1), Create(horizontalline2), Create(horizontalline3), Create(horizontalline4), Create(horizontalline5), Create(horizontalline6), Create(horizontalline7), Create(horizontalline8), Create(horizontalline9), run_time=2)
         self.play(Create(verticalline11), Create(verticalline22), Create(verticalline33), Create(verticalline44), Create(verticalline55), Create(verticalline66), Create(verticalline77), Create(verticalline88), Create(verticalline99),run_time=0.5)
         self.play(Create(horizontalline11), Create(horizontalline22), Create(horizontalline33), Create(horizontalline44), Create(horizontalline55), Create(horizontalline66), Create(horizontalline77), Create(horizontalline88), Create(horizontalline99), run_time=0.5)
-        self.play(Uncreate(verticalline1), Uncreate(verticalline2), Uncreate(verticalline3), Uncreate(verticalline4), Uncreate(verticalline5), Uncreate(verticalline6), Uncreate(verticalline7), Uncreate(verticalline8), Uncreate(verticalline9), 
+        self.play(Write(Text_4_scene9), labels[1].animate.move_to(LEFT * 5.5 + UP *3), Uncreate(verticalline1), Uncreate(verticalline2), Uncreate(verticalline3), Uncreate(verticalline4), Uncreate(verticalline5), Uncreate(verticalline6), Uncreate(verticalline7), Uncreate(verticalline8), Uncreate(verticalline9), 
                   Uncreate(horizontalline1), Uncreate(horizontalline2), Uncreate(horizontalline3), Uncreate(horizontalline4), Uncreate(horizontalline5), Uncreate(horizontalline6), Uncreate(horizontalline7), Uncreate(horizontalline8), Uncreate(horizontalline9),
                   run_time=0.5)
         self.wait(0.5)
@@ -342,6 +406,7 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(dot64), run_time=0.2)
         self.play(Create(rect), Create(rect1), Create(dotxiyi), run_time=2)
         self.wait(0.5)
+        self.play(Unwrite(Text_4_scene9))
         self.play(rect.animate.move_to(UP*3), run_time=2)
         self.play(FadeIn(tex1), run_time=2)
         self.wait(0.5)
