@@ -139,7 +139,7 @@ class Main(CustomThreeDScene):
         )
         surface_over_D_copy = surface_over_D.copy().set_opacity(0)
         self.add(surface_over_D_copy)
-        self.play(Transform(surface_over_D_copy, domain_D, replace_mobject_with_target_in_scene=True), run_time = 0.4)
+        self.play(Transform(surface_over_D_copy, domain_D, replace_mobject_with_target_in_scene=True), run_time = 0.8)
         self.wait(1)
         # set lại camera
         group3d = VGroup(axes, x_label, y_label, z_label, surface_over_D, domain_D, surface_over_D_copy)
@@ -204,7 +204,7 @@ class Main(CustomThreeDScene):
             )
             side_faces.add(side_face)
         solid_prism_manual = VGroup(base_face, top_face, *side_faces)
-        dot_on_surface = Dot(axes.c2p(dot_x, dot_y, h_prism), color=color_88bdef, radius=0.08)
+        dot_on_surface = Sphere(axes.c2p(dot_x, dot_y, h_prism), color=color_88bdef, radius=0.08)
 
         self.play(Create(base_face), run_time=0.7)
         self.wait(0.2)
