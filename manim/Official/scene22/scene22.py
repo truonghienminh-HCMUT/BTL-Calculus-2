@@ -27,6 +27,8 @@ class ChiaNho(MovingCameraScene):
         color_fececa = "#fececa"
         color_e158d0 = "#e158d0"
         color_88bdef = "#88bdef"
+        color_4dbbbe0 = "#4dbbe0"
+        color_fe7051 = "#fe7051"
 
         Text_1_scene22 = Tex(
             r"III. ỨNG DỤNG CỦA TÍCH PHÂN KÉP",
@@ -47,15 +49,14 @@ class ChiaNho(MovingCameraScene):
             font_size = 35, 
             color = WHITE
         )
-        background_box = SurroundingRectangle(
+        background_box_dohoamaytinh = SurroundingRectangle(
             Text_2_scene22,
             color=RED_E,            # màu viền
             fill_color=RED_E,    # màu nền
             fill_opacity=0.5,       # độ đậm nền (1 = đặc)
             buff=0.15             # khoảng cách mép khung đến chữ
         )
-        Text_2_box_scene22 = VGroup(background_box, Text_2_scene22)
-        Text_2_box_scene22.shift(UP * 3)
+        Text_2_box_scene22 = VGroup(background_box_dohoamaytinh, Text_2_scene22)
 
         Text_2_2_scene22 = Tex(
             r"Tính shading trong mô hình ánh sáng như",
@@ -64,7 +65,8 @@ class ChiaNho(MovingCameraScene):
         Text_2_3_scene22 = Tex(
             r"Phong Reflection Model",
             r" hoặc",
-            r" Radiosity.",
+            r" Radiosity",
+            r".",
             font_size = 40
         )
 
@@ -88,20 +90,57 @@ class ChiaNho(MovingCameraScene):
         Radiosity_image.scale(0.35)
         Radiosity_image.shift(DOWN * 2 + UP * 1.3)
 
+        Text_3_scene22 = Tex(
+            r"\textbf{Thị giác máy tính (Computer Vision)}",
+            font_size = 35,
+            color = WHITE
+        )
+        background_box_thigiacmaytinh = SurroundingRectangle(
+            Text_3_scene22,
+            color=BLUE,            # màu viền
+            fill_color= color_4dbbbe0,    # màu nền
+            fill_opacity=0.5,       # độ đậm nền (1 = đặc)
+            buff=0.15             # khoảng cách mép khung đến chữ
+        )
+        Text_3_box_scene22 = VGroup(background_box_thigiacmaytinh, Text_3_scene22)
+        Text_3_box_scene22.shift(UP * 3)
 
+        Text_4_scene22 = Tex(
+            r"Trong quá trình trích xuất đặc trưng hoặc tính toán các đặc trưng dạng hình tròn, việc tích phân trong tọa độ cực giúp chuẩn hóa và tính toán chính xác hơn các thuộc tính hình học như diện tích, mật độ điểm ảnh, ...",
+            font_size=20
+        )
+
+        Text_5_scene22 = Tex(
+            r"\textbf{Xử lý tín hiệu số (Digital Signal Processing \- DSP)}",
+            font_size=35
+        )
+
+        Text_6_scene22 = Tex(
+            r"Tích phân trong tọa độ cực giúp tối ưu hóa và đánh giá hiệu suất của các bộ lọc không gian hình tròn trong việc làm mịn ảnh, phát hiện biên hình tròn, ...", 
+            font_size=25
+        )
+   
+        Text_7_scene22 = Tex(
+            r"Robot học và điều khiển"
+        )
+
+        Text_8_scene22 = Tex(
+            r"Tích phân trong tọa độ cực dùng để tính diện tích quét, phân bố năng lượng, hoặc tối ưu hóa đường đi của robot khi hoạt động trong không gian có tính đối xứng tròn."
+        )
         self.play(Write(Text_1_scene22), Write(Text_1_1_scene22), run_time=3)
         self.play(Unwrite(Text_1_1_scene22), Unwrite(Text_1_scene22))
-        self.play(LaggedStart(FadeIn(background_box), Write(Text_2_scene22), lag_ratio=0.3), run_time=2)
+        self.play(LaggedStart(FadeIn(background_box_dohoamaytinh), Write(Text_2_scene22), lag_ratio=0.3), run_time=2)
+        self.play(background_box_dohoamaytinh.animate.move_to(UP * 3), Text_2_scene22.animate.move_to(UP * 3))
         self.play(Write(Text_2_2_scene22), run_time=2)
         self.play(Write(Text_2_3_scene22), run_time=2)
         self.play(Phong_Reflection_Model.animate.move_to(DOWN * 3), run_time=1)
-        self.play(SpinInFromNothing(Blinn_Phong), run_time=2)
-        self.play(SpinInFromNothing(Phong), run_time=2)
-        self.play(SpinInFromNothing(Blinn_Phong_higher_eponent), run_time=2)
+        self.play(SpinInFromNothing(Blinn_Phong), SpinInFromNothing(Phong), SpinInFromNothing(Blinn_Phong_higher_eponent), run_time=2)
         self.wait(1)
-        self.play(Transform(Phong_Reflection_Model, Radiosity), FadeOut(Phong), FadeOut(Blinn_Phong), FadeOut(Blinn_Phong_higher_eponent), run_time=2)
-        self.play(SpinInFromNothing(Radiosity_image), run_time=2)
-
+        self.play(Blinn_Phong.animate.move_to( DOWN * 0.8), Blinn_Phong_higher_eponent.animate.move_to(DOWN * 0.8))
+        self.play(FadeOut(Phong), FadeOut(Blinn_Phong), FadeOut(Blinn_Phong_higher_eponent), run_time=2)
+        self.play(Transform(Phong_Reflection_Model, Radiosity), SpinInFromNothing(Radiosity_image), run_time=2)
+        self.play(FadeOut(Radiosity_image), Unwrite(Radiosity), Unwrite(Text_2_2_scene22), Unwrite(Text_2_3_scene22), Unwrite(Phong_Reflection_Model), Unwrite(Text_2_scene22))
+        self.play(Transform(background_box_dohoamaytinh, Text_3_box_scene22), run_time=2)
 
 
         def update_curve(mob):
