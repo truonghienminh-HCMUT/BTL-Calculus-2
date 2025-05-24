@@ -81,8 +81,8 @@ class Main(CustomThreeDScene):
 
         self.set_camera_orientation(phi = 70 * DEGREES, theta = 45 * DEGREES, frame_center = axes_center, zoom = 0.7)
         self.play(Write(axes), Write(x_label), Write(y_label), Write(z_label), Write(equation), run_time = 1)
-        self.wait(2)
-
+        self.wait(1.2)
+        
         surface_over_D = Surface(
             lambda u, v: axes.c2p(u, v, func_z(u, v)),
             u_range = [a, b],
@@ -95,6 +95,36 @@ class Main(CustomThreeDScene):
         )
         self.play(Create(surface_over_D), run_time = 1)
         self.wait(1)
+        pt_a = axes.c2p(a, 0, 0)
+        pt_b = axes.c2p(b, 0, 0)
+        pt_c = axes.c2p(0, c, 0)
+        pt_d = axes.c2p(0, d, 0)
+        label_a = Tex(r"a", font_size = 30).next_to(pt_a, DOWN, buff = 0.2)
+        label_b = Tex(r"b", font_size = 30).next_to(pt_b, DOWN, buff = 0.2)
+        label_c = Tex(r"c", font_size = 30).next_to(pt_c, LEFT, buff = 0.2)
+        label_d = Tex(r"d", font_size = 30).next_to(pt_d, LEFT, buff = 0.2)
+        for label in [label_a, label_b, label_c, label_d]:
+            self.add_fixed_orientation_mobjects(label)
+        self.play(Write(label_a), Write(label_b), Write(label_c), Write(label_d), run_time=0.5)
+
+        P1 = axes.c2p(a, c, 0)
+        P2 = axes.c2p(b, c, 0)
+        P3 = axes.c2p(b, d, 0)
+        P4 = axes.c2p(a, d, 0)
+
+        dashed_lines_to_D = VGroup(
+            DashedLine(pt_a, P1, stroke_width = 1.5),
+            DashedLine(pt_a, P4, stroke_width = 1.5),
+            DashedLine(pt_b, P2, stroke_width = 1.5),
+            DashedLine(pt_b, P3, stroke_width = 1.5),
+            DashedLine(pt_c, P1, stroke_width = 1.5),
+            DashedLine(pt_c, P2, stroke_width = 1.5),
+            DashedLine(pt_d, P3, stroke_width = 1.5),
+            DashedLine(pt_d, P4, stroke_width = 1.5),
+        )
+
+        self.play(Write(dashed_lines_to_D), run_time=1)
+        # self.wait(0.5)
 
         # Vẽ miền D
         domain_D = Polygon(
