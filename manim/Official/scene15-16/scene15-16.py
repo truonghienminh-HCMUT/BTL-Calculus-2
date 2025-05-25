@@ -134,6 +134,86 @@ class ChiaNho(MovingCameraScene):
         line_2 = Line(start= axes2.c2p(0, 0), end=axes2.c2p(3.3, 2.9), color=BLUE, stroke_width=4)
         line_3 = Line(start= axes2.c2p(0, 0), end=axes2.c2p(3.9, 2), color=BLUE, stroke_width=4)
 
+        Text_1_scene15 = Tex(
+            r"Như vậy, miền D được mô tả trong hệ toạ độ cực:",
+            font_size=40
+        )
+        NhuVayMienD = MathTex(
+            r"D \;=\; \{(r, \varphi) \colon a \leq r \leq b, \alpha \leq \varphi \leq \beta\}",
+            font_size=40
+        )
+        Text_2_scene15 = Tex(
+            r"Miền nhỏ bất kỳ trong hệ toạ độ cực xác định như sau:",
+            font_size=40
+        ).shift(UP * 3)
+ 
+        Text_1_scene16 = Tex(
+            r"Tâm của phần tử con trong hệ toạ độ cực:",
+            font_size=35
+        ).shift(LEFT * 3 + UP * 1)
+        TamCuaPhanTuCon = MathTex(
+            r"D_{ij} = \{ (r,\varphi) \colon r_{i-1} \le r \le r_i, \varphi_{j-1} \le \varphi \le \varphi_j \}",
+            font_size=35
+        ).shift(LEFT * 3)
+
+        Text_2_scene16 = Tex(
+            r"Lấy một điểm bất kỳ trong $D_{ij}$ có toạ độ:", 
+            font_size=35
+        ).shift(LEFT * 3 + UP * 1)
+        LayMotDiem = MathTex(
+            r"r_i^* = \tfrac{1}{2}\Big(r_i + r_{i-1}\Big), \,",
+            r"\varphi_j^* = \tfrac{1}{2}\Big(\varphi_j + \varphi_{j-1}\Big)",
+            font_size=35
+        ).shift(LEFT * 3)
+
+        Text_3_scene16 = Tex(
+            r"Diện tích của miền $D_{ij}$ được tính bằng:",
+            font_size=35
+        ).shift(LEFT * 3 + UP * 2)
+        DienTichCuaMienD_1 = MathTex(
+            r"S_{D_{ij}} = \frac{1}{2} r_i^2 \Delta \varphi - \frac{1}{2} r_{i-1}^2 \Delta \varphi ",
+            font_size=35
+        ).shift(LEFT * 3 + UP * 1)
+        DienTichCuaMienD_2 = MathTex(
+            r"= \frac{1}{2} \Big( r_i + r_{i-1} \Big) \Big( r_i - r_{i-1} \Big) \cdot \Delta \varphi ",
+            r"= r_i^* \Delta r \cdot \Delta \varphi",
+            font_size=35
+        ).shift(LEFT * 3)
+
+        Text_4_scene16 = Tex(
+            r"Khi đó, tổng Riemann tương ứng sẽ là:",
+            font_size=35
+        ).shift(LEFT * 3 + UP * 2)
+        TongRiemann_1 = MathTex(
+            r"\sum_{i=1}^m \sum_{j=1}^n f \left( r_i^* \cos \varphi_j, r_j^* \sin \varphi_j \right) S_{D_{ij}}",
+            font_size=35
+        ).shift(LEFT * 3 + UP * 1)
+        TongRiemann_2 = MathTex(
+            r"=",
+            r"\sum_{i=1}^m \sum_{j=1}^n f \left( r_i^* \cos \varphi_j, r_j^* \sin \varphi_j \right) r_i^* \cdot \Delta r \cdot \Delta \varphi",
+            font_size=35
+        ).shift(LEFT * 3 + DOWN  * 0.2)
+
+        Text_5_scene16 = Tex(
+            r"Nếu ta đặt $g(r, \varphi) =rf(rcos\varphi,rsin\varphi)$",
+            font_size=35
+        ).shift(LEFT * 3 + UP * 2)
+        Text_5_scene16_2 = Tex(
+            r"thì tổng Riemann ở trên có dạng:",
+            font_size=35
+        ).shift(LEFT * 3 + UP * 1)
+        NeuTaDat = MathTex(
+            r"\left| \sum_{i=1}^m \sum_{j=1}^n g\left(r_i^*, \varphi_j^*\right) \cdot \Delta r \cdot \Delta \varphi \right|",
+            font_size=35
+        ).shift(LEFT * 3)
+
+
+
+        self.play(Write(Text_1_scene15), run_time=2)
+        self.play(Text_1_scene15.animate.move_to(UP * 1.5), run_time=1)
+        self.play(Write(NhuVayMienD), run_time=2)
+        self.play(Unwrite(NhuVayMienD), run_time=1)
+        self.play(Transform(Text_1_scene15, Text_2_scene15))
         self.play(Create(axes1),  run_time=2)
         self.play(Create(x_axes1_labels), Create(y_axes1_labels),Write(Text0))
         self.play(Create(part), run_time=2)
@@ -145,6 +225,21 @@ class ChiaNho(MovingCameraScene):
         self.play(Uncreate(region), Uncreate(angle_alpha), Uncreate(angle_beta), Uncreate(alpha_label_old), Uncreate(beta_label_old), Uncreate(ra), Uncreate(rb), Uncreate(D))
         self.play(Create(line_1), Create(line_2), Create(line_3), run_time=2)
         self.play(Create(big_arc), Create(small_arc), run_time=2)
+        self.play(Uncreate(part_copy), Uncreate(axes1), Uncreate(x_axes1_labels), Uncreate(y_axes1_labels), Unwrite(Text0))
+        self.play(
+                  part1.animate.move_to(DOWN * 0.3 + RIGHT * 4), axes2.animate.move_to(RIGHT * 4), line_1.animate.move_to(RIGHT * 4), line_2.animate.move_to(RIGHT * 4),
+                  line_3.animate.move_to(RIGHT * 4), big_arc.animate.move_to(RIGHT * 4), small_arc.animate.move_to(RIGHT * 4), x_axes1_labels_copy.animate.move_to(RIGHT * 4), y_axes1_labels_copy.animate.move_to(RIGHT * 4), Text01.animate.move_to(RIGHT * 4), Unwrite(Text_1_scene15),
+                  Write(Text_1_scene16), Write(TamCuaPhanTuCon),
+                  run_time=2   
+        )
+        self.wait(1)
+        self.play(Transform(Text_1_scene16, Text_2_scene16), Transform(TamCuaPhanTuCon, LayMotDiem), run_time=1)
+        self.wait(1)
+        self.play(Transform(Text_1_scene16, Text_3_scene16), Transform(TamCuaPhanTuCon, DienTichCuaMienD_1), Write(DienTichCuaMienD_2), run_time=1)
+        self.wait(1)
+        self.play(Transform(Text_1_scene16, Text_4_scene16), Transform(TamCuaPhanTuCon, TongRiemann_1), Transform(DienTichCuaMienD_2, TongRiemann_2), run_time=1)
+        self.wait(1)
+        self.play(Transform(Text_1_scene16, Text_5_scene16), Transform(TamCuaPhanTuCon, Text_5_scene16_2), Transform(DienTichCuaMienD_2, NeuTaDat), run_time=1)
         
 
 
