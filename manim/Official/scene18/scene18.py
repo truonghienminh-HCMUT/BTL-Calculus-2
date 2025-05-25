@@ -32,10 +32,10 @@ class ChiaNho(MovingCameraScene):
         TextO = Tex(r"$O$", color=WHITE).move_to(ax.c2p(0, 0))
         TextO.move_to(LEFT * 5.4 + DOWN * 2.8)
 
-        a = 3  # bán kính trong
-        b = 6    # bán kính ngoài
+        a = 9  # bán kính trong
+        b = 10    # bán kính ngoài
         alpha = 0.3  # góc alpha (rad)
-        beta = 1.2   # góc beta (rad)
+        beta = 0.5   # góc beta (rad)
         origin = ax.c2p(0, 0)
 
         outer_arc = Arc(radius=b, start_angle=alpha, angle=beta - alpha, arc_center=origin)
@@ -49,14 +49,17 @@ class ChiaNho(MovingCameraScene):
         left_line = Line(origin, left_point)
         right_line = Line(origin, right_point)
 
-        outer_points = [b * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(alpha, beta, 30)]
-        inner_points = [a * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(beta, alpha, 30)]
+        outer_points = [origin + b * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(alpha, beta, 30)]
+        inner_points = [origin + a * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(beta, alpha, 30)]
 
         region_points = outer_points + inner_points
         region = VMobject()
         region.set_points_as_corners(region_points)
         region.set_fill(RED, opacity=0.5)
-        region.set_stroke(BLUE)
+        left_line.set_color(BLUE)
+        right_line.set_color(BLUE)
+        outer_arc.set_color(RED)
+        inner_arc.set_color(RED)
 
         part = VGroup(outer_arc, inner_arc, left_line, right_line, region)
         self.play(Create(ax), run_time=2)

@@ -253,17 +253,18 @@ class ChiaNho(MovingCameraScene):
         Text_3_scene13[6].shift(RIGHT * 5.3 + UP * 2.02)
 
         Text_4_scene13 = MathTex(r"r^2=x_1^2+y_1^2").scale(1)
-        Text_4_scene13.shift(RIGHT * 3.5 + UP * 1)
-        Text_4_scene13.set_color(BLUE)
+        Text_4_scene13.shift(RIGHT * 3.5)
+        Text_4_scene13.set_color(WHITE)
         Text_5_scene13 = MathTex(r"x_1=rcos\varphi").scale(1)
         Text_5_scene13.shift(RIGHT * 3.5 + UP * 0.4)
-        Text_5_scene13.set_color(BLUE)
+        Text_5_scene13.set_color(WHITE)
         Text_6_scene13 = MathTex(r"y_1=rsin\varphi").scale(1)
+        xy = VGroup(Text_5_scene13, Text_6_scene13)#chỉnh
         Text_6_scene13.shift(RIGHT * 3.5 + UP * -0.1)
-        Text_6_scene13.set_color(BLUE)
+        Text_6_scene13.set_color(WHITE)
         Text_7_scene13 = MathTex(r"tan\varphi =\frac{y_1}{x_1}")
         Text_7_scene13.shift(RIGHT * 3.5 + UP * -0.9)
-        Text_7_scene13.set_color(BLUE)
+        Text_7_scene13.set_color(WHITE)
 
         #CHẠY ANIMATION
         self.play(Write(Text_1_scene13[0]), Write(Text_1_scene13[1]), run_time=2)
@@ -273,7 +274,6 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(axes_scene13), Write(axes_labels_scene13))
         self.wait(1)
         self.play(Create(dot_scene13))
-        #self.play(Create(toado))
         self.play(Create(dashed_line_y_scene13), Create(dashed_line_x_scene13), Create(Px1y1_scene13))
         self.wait(1)
         self.play(Unwrite(Text_1_scene13[0]), Unwrite(Text_1_scene13[1]), Unwrite(Text_1_scene13[2]), Unwrite(Text_1_scene13[3]), Unwrite(Text_1_scene13[4]), Unwrite(Text_1_scene13[5]) )
@@ -289,12 +289,12 @@ class ChiaNho(MovingCameraScene):
                 run_time=2)
         self.play(Unwrite(Text_3_scene13[0]), Unwrite(Text_3_scene13[1]), Unwrite(Text_3_scene13[2]), Unwrite(Text_3_scene13[3]), Uncreate(Px1y1_scene13),
                 Unwrite(Text_3_scene13[4]), Unwrite(Text_3_scene13[5]), Unwrite(Text_3_scene13[6]))
-        self.play(Write(Text_4_scene13), Write(Text_5_scene13), Write(Text_6_scene13), Write(Text_7_scene13), run_time=1)
+        self.play(Write(Text_4_scene13), run_time=1)
         self.play(dashed_line_x_scene13.animate.shift(DOWN * 1.46), Unwrite(Px1y1_copy_scene13), Unwrite(x_1_scene13), Unwrite(y_1_scene13))
         self.play(Create(angle_scene13))
         self.play(Write(angle_label_scene13))
         self.wait(1)
-        self.play(r1_scene13.animate.move_to([0, 0.7, 0]), r2_scene13.animate.move_to([-1.7, -0.3, 0]), Write(sin_scene13), Write(cos_scene13), angle_label1_scene13.animate.move_to([0.6, 0.73, 0]), angle_label2_scene13.animate.move_to([-1.05, -0.27, 0]))
+        self.play(r1_scene13.animate.move_to([0, 0.7, 0]), r2_scene13.animate.move_to([-1.7, -0.3, 0]), Write(sin_scene13), Write(cos_scene13), angle_label1_scene13.animate.move_to([0.6, 0.73, 0]), angle_label2_scene13.animate.move_to([-1.05, -0.27, 0]), Transform(Text_4_scene13, xy))
         self.wait(1)
         self.play(Unwrite(sin_scene13), Unwrite(cos_scene13), Uncreate(angle_label1_scene13), Uncreate(angle_label2_scene13), Unwrite(r1_scene13), Unwrite(r2_scene13))
         self.play(Transform(dot_scene13, dot1_scene13), Uncreate(dashed_line_x_scene13), Uncreate(dashed_line_y_scene13), Transform(line1_scene13, line11_scene13), angle_label_scene13.animate.move_to([-1.4, 0.3, 0]), r_scene13.animate.move_to([-1.4, 0.8, 0]), Transform(angle_scene13, angle1_scene13))
@@ -305,7 +305,7 @@ class ChiaNho(MovingCameraScene):
         self.play(dot_scene13.animate.move_to([2.197, 0, 0]).shift(LEFT * 2.5), dot1_scene13.animate.move_to([2.197, 0, 0]).shift(LEFT * 2.5), Transform(line1_scene13, line2_scene13))
         self.add(moving_part_scene13)
         self.play(Uncreate(line1_scene13), Uncreate(angle_label_scene13), Uncreate(r_scene13), Uncreate(angle_scene13))
-        self.play(Uncreate(dot1_scene13))
+        self.play(Uncreate(dot1_scene13), Transform(xy, Text_7_scene13))
 
         #BẮT ĐẦU QUAY
         diem_quay_scene13 = ORIGIN + LEFT * 2.5
