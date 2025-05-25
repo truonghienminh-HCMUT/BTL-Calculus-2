@@ -1,0 +1,11 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/4193198211_1755747358_223132457.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_205426088_2112896566.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_1279054104_2658303120.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_1303962133_1542157126.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_1296365591_1105510582.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_548731573_1603795123.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_4019772313_3601214936.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_1635347580_278437206.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_1446799906_1613709383.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene19-20-21/media/videos/scene19-20-21/720p60/partial_movie_files/ChiaNho/501858615_2566152641_3845311141.mp4'
