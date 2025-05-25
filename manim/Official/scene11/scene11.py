@@ -40,6 +40,40 @@ def func_z(x, y):
     return -0.034 * x**2 - 0.02 * y**2 + 5
 
 class Main(CustomThreeDScene):
+    def create_riemann_element(self, dot_x, dot_y, axes):
+        # INIT
+        color_db9512 = "#db9512"
+        color_88bdef = "#88bdef"
+        color_03ffff = "#03ffff"
+        sphere_radius = 0.08
+        dx = 1.0
+        dy = 1.0
+        h_data_sphere_center = func_z(dot_x, dot_y)
+        if h_data_sphere_center < 0.01: h_data_sphere_center = 0.01
+
+        x_scale = axes.x_length / (axes.x_range[1] - axes.x_range[0])
+        y_scale = axes.y_length / (axes.y_range[1] - axes.y_range[0])
+        z_scale = axes.z_length / (axes.z_range[1] - axes.z_range[0])
+
+        prism_width = dx * x_scale
+        prism_depth = dy * y_scale
+        h_sphere_center = h_data_sphere_center * z_scale
+        # Chiều cao = chiều cao + r
+        total_height = h_sphere_center + sphere_radius
+
+        sphere = Sphere(
+            radius=sphere_radius,
+            fill_color=color_88bdef,
+        )
+        sphere.move_to(axes.c2p(dot_x, dot_y, h_data_sphere_center))
+
+        prism = Prism(dimensions=[prism_width, prism_depth, total_height])
+        prism.set_fill(color_db9512, opacity=1.0)
+        prism.set_stroke(color_03ffff, width=1.5)
+        prism.move_to(axes.c2p(dot_x, dot_y, 0) + OUT * total_height / 2)    
+
+        return VGroup(prism, sphere)
+
     def construct(self):
         # INIT
         color_db5897 = "#db5897"
@@ -50,6 +84,7 @@ class Main(CustomThreeDScene):
         color_88bdef = "#88bdef"
         color_db9512 = "#db9512"
 
+        # miền D
         # miền D
         a = 2
         b = 8
@@ -82,7 +117,7 @@ class Main(CustomThreeDScene):
         self.set_camera_orientation(phi = 70 * DEGREES, theta = 45 * DEGREES, frame_center = axes_center, zoom = 0.7)
         self.play(Write(axes), Write(x_label), Write(y_label), Write(z_label), Write(equation), run_time = 1)
         self.wait(1.2)
-        
+
         surface_over_D = Surface(
             lambda u, v: axes.c2p(u, v, func_z(u, v)),
             u_range = [a, b],
@@ -125,7 +160,6 @@ class Main(CustomThreeDScene):
 
         self.play(Write(dashed_lines_to_D), run_time=1)
         # self.wait(0.5)
-
         # Vẽ miền D
         domain_D = Polygon(
             axes.c2p(a, c, 0),
@@ -144,6 +178,7 @@ class Main(CustomThreeDScene):
         # set lại camera
         group3d = VGroup(axes, x_label, y_label, z_label, surface_over_D, domain_D, surface_over_D_copy)
 
+        # Chia vùng D ra thành grid các ô vuông nhỏ
         grid_lines = VGroup()
         x_steps = np.arange(a, b + 1, 1)
         y_steps = np.arange(c, d + 1, 1)
@@ -156,123 +191,101 @@ class Main(CustomThreeDScene):
         group3d.add(grid_lines)
         # self.wait()
 
-        dot_x = a + 0.5 + 2
-        dot_y = c + 0.5 + 2
-        # Chọn ra 1 ô để một dấu chấm nhỏ ở giữa và kéo ô vuông chứa nó lên đến surface thành 1 khối hình hộp chữ nhật đứng thể hiện thể tích tích phân
-        center_dot_on_base = Sphere(axes.c2p(dot_x, dot_y, 0), color = color_88bdef, radius = 0.08, fill_opacity = 1)
-        self.play(Create(center_dot_on_base), run_time = 0.5)
-        self.wait(1)
-        dx = 1.0
+        # peak
+        all_initial_prisms = VGroup()
+        all_final_prisms = VGroup()
+        all_initial_spheres = VGroup()
+        all_final_spheres = VGroup()
+        
+        dx = 1.0 # Kích thước ô
         dy = 1.0
+        sphere_radius_manim = 0.08 # Bán kính sphere (Manim units)
 
-        h_prism = func_z(dot_x, dot_y) + center_dot_on_base.radius
-        if h_prism < 0.01: h_prism = 0.01
-
-        base_vertices_2d = [
-            axes.c2p(dot_x - dx / 2, dot_y - dy / 2, 0), # bottom-left
-            axes.c2p(dot_x + dx / 2, dot_y - dy / 2, 0), # bottom-right
-            axes.c2p(dot_x + dx / 2, dot_y + dy / 2, 0), # top-right
-            axes.c2p(dot_x - dx / 2, dot_y + dy / 2, 0)  # top-left
-        ]
-        base_polygon = Polygon(*base_vertices_2d, stroke_color = color_03ffff, stroke_width = 1.5, fill_color = color_db9512, fill_opacity = 1)
-        top_vertices_3d = [axes.c2p(v[0]/axes.x_length*10, v[1]/axes.y_length*10, h_prism) for v in base_vertices_2d]
-        base_data_coords = [
-            [dot_x - dx / 2, dot_y - dy / 2, 0],
-            [dot_x + dx / 2, dot_y - dy / 2, 0],
-            [dot_x + dx / 2, dot_y + dy / 2, 0],
-            [dot_x - dx / 2, dot_y + dy / 2, 0]
-        ]
-        top_data_coords = [[x, y, h_prism] for x,y,z_base in base_data_coords]
-        world_base_vertices = [axes.c2p(x,y,z) for x,y,z in base_data_coords]
-        world_top_vertices = [axes.c2p(x,y,z) for x,y,z in top_data_coords]
-        base_face = Polygon(*world_base_vertices, 
-                            stroke_color=color_03ffff, stroke_width=1.5, 
-                            fill_color=color_db9512, fill_opacity=1.0)
-        top_face = Polygon(*world_top_vertices, 
-                           stroke_color=color_03ffff, stroke_width=1.5, 
-                           fill_color=color_db9512, fill_opacity=1.0)
-
-        side_faces = VGroup()
-        for i in range(4):
-            idx_next = (i + 1) % 4
-            side_face = Polygon(
-                world_base_vertices[i], world_base_vertices[idx_next],
-                world_top_vertices[idx_next], world_top_vertices[i],
-                stroke_color=color_03ffff, stroke_width=1.5,
-                fill_color=color_db9512, fill_opacity=1.0
-            )
-            side_faces.add(side_face)
-        solid_prism_manual = VGroup(base_face, top_face, *side_faces)
-        dot_on_surface = Sphere(axes.c2p(dot_x, dot_y, h_prism), color=color_88bdef, radius=0.08)
-
-        self.play(Create(base_face), run_time=0.7)
-        self.wait(0.2)
-
+        # Lấy scales (cần cho initial_prism)
         x_scale = axes.x_length / (axes.x_range[1] - axes.x_range[0])
         y_scale = axes.y_length / (axes.y_range[1] - axes.y_range[0])
         z_scale = axes.z_length / (axes.z_range[1] - axes.z_range[0])
-
+        initial_prism_height_manim = 0.005 * z_scale
         prism_width_manim = dx * x_scale
         prism_depth_manim = dy * y_scale
-        prism_height_manim = h_prism * z_scale
-        initial_prism_height_manim = 0.01 * z_scale
-        volumetric_element = Prism(dimensions=[prism_width_manim, prism_depth_manim, initial_prism_height_manim])
-        volumetric_element.set_fill(color_db9512, opacity=1.0)
-        volumetric_element.set_stroke(color_03ffff, width=1.5)
-        target_bottom_center_world = axes.c2p(dot_x, dot_y, 0)
-        volumetric_element.move_to(target_bottom_center_world)
-        volumetric_element.shift(OUT * initial_prism_height_manim / 2)
 
-        self.play(Create(volumetric_element), run_time=0.5)
-        group3d.add(volumetric_element, center_dot_on_base)
-        self.wait(0.5)
+        # Vòng lặp qua các ô trong miền D (a, b, c, d đã được định nghĩa trước đó)
+        for x_val in np.arange(a + dx / 2, b, dx):
+            for y_val in np.arange(c + dy / 2, d, dy):
+                # Tạo Prism ban đầu (thấp)
+                initial_prism = Prism(dimensions=[prism_width_manim, prism_depth_manim, initial_prism_height_manim])
+                initial_prism.set_fill("#db9512", opacity=1.0)
+                initial_prism.set_stroke("#03ffff", width=1.0)
+                initial_prism.move_to(axes.c2p(x_val, y_val, 0) + OUT * initial_prism_height_manim / 2)
+                all_initial_prisms.add(initial_prism)
 
-        final_prism = Prism(dimensions=[prism_width_manim, prism_depth_manim, prism_height_manim])
-        final_prism.set_fill(color_db9512, opacity=1.0)
-        final_prism.set_stroke(color_03ffff, width=1.5)
-        final_prism.move_to(target_bottom_center_world)
-        final_prism.shift(OUT * prism_height_manim / 2)
+                # Tạo Sphere ban đầu (ở đáy, z=0)
+                initial_sphere = Sphere(
+                    radius=sphere_radius_manim, 
+                    fill_color="#88bdef", 
+                    fill_opacity=0.9,
+                    stroke_width=1,
+                    stroke_color=WHITE,
+                    resolution=(16, 8)
+                )
+                initial_sphere.move_to(axes.c2p(x_val, y_val, 0))
+                all_initial_spheres.add(initial_sphere)
 
-        # Tạo animation cho sphere và prism
-        sphere_animation = center_dot_on_base.animate.move_to(axes.c2p(dot_x, dot_y, h_prism))
-        prism_animation = Transform(volumetric_element, final_prism, replace_mobject_with_target_in_scene=True)
+                # Tạo Prism và Sphere cuối cùng bằng hàm
+                final_element = self.create_riemann_element(x_val, y_val, axes)
+                all_final_prisms.add(final_element[0])
+                all_final_spheres.add(final_element[1])
 
+        self.play(Create(all_initial_spheres), run_time=1.5)
+        self.wait(0.3)
+
+        self.add(all_initial_prisms)
+
+        # các prism sẽ mọc lên, các sphere sẽ bay lên.
         self.play(
-            prism_animation,
-            sphere_animation,
-            run_time=2
+            Transform(all_initial_prisms, all_final_prisms),
+            Transform(all_initial_spheres, all_final_spheres),
+            run_time = 3 
         )
-        if volumetric_element in group3d: group3d.remove(volumetric_element)
-        group3d.add(final_prism)
-        group3d.add(center_dot_on_base)
-        group3d.add(solid_prism_manual, dot_on_surface)
 
-        self.wait(1) # Giảm thời gian chờ
+        group3d.add(all_final_prisms, all_final_spheres)
+        self.wait(1)
 
-        # Di chuyển camera và scale toàn bộ group
-        self.move_camera(phi=75 * DEGREES, theta=-30 * DEGREES, zoom=0.8, frame_center=axes.c2p(dot_x, dot_y, h_prism/2))
+        # Begin rotation
+        rotation_time = 8
+        flicker_count = 6
+        og_opacity = 1.0
+        flicker_opacity = 0.1
+        mid_opacity = (og_opacity + flicker_opacity) / 2
+        amplitude = (og_opacity - flicker_opacity) / 2
+
+        def update_opacity(mobj, alpha):
+            new_opacity = mid_opacity + amplitude * np.cos(2 * PI * flicker_count * alpha)
+            mobj.set_opacity(new_opacity)
+
+        rotation_animation = self.camera.theta_tracker.animate.set_value(self.camera.theta_tracker.get_value() + 360 * DEGREES)
+        flickering_animation = UpdateFromAlphaFunc(surface_over_D, update_opacity)
+        self.play(rotation_animation, flickering_animation, run_time = rotation_time)
+        surface_over_D.set_opacity(og_opacity)
         self.wait(0.5)
-        self.move_camera(phi=60 * DEGREES, theta=20 * DEGREES, zoom=0.75, frame_center=axes_center)
-        self.move_camera(phi=70 * DEGREES, theta=0 * DEGREES, zoom=0.7, frame_center=axes_center)
         
         # self.play(
         #     group3d.animate.scale(1).to_edge(DOWN, buff=-5), # Điều chỉnh buff
         #     run_time=1.25
         # )
-
+        # move
+        self.move_camera(phi=75 * DEGREES, theta=0* DEGREES, zoom=0.7, frame_center=axes_center)
         self.move_camera(frame_center=axes_center + (DOWN * -5.0), run_time=1.25)
-        self.wait(2)
-        
+        self.wait(1.5)
+
         paragraph_string = r"""
         \begin{minipage}{0.7\textwidth}
-        Chúng ta có thể xấp xỉ được thể tích $V$ cần tìm, 
-        bằng cách tính tổng các thể tích hình 
-        hộp chữ nhật nhỏ với đáy là $D_{ij}$ có diện tích 
-        $\Delta A = \Delta x \Delta y$ và chiều cao là $f(x_{ij}^*, y_{ij}^*)$, 
-        với $(x_{ij}^*, y_{ij}^*)$ là điểm được chọn trên miền D. 
-        Thể tích hình hộp chữ nhật nhỏ khi này bằng: \\[1em]
-        \centering
-        $f(x_{ij}^*, y_{ij}^*)\Delta A = f(x_{ij}^*, y_{ij}^*)\Delta x \Delta y$
+        Như vậy, khi cộng tất cả những thể tích
+        của những hình hộp chữ nhật nhỏ, chúng
+        ta sẽ xấp xỉ được thể tích $V$ cần tìm:\\
+        \centering 
+        $$ V \approx \sum_{i=1}^m \sum_{j=1}^n f(x_{ij}^*, y_{ij}^*)\Delta A
+        = \sum_{i=1}^m \sum_{j=1}^n f(x_{ij}^*, y_{ij}^*)\Delta x \Delta y $$
         \end{minipage}
         """
 
@@ -284,6 +297,5 @@ class Main(CustomThreeDScene):
 
         paragraph_tex.to_edge(RIGHT, buff = 0.5)
         set_fixed(paragraph_tex)
-        self.play(Write(paragraph_tex), run_time = 4)
+        self.play(Write(paragraph_tex), run_time = 4.5)
         self.wait(3)
-
