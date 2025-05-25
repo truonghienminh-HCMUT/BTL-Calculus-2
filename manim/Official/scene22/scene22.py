@@ -21,14 +21,12 @@ class ChiaNho(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
 
-        color_db5897 = "#db5897"
         color_03ffff = "#03ffff"
         color_cc00ff = "#cc00ff"
-        color_fececa = "#fececa"
-        color_e158d0 = "#e158d0"
-        color_88bdef = "#88bdef"
         color_4dbbbe0 = "#4dbbe0"
         color_fe7051 = "#fe7051"
+        color_7fb663 = "#7fb663"
+        color_ff8d28 = "#ff8d28"
 
         Text_1_scene22 = Tex(
             r"III. ỨNG DỤNG CỦA TÍCH PHÂN KÉP",
@@ -103,30 +101,167 @@ class ChiaNho(MovingCameraScene):
             buff=0.15             # khoảng cách mép khung đến chữ
         )
         Text_3_box_scene22 = VGroup(background_box_thigiacmaytinh, Text_3_scene22)
-        Text_3_box_scene22.shift(UP * 3)
+        Text_3_box_scene22.shift(UP * 3 + RIGHT * 7)
 
         Text_4_scene22 = Tex(
-            r"Trong quá trình trích xuất đặc trưng hoặc tính toán các đặc trưng dạng hình tròn, việc tích phân trong tọa độ cực giúp chuẩn hóa và tính toán chính xác hơn các thuộc tính hình học như diện tích, mật độ điểm ảnh, ...",
-            font_size=20
-        )
+            r"Trong quá trình trích xuất đặc trưng hoặc tính toán các đặc trưng dạng hình tròn,",
+            r" việc tích phân trong tọa độ cực giúp chuẩn hóa và tính toán chính xác hơn các thuộc tính hình học",
+            r" như",
+            r" diện tích",
+            r",",
+            r" mật độ điểm ảnh",
+            r", ...",
+            font_size=35
+        ).shift(UP * 1.9)
+
+        DienTich = Text_4_scene22[3].copy()
+        MatDoDiemAnh = Text_4_scene22[5].copy()
+
+        axes = Axes(
+            x_range=[0, 5, 1],
+            y_range=[0, 5, 1],
+            x_length=3,
+            y_length=3,
+            axis_config={"include_tip": True},
+        ).move_to(LEFT * 3.5 + DOWN * 1)
+
+        Text0 = Tex("O").to_edge(UP * 7,  buff=0.5).scale(1)
+        Text0.shift(LEFT * 5.1 + DOWN * 3)
+
+        x_axes_labels = axes.get_x_axis_label("x")
+        y_axes_labels = axes.get_y_axis_label("y")
+
+        a = 2  # bán kính trong
+        b = 3.5    # bán kính ngoài
+        alpha = 0.3  # góc alpha (rad)
+        beta = 1.2   # góc beta (rad)
+        origin = axes.c2p(0, 0)
+
+        outer_arc = Arc(radius=b, start_angle=alpha, angle=beta - alpha, arc_center=origin)
+        inner_arc = Arc(radius=a, start_angle=beta, angle=-(beta - alpha), arc_center=origin)
+
+        left_point = origin + b * np.array([np.cos(alpha), np.sin(alpha), 0])
+        right_point = origin + b * np.array([np.cos(beta), np.sin(beta), 0])
+
+        # Tạo các đoạn thẳng từ origin
+        left_line = Line(origin, left_point)
+        right_line = Line(origin, right_point)
+
+        outer_points = [origin + b * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(alpha, beta, 30)]
+        inner_points = [origin + a * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(beta, alpha, 30)]
+
+        region_points = outer_points + inner_points
+        region = VMobject()
+        region.set_points_as_corners(region_points)
+        region.set_fill(RED, opacity=0.5)
+        left_line.set_color(BLUE)
+        right_line.set_color(BLUE)
+        outer_arc.set_color(RED)
+        inner_arc.set_color(RED)
+
+        TrucDienTich = VGroup(axes, x_axes_labels, y_axes_labels, Text0, outer_arc, inner_arc, left_line, right_line, region)
+
+        MatDoDiemAnh_Image = ImageMobject("MatDoDiemAnh.jpg")
+        MatDoDiemAnh_Image.scale(1).shift(RIGHT * 3 + DOWN * 1)
+
 
         Text_5_scene22 = Tex(
-            r"\textbf{Xử lý tín hiệu số (Digital Signal Processing \- DSP)}",
+            r"\textbf{Xử lý tín hiệu số (Digital Signal Processing - DSP)}",
             font_size=35
         )
+        background_box_xulytinhieuso = SurroundingRectangle(
+            Text_5_scene22,
+            color=GREEN,            # màu viền
+            fill_color= color_7fb663,    # màu nền
+            fill_opacity=0.5,       # độ đậm nền (1 = đặc)
+            buff=0.15             # khoảng cách mép khung đến chữ
+        )
+        Text_5_box_scene22 = VGroup(background_box_xulytinhieuso, Text_5_scene22)
+        Text_5_box_scene22.shift(UP * 3)
 
         Text_6_scene22 = Tex(
             r"Tích phân trong tọa độ cực giúp tối ưu hóa và đánh giá hiệu suất của các bộ lọc không gian hình tròn trong việc làm mịn ảnh, phát hiện biên hình tròn, ...", 
-            font_size=25
+            font_size=35
         )
-   
+        axes2_scene12 = Axes(
+            x_range=[-3, 3, 1],
+            y_range=[-3, 3, 1],
+            x_length=4,
+            y_length=4,
+            axis_config={"color": RED}
+        ).shift(LEFT * 3 )
+        half_circle_scene22 = Annulus(
+            inner_radius=0.6,
+            outer_radius=1.2,
+            fill_opacity=0.8,
+            stroke_width=0
+        ).set_color([BLUE_E, TEAL_B, GREEN]).move_to(axes2_scene12.c2p(0, 0))
+        half_circle_after_scene22 = half_circle_scene22.copy()
+
+        LamMinAnh_before_Image = ImageMobject("LamMinAnh_before.png")
+        LamMinAnh_before_Image.scale(1).shift(LEFT  * 3.8 + UP * 0.8)
+        LamMinAnh_after_Image = ImageMobject("LamMinAnh_after.png")
+        LamMinAnh_after_Image.scale(1).shift(RIGHT  * 3 + DOWN * 2.4)
+
+
         Text_7_scene22 = Tex(
-            r"Robot học và điều khiển"
+            r"\textbf{Robot học và điều khiển}"
         )
+        background_box_robothocvadieukhien = SurroundingRectangle(
+            Text_7_scene22,
+            color=ORANGE,            # màu viền
+            fill_color= color_ff8d28,    # màu nền
+            fill_opacity=0.5,       # độ đậm nền (1 = đặc)
+            buff=0.15             # khoảng cách mép khung đến chữ
+        ).shift(UP * 3)
+        Text_7_box_scene22 = VGroup(background_box_robothocvadieukhien, Text_7_scene22)
+
+        # Tạo robot với thiết kế đẹp hơn
+        body = RoundedRectangle(
+            width=1.2, height=1.8, 
+            corner_radius=0.2,
+            fill_color=BLUE_E, fill_opacity=1,
+            stroke_color=BLUE_A, stroke_width=3
+        )
+        
+        head = Circle(
+            radius=0.4,
+            fill_color=BLUE_C, fill_opacity=1,
+            stroke_color=BLUE_A, stroke_width=3
+        ).shift(UP*1.2)
+        
+        eyes = VGroup(
+            Dot(color=WHITE).shift(UP*1.3 + LEFT*0.15),
+            Dot(color=WHITE).shift(UP*1.3 + RIGHT*0.15)
+        )
+        
+        # Chân và tay sẽ được animate
+        left_arm = Line(ORIGIN, LEFT*0.5 + DOWN*0.5, stroke_width=8)
+        right_arm = Line(ORIGIN, RIGHT*0.5 + DOWN*0.5, stroke_width=8)
+        arms = VGroup(left_arm, right_arm).shift(UP*0.5)
+        
+        left_leg = Line(ORIGIN, LEFT*0.3 + DOWN*0.7, stroke_width=8)
+        right_leg = Line(ORIGIN, RIGHT*0.3 + DOWN*0.7, stroke_width=8)
+        legs = VGroup(left_leg, right_leg).shift(DOWN*0.9)
+        
+        robot = VGroup(body, head, eyes, arms, legs)
+        robot.scale(0.8).shift(LEFT*5 + DOWN*0.5)
+        
+        # Thêm bóng đổ
+        shadow = Circle(radius=0.8, fill_color=BLACK, fill_opacity=0.2, stroke_width=0)
+        shadow.scale(0.5).shift(DOWN*2.2)
+        
+        # Tạo hiệu ứng chạy
+        start_pos = robot.get_center()
+        end_pos = start_pos + RIGHT*10
+        
+        
+        Text_7_scene22.next_to(robot, UP)  # đặt trên đầu robot
 
         Text_8_scene22 = Tex(
-            r"Tích phân trong tọa độ cực dùng để tính diện tích quét, phân bố năng lượng, hoặc tối ưu hóa đường đi của robot khi hoạt động trong không gian có tính đối xứng tròn."
-        )
+            r"Tích phân trong tọa độ cực dùng để tính diện tích quét, phân bố năng lượng, hoặc tối ưu hóa đường đi của robot khi hoạt động trong không gian có tính đối xứng tròn.",
+            font_size=35
+        ).shift(UP * 1.8)
         self.play(Write(Text_1_scene22), Write(Text_1_1_scene22), run_time=3)
         self.play(Unwrite(Text_1_1_scene22), Unwrite(Text_1_scene22))
         self.play(LaggedStart(FadeIn(background_box_dohoamaytinh), Write(Text_2_scene22), lag_ratio=0.3), run_time=2)
@@ -139,8 +274,115 @@ class ChiaNho(MovingCameraScene):
         self.play(Blinn_Phong.animate.move_to( DOWN * 0.8), Blinn_Phong_higher_eponent.animate.move_to(DOWN * 0.8))
         self.play(FadeOut(Phong), FadeOut(Blinn_Phong), FadeOut(Blinn_Phong_higher_eponent), run_time=2)
         self.play(Transform(Phong_Reflection_Model, Radiosity), SpinInFromNothing(Radiosity_image), run_time=2)
-        self.play(FadeOut(Radiosity_image), Unwrite(Radiosity), Unwrite(Text_2_2_scene22), Unwrite(Text_2_3_scene22), Unwrite(Phong_Reflection_Model), Unwrite(Text_2_scene22))
-        self.play(Transform(background_box_dohoamaytinh, Text_3_box_scene22), run_time=2)
+        self.wait(1)
+        self.play(FadeOut(Radiosity_image), Unwrite(Radiosity), Unwrite(Text_2_2_scene22), Unwrite(Text_2_3_scene22), Unwrite(Phong_Reflection_Model))
+        self.play(Text_2_box_scene22.animate.move_to(LEFT * 13 + UP *3), run_time=2)
+        self.play(Text_3_box_scene22.animate.move_to( UP * 3), run_time=2)
+        self.play(Uncreate(Text_2_box_scene22))
+        self.play(Write(Text_4_scene22), run_time = 2)
+        self.play(DienTich.animate.move_to(DOWN * 1 + LEFT * 3.5), MatDoDiemAnh.animate.move_to(DOWN * 1 + RIGHT * 3.5), run_time=1)
+        self.play(Transform(DienTich, TrucDienTich), run_time=2)
+        self.play(FadeOut(MatDoDiemAnh), FadeIn(MatDoDiemAnh_Image), run_time=2)
+        self.play(Transform(Text_3_scene22, Text_5_box_scene22), Write(Text_5_scene22), Transform(background_box_dohoamaytinh, background_box_xulytinhieuso), Uncreate(Text_3_box_scene22), Unwrite(Text_4_scene22), Uncreate(TrucDienTich), FadeOut(MatDoDiemAnh_Image), Unwrite(DienTich), run_time=1)
+        self.play(Write(Text_6_scene22), run_time=2)
+        self.play(Text_6_scene22.animate.move_to(UP * 1.9), run_time=1)
+        self.play(Create(half_circle_scene22), run_time=2)
+        self.play(SpinInFromNothing(LamMinAnh_before_Image), run_time=2)
+        self.play(LamMinAnh_before_Image.animate.move_to(DOWN * 2.5 + LEFT * 3), run_time=1)
+        self.play(half_circle_after_scene22.animate.move_to(RIGHT * 3), SpinInFromNothing(LamMinAnh_after_Image), run_time=2)
+        self.play(Uncreate(half_circle_after_scene22), Uncreate(half_circle_scene22), FadeOut(LamMinAnh_after_Image), FadeOut(LamMinAnh_before_Image), Uncreate(background_box_dohoamaytinh), Unwrite(Text_5_scene22), Unwrite(Text_6_scene22), FadeOut(Text_5_box_scene22), Uncreate(background_box_xulytinhieuso))
+        self.add(shadow, robot)
+        # Animation di chuyển
+        run_time = 3
+        frames_per_step = 5
+        
+        for i in range(frames_per_step):
+            alpha = i / frames_per_step
+            new_pos = interpolate(start_pos, end_pos, alpha)
+
+            leg_angle = 20 * np.sin(2 * PI * alpha * 4)
+            arm_angle = 30 * np.sin(2 * PI * alpha * 4 + PI / 2)
+
+            # Tính delta từ vị trí hiện tại đến vị trí mới
+            delta = new_pos - robot.get_center()
+
+            # Di chuyển toàn bộ robot cũ sang vị trí mới
+            new_robot = robot.copy().shift(delta)
+
+            # Tạo tay/chân mới (gắn đúng vị trí theo new_pos)
+            leg_origin = new_pos + DOWN * 0.9
+            new_left_leg = Line(leg_origin, leg_origin + LEFT*0.3 + DOWN*0.7).rotate(leg_angle * DEGREES, about_point=leg_origin)
+            new_right_leg = Line(leg_origin, leg_origin + RIGHT*0.3 + DOWN*0.7).rotate(-leg_angle * DEGREES, about_point=leg_origin)
+
+            arm_origin = new_pos + UP * 0.5
+            new_left_arm = Line(arm_origin, arm_origin + LEFT*0.5 + DOWN*0.5).rotate(arm_angle * DEGREES, about_point=arm_origin)
+            new_right_arm = Line(arm_origin, arm_origin + RIGHT*0.5 + DOWN*0.5).rotate(-arm_angle * DEGREES, about_point=arm_origin)
+
+            # Gắn lại tay và chân mới vào robot
+            new_robot.submobjects[3] = VGroup(new_left_arm, new_right_arm)
+            new_robot.submobjects[4] = VGroup(new_left_leg, new_right_leg)
+
+            # Cập nhật bóng
+            new_shadow = shadow.copy().shift(delta)
+            new_shadow.stretch_to_fit_width(1.2 - 0.3 * abs(np.sin(2 * PI * alpha * 4)))
+
+            # Cập nhật màn hình
+            self.remove(robot, shadow)
+            robot = new_robot
+            shadow = new_shadow
+            self.add(shadow, robot)
+            self.wait(run_time / frames_per_step)
+            self.add(Text_7_scene22)
+            Text_7_scene22.shift(delta)
+        self.play(Text_7_scene22.animate.move_to(UP * 3), Create(background_box_robothocvadieukhien), run_time=1)
+        self.play(Uncreate(robot), Uncreate(shadow))
+        self.add(Text_7_box_scene22)
+        self.play(Write(Text_8_scene22), run_time=2)
+        circle1_scene13 = Circle(radius=2, color=WHITE).shift(DOWN * 1)
+        line2_scene13 = Line(start=[2.5, 0, 0], end=[0, 0, 0], color=YELLOW, stroke_width=5).shift(LEFT * 2.5 + DOWN * 1)
+        diem_quay_scene13 = ORIGIN + DOWN * 1
+        self.add(circle1_scene13)
+        angle_tracker = ValueTracker(0)
+        center = ORIGIN + DOWN * 1
+
+        # Đường tròn nền
+        circle = Circle(radius=2, color=WHITE).move_to(center)
+        self.add(circle)
+
+        # Bộ theo dõi góc quay
+        angle_tracker = ValueTracker(0)
+
+        # Đoạn thẳng quay, cập nhật theo góc
+        rotating_line = always_redraw(lambda: Line(
+            start=center,
+            end=center + rotate_vector(RIGHT * 2, angle_tracker.get_value()),
+            color=YELLOW,
+            stroke_width=5
+        ))
+
+        # Vùng tô động theo góc
+        dynamic_sector = always_redraw(lambda: Sector(
+            arc_center=center,
+            radius=2,
+            angle=angle_tracker.get_value(),
+            start_angle=0,
+            color=BLUE,
+            fill_opacity=0.3,
+            stroke_width=0,
+        ))
+
+        self.add(dynamic_sector, rotating_line)
+
+        # Animation: tăng góc từ 0 đến 2π
+        self.play(
+            angle_tracker.animate.set_value(2 * PI),
+            run_time=4,
+            rate_func=rush_into
+        )
+        
+        self.wait(1)
+
+
 
 
         def update_curve(mob):

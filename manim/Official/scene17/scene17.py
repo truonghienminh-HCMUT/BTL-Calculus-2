@@ -79,7 +79,7 @@ class ChiaNho(MovingCameraScene):
         fxy.move_to([-2.9, 3, 0])
         fxy.set_color(RED)
         fxy_copy = fxy.copy()
-        frphi = MathTex(r"f(r(cos(\varphi)),rsin(\varphi))").scale(1).next_to(axes2.c2p(a, 0), UP)
+        frphi = MathTex(r"f(r(cos(\varphi)),rsin(\varphi)).r").scale(1).next_to(axes2.c2p(a, 0), UP)
         frphi.move_to([3, 3, 0])
         frphi.set_color(BLUE)
 
