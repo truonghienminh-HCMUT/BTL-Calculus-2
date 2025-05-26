@@ -26,6 +26,22 @@ class ChiaNho(MovingCameraScene):
         color_7cfc00 = "#cc00ff"
 
         #TEXT CỦA HÌNH MÔ PHỎNG BÊN TRÁI
+        TEXT_scene13 = Tex(
+            r"\textbf{CÁCH CHUYỂN TỪ TỌA ĐỘ DESCARTES", 
+            font_size=40
+        ).shift(UP * 1)
+        TEXT_small_scene13 = Tex(
+            r"\textbf{CÁCH CHUYỂN TỪ TỌA ĐỘ DESCARTES", 
+            font_size=30
+        ).shift(UP * 3 + RIGHT * 3)
+        TEXT_1_scene13 = Tex(
+            r"\textbf{SANG TỌA ĐỘ CỰC}",#0"
+            font_size=40
+        )
+        TEXT_small_1_scene13 = Tex(
+            r"\textbf{SANG TỌA ĐỘ CỰC}",#0"
+            font_size=30
+        ).shift(UP * 2.5 + RIGHT * 3)
         Text1_scene13 = Tex("Tọa độ Descartes").to_edge(UP * 7,  buff=0.5).scale(1)
         Text1_scene13.shift((UP * 3), LEFT * 3)
         Text1_scene13.shift(LEFT * 2)
@@ -267,6 +283,7 @@ class ChiaNho(MovingCameraScene):
         Text_7_scene13.set_color(WHITE)
 
         #CHẠY ANIMATION
+        self.play(Transform(TEXT_scene13, TEXT_small_scene13), Transform(TEXT_1_scene13, TEXT_small_1_scene13), run_time=2)
         self.play(Write(Text_1_scene13[0]), Write(Text_1_scene13[1]), run_time=2)
         self.play(Write(Text_1_scene13[2]), Write(Text_1_scene13[3]), Write(Text1_scene13), run_time=2)
         self.play(Write(Text_1_scene13[4]), Write(Text_1_scene13[5]))
