@@ -86,9 +86,9 @@ class Main(CustomThreeDScene):
 
         # miền D
         # miền D
-        a = 2
+        a = 1
         b = 8
-        c = 3
+        c = 1
         d = 8
 
         axes = ThreeDAxes(
@@ -111,7 +111,7 @@ class Main(CustomThreeDScene):
         # set_fixed(x_label, y_label, z_label)
         self.add_fixed_orientation_mobjects(x_label, y_label, z_label)
         # Write the equation from the func_z (with fixed)
-        equation = MathTex(r"z = -0.034x^2 - 0.02y^2 + 5", font_size = 34).to_edge(UP, buff = 0.1)
+        equation = MathTex(r"z = f(x, y) = -0.034x^2 - 0.02y^2 + 5", font_size = 34).to_edge(UP, buff = 0.1)
         set_fixed(equation)
 
         self.set_camera_orientation(phi = 70 * DEGREES, theta = 45 * DEGREES, frame_center = axes_center, zoom = 0.7)
@@ -130,6 +130,24 @@ class Main(CustomThreeDScene):
         )
         self.play(Create(surface_over_D), run_time = 1)
         self.wait(1)
+
+        target_point_coords = (a, (c+d) / 2, func_z(a, (c+d) / 2))
+        target_point = axes.c2p(*target_point_coords)
+        start_point = target_point + UP * 2.5 + RIGHT * 2.4 + OUT * 2.6
+        arrow = Arrow(
+            start_point,
+            target_point,
+            buff = 0,
+            stroke_width = 1,
+            stroke_color = WHITE
+        )
+        surface_label = MathTex(r"z = f(x, y)", font_size = 30, color = YELLOW)
+        surface_label.next_to(arrow.get_start(), UP, buff = 0.2)
+        self.add_fixed_orientation_mobjects(surface_label)
+        self.play(FadeIn(arrow), Write(surface_label), run_time = 1)
+        self.wait(1.5)
+        self.play(FadeOut(arrow), FadeOut(surface_label), run_time = 1)
+        
         pt_a = axes.c2p(a, 0, 0)
         pt_b = axes.c2p(b, 0, 0)
         pt_c = axes.c2p(0, c, 0)
@@ -276,13 +294,14 @@ class Main(CustomThreeDScene):
         # move
         self.move_camera(phi=75 * DEGREES, theta=0* DEGREES, zoom=0.7, frame_center=axes_center)
         self.move_camera(frame_center=axes_center + (DOWN * -5.0), run_time=1.25)
+        self.play(surface_over_D.animate.set_opacity(0), run_time=1)
         self.wait(1.5)
 
         paragraph_string = r"""
         \begin{minipage}{0.7\textwidth}
         Như vậy, khi cộng tất cả những thể tích
         của những hình hộp chữ nhật nhỏ, chúng
-        ta sẽ xấp xỉ được thể tích $V$ cần tìm:\\
+        ta sẽ xấp xỉ được \\thể tích $V$ cần tìm:\\
         \centering 
         $$ V \approx \sum_{i=1}^m \sum_{j=1}^n f(x_{ij}^*, y_{ij}^*)\Delta A
         = \sum_{i=1}^m \sum_{j=1}^n f(x_{ij}^*, y_{ij}^*)\Delta x \Delta y $$
