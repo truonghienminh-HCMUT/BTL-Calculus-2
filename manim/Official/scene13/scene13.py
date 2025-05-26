@@ -342,6 +342,11 @@ class ChiaNho(MovingCameraScene):
                 rate_func=rush_from,  # Nhanh dần về cuối
            )
        )
+        self.play(Uncreate(moving_part_scene13), Unwrite(textpi4_scene13), Unwrite(textpi34_scene13), Unwrite(textpi54_scene13), Unwrite(textpi74_scene13), Unwrite(textpi2_scene13), Unwrite(textpi_scene13), Unwrite(textpi32_scene13), Unwrite(text0_scene13),
+                Uncreate(circle1_scene13), Uncreate(circle2_scene13), Uncreate(circle3_scene13), Uncreate(circle4_scene13),
+                Unwrite(Text1_scene13), Unwrite(Text_5_scene13), Unwrite(Text_6_scene13), Unwrite(Text_7_scene13), Uncreate(axes1_scene13), Unwrite(axes_labels_scene13),
+                Uncreate(pi4_scene13), Uncreate(pi34_scene13), Uncreate(pi54_scene13), Uncreate(pi74_scene13), Unwrite(Text_4_scene13)
+         )
 
 
 

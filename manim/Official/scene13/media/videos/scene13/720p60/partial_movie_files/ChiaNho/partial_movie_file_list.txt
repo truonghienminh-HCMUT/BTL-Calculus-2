@@ -33,4 +33,5 @@ file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/man
 file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene13/media/videos/scene13/720p60/partial_movie_files/ChiaNho/501858615_199173273_1272019361.mp4'
 file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene13/media/videos/scene13/720p60/partial_movie_files/ChiaNho/501858615_249574568_1272019361.mp4'
 file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene13/media/videos/scene13/720p60/partial_movie_files/ChiaNho/501858615_2195984896_1272019361.mp4'
-file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene13/media/videos/scene13/720p60/partial_movie_files/ChiaNho/501858615_2566152641_1064558867.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene13/media/videos/scene13/720p60/partial_movie_files/ChiaNho/501858615_1505002949_1576348257.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene13/media/videos/scene13/720p60/partial_movie_files/ChiaNho/501858615_2566152641_606305979.mp4'
