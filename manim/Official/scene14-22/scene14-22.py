@@ -20,6 +20,13 @@ config.frame_rate = 60
 class ChiaNho(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
+
+        color_03ffff = "#03ffff"
+        color_cc00ff = "#cc00ff"
+        color_4dbbbe0 = "#4dbbe0"
+        color_fe7051 = "#fe7051"
+        color_7fb663 = "#7fb663"
+        color_ff8d28 = "#ff8d28"
          
         #SCENE14_16
         axes1 = Axes(
@@ -246,8 +253,9 @@ class ChiaNho(MovingCameraScene):
                   Uncreate(line_3), Uncreate(big_arc), Uncreate(small_arc), Uncreate(x_axes1_labels_copy), Uncreate(y_axes1_labels_copy), Unwrite(Text01),
                   Unwrite(DienTichCuaMienD_2), Unwrite(Text_1_scene16), Unwrite(TamCuaPhanTuCon),
                   run_time=1   )
-        
-        #SCENE 17
+         
+
+        #SCENE17
         axes1_scene17 = Axes(
             x_range=[0, 5, 1],
             y_range=[0, 5, 1],
@@ -384,23 +392,23 @@ class ChiaNho(MovingCameraScene):
             font_size=35
         )
         TongRiemannCuaTichPhanKep_ngan = MathTex(
-            r"\iint_D",
-            r" f(x, y)",
-            r"\,dx\,dy",
-            r" = \int_{\alpha}^{\beta} \int_{a}^{b}",
-            r" f(rcos\varphi, rsin\varphi)",
-            r"\cdot r\, dr\, d\varphi",
+            r"\iint_D",#0
+            r" f(x, y)",#1
+            r"\,dx\,dy",#2
+            r" = \int_{\alpha}^{\beta} \int_{a}^{b}",#2
+            r" f(rcos\varphi, rsin\varphi)",#3
+            r"\cdot r\,",#4
+            r" dr\, d\varphi",#5
             font_size=35
         )
 
-
-        self.remove(TamCuaPhanTuCon)
-        self.play(Transform(Text_1_scene16, Text_1_scene17), run_time=2)
-        self.remove(Text_1_scene16)
+        self.play(Write(Text_1_scene17), run_time=2)
         self.play(Text_1_scene17.animate.move_to(UP * 2.5))
         self.wait(1)
         self.play(Write(TongRiemannCuaTichPhanKep_dai), run_time=2)
+        self.wait(1.5)
         self.play(Transform(TongRiemannCuaTichPhanKep_dai, TongRiemannCuaTichPhanKep_ngan), run_time=1)
+        self.play(Circumscribe(TongRiemannCuaTichPhanKep_ngan))
         self.wait(1)
         self.play(Unwrite(Text_1_scene17))
         self.play(Transform(TongRiemannCuaTichPhanKep_ngan[1], fxy_scene17), TongRiemannCuaTichPhanKep_dai.animate.move_to(DOWN * 3), run_time=2)
@@ -408,6 +416,7 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(x_axes1_labels_scene17), Create(y_axes1_labels_scene17),Write(Text0_scene17))
         self.play(Create(part_scene17), run_time=2)
         self.add(outer_arc_scene17, inner_arc_scene17, left_line_scene17, right_line_scene17)
+        self.wait(1)
         self.play(Create(axes2_scene17), Write(Text01_scene17), run_time=2)
         self.add(part_copy_scene17)
         self.play(fxy_copy_scene17.animate.move_to(RIGHT * 3 + UP *3), part1_scene17.animate.move_to(RIGHT * 3.05 + DOWN * 0.3), x_axes1_labels_copy_scene17.animate.move_to(RIGHT * 5.1 + UP * (-1.5)), y_axes1_labels_copy_scene17.animate.move_to(RIGHT * 1.7 + UP * 2), run_time=2)
@@ -415,7 +424,14 @@ class ChiaNho(MovingCameraScene):
         self.play(Transform(fxy_copy_scene17, frphi_scene17), Transform(x_axes1_labels_copy_scene17, Textphi_scene17), Transform(y_axes1_labels_copy_scene17, yaxes2_label_scene17), Transform(left_line_scene17, line_r_a_scene17), Transform(right_line_scene17, line_r_b_scene17), Transform(angle_alpha_scene17, line_alpha_scene17), Transform(angle_beta_scene17, line_beta_scene17), Transform(region_scene17, region_new_D_scene17),
                 D_scene17.animate.move_to(DOWN * 0.2 + RIGHT * 2.7), Uncreate(outer_arc_scene17), Uncreate(inner_arc_scene17), Uncreate(alpha_label_old_scene17), Uncreate(beta_label_old_scene17), rb_scene17.animate.move_to(LEFT * (-0.4) +  UP * 0.8), Transform(ra_scene17, r_a_sau_scene17), Create(alpha_label_scene17), Create(beta_label_scene17),
                 run_time=2)
+        self.play(Wiggle(TongRiemannCuaTichPhanKep_dai[4]), Wiggle(TongRiemannCuaTichPhanKep_dai[5]))
+        self.remove(TongRiemannCuaTichPhanKep_dai, fxy_copy_scene17, x_axes1_labels_copy_scene17, y_axes1_labels_copy_scene17, left_line_scene17, right_line_scene17, angle_alpha_scene17, angle_beta_scene17,region_scene17,
+                D_scene17, rb_scene17, ra_scene17, alpha_label_scene17, beta_label_scene17, part1_scene17,
+                axes1_scene17, axes2_scene17, x_axes1_labels_scene17, y_axes1_labels_scene17, x_axes1_labels_copy_scene17, y_axes1_labels_copy_scene17, part_copy_scene17, TongRiemannCuaTichPhanKep_ngan[1], Text01_scene17, Text0_scene17
+                ) 
         
+
+
         #SCENE 18
         # create the axes and the curve
         ax_scene18 = Axes(x_range=[-1, 10], 
@@ -477,7 +493,8 @@ class ChiaNho(MovingCameraScene):
         inner_arc_scene18.set_color(RED)
 
         Text_1_scene18 = Tex(
-            r"Khi chuyển từ hệ toạ độ Descartes sang hệ toạ độ cực bằng cách đổi \textbf{$x=rcos\varphi$}, \textbf{$y=rsin\varphi$} sử dụng tính gần đúng của giới hạn khi tính tích phân đối với \textbf{$r$} và \textbf{$\varphi$}, ta có thể viết lại \textbf{$dA = rdrd\varphi$}.",
+            r"Khi chuyển từ hệ toạ độ Descartes sang hệ toạ độ cực bằng cách đổi \textbf{$x=rcos\varphi$}, \textbf{$y=rsin\varphi$} sử dụng tính gần đúng của giới hạn khi tính tích phân đối với \textbf{$r$} và \textbf{$\varphi$}, ta có thể viết lại ",
+            r"\textbf{$dA = rdrd\varphi$}.",
             font_size=35
         ).shift(UP * 3)
 
@@ -523,25 +540,23 @@ class ChiaNho(MovingCameraScene):
         part_scene18 = VGroup(outer_arc_scene18, inner_arc_scene18, left_line_scene18, right_line_scene18, region_scene18)
         self.play(Create(ax_scene18), run_time=2)
         self.play(Create(labels_scene18), run_time=1)
-        self.play(Create(part_scene18), Create(angle_scene18), Write(Text_1_scene18), run_time=4)
-        self.play(Create(d_phi_scene18), Create(d_A_scene18), Create(d_r_scene18), Create(r_d_phi_scene18), Write(d_r_text_scene18), Write(d_phi_text_scene18), Write(d_A_text_scene18), Write(r_d_phi_text_scene18), run_time=2)
+        self.play(Write(Text_1_scene18), run_time=4)
+        self.play(Create(part_scene18), Create(angle_scene18), run_time=4)
+        self.play(Create(d_phi_scene18), Create(d_A_scene18), Create(d_r_scene18), Create(r_d_phi_scene18), Write(d_r_text_scene18), Write(d_phi_text_scene18), Write(d_A_text_scene18), Write(r_d_phi_text_scene18), Wiggle(Text_1_scene18[1]), run_time=2)
         self.wait(2)
         self.play(Uncreate(d_phi_scene18), Uncreate(d_A_scene18), Uncreate(r_d_phi_scene18), Uncreate(d_r_text_scene18), Unwrite(r_d_phi_text_scene18), Unwrite(d_A_text_scene18), Unwrite(r_d_phi_text_scene18), Unwrite(d_r_scene18), Uncreate(part_scene18), Unwrite(labels_scene18), Uncreate(ax_scene18), Transform(Text_1_scene18, Text_2_scene18[0]), 
-                  Uncreate(angle_scene18), Unwrite(d_phi_text_scene18), run_time=2)
+                  Uncreate(angle_scene18), Unwrite(d_phi_text_scene18), run_time=1)
         self.play(Write(Text_2_scene18[1]), run_time=2)
         self.play(Write(Text_3_scene18), run_time=2)
+        self.play(Circumscribe(Text_3_scene18))
         self.wait(2)
-        self.play(Unwrite(Text_2_scene18[1]), Unwrite(Text_3_scene18), Unwrite(Text_1_scene18), run_time=2)
+        self.play(Unwrite(Text_2_scene18[1]), Unwrite(Text_3_scene18), Unwrite(Text_1_scene18), run_time=2)  
 
-        #SCENE 19
-        color_03ffff = "#03ffff"
-        color_cc00ff = "#cc00ff"
-        color_4dbbbe0 = "#4dbbe0"
-        color_fe7051 = "#fe7051"
-        color_7fb663 = "#7fb663"
-        color_ff8d28 = "#ff8d28"
 
-        Text_1_scene19 = Tex(
+
+        #SCENE19
+
+        Text_1 = Tex(
             r"Khi đổi biến trong \textbf{tích phân đôi} (ví dụ như",
             r" $\iint_R f(x, y) \, dxdy$)",
             r", nếu chuyển sang",
@@ -551,44 +566,44 @@ class ChiaNho(MovingCameraScene):
             r":",
             font_size=40
         )
-        ToaDoCuc = Text_1_scene19[3].copy()
+        ToaDoCuc = Text_1[3].copy()
         ToaDoCuc.set_color(BLUE)
 
-        Text_1_scene19[3].set_color(BLUE)
-        Text_1_scene19[5].set_color(YELLOW)
+        Text_1[3].set_color(BLUE)
+        Text_1[5].set_color(YELLOW)
 
-        Text_2_scene19 = Tex(
+        Text_2 = Tex(
             r"Công thức đổi biến sang hệ",
             r" toạ độ cực:",
             font_size=40
         ).shift(UP * 3)
-        Text_2_scene19[1].set_color(BLUE)
+        Text_2[1].set_color(BLUE)
 
-        Text_3_scene19 = MathTex(
+        Text_3 = MathTex(
             r"x=",
             r"r",
             r"\cos\varphi",
             font_size=80
         )
-        r1_scene19 = Text_3_scene19[1].copy()
-        Text_4_scene19 = MathTex(
+        r1 = Text_3[1].copy()
+        Text_4 = MathTex(
             r"y=",
             r"r",
             r"\sin\varphi", 
             font_size=80
         )
-        r2_scene19 = Text_4_scene19[1].copy()
-        Text_5_scene19 = MathTex(
+        r2 = Text_4[1].copy()
+        Text_5 = MathTex(
             r"r",
             r" \ge 0",
             font_size=80
         )
-        Text_5_scene19[1].shift(RIGHT * 1 + DOWN * 1)
+        Text_5[1].shift(RIGHT * 1 + DOWN * 1)
 
-        CongThucToaDoCuc = VGroup(Text_4_scene19, Text_3_scene19)
+        CongThucToaDoCuc = VGroup(Text_4, Text_3)
 
-        Text_6_scene19 = Tex(
-            r"Định thức Jacobian khi chuyển sang hệ toạ độ cực là:",
+        Text_6 = Tex(
+            r"Khi đó, định thức Jacobian khi chuyển sang hệ toạ độ cực là:",
             font_size=40
         ).shift(UP * 3)
 
@@ -606,19 +621,27 @@ class ChiaNho(MovingCameraScene):
             r"= r",
             font_size=55
         )
+        HeToaDoCuc_scene19 = VGroup(Text_3, Text_4, Text_5)
 
 
-        self.play(Write(Text_1_scene19), run_time=3)
-        self.play(Unwrite(Text_1_scene19), Transform(ToaDoCuc, Text_2_scene19[1]), Write(Text_2_scene19[0]), run_time=1)
-        self.play(Write(Text_3_scene19), run_time=2)
-        self.play(Text_3_scene19.animate.move_to(UP * 1), Write(Text_4_scene19))
-        self.play(r2_scene19.animate.move_to(DOWN * 1), Write(Text_5_scene19[1]), run_time=1)
+        self.play(Write(Text_1), run_time=3)
         self.wait(1)
-        self.play(Unwrite(r2_scene19), Unwrite(Text_5_scene19[1]))
+        self.play(Unwrite(Text_1), Transform(ToaDoCuc, Text_2[1]), Write(Text_2[0]), run_time=2)
+        self.play(Write(Text_3), run_time=2)
+        self.play(Text_3.animate.move_to(UP * 1), Write(Text_4))
+        self.play(r1.animate.move_to(DOWN * 1), r2.animate.move_to(DOWN * 1), run_time=2)
+        self.play(Write(Text_5[1]))
+        self.play(Circumscribe(HeToaDoCuc_scene19))
+        self.wait(1)
+        self.play(Unwrite(r1), Unwrite(r2), Unwrite(Text_5[1]))
         self.remove(ToaDoCuc)
-        self.play(Transform(Text_2_scene19, Text_6_scene19), run_time=2)
+        self.play(Transform(Text_2, Text_6), run_time=1)
         self.play(Transform(CongThucToaDoCuc, Jacobian), run_time=2)
-        self.play(Unwrite(Jacobian), Unwrite(Text_6_scene19), Unwrite(Text_2_scene19), Unwrite(CongThucToaDoCuc))
+        self.play(Circumscribe(CongThucToaDoCuc))
+        self.wait(1)
+        self.remove(CongThucToaDoCuc, Text_2)
+
+        #SCENE22
 
         Text_1_scene22 = Tex(
             r"III. ỨNG DỤNG CỦA TÍCH PHÂN KÉP",
@@ -855,7 +878,7 @@ class ChiaNho(MovingCameraScene):
             font_size=35
         ).shift(UP * 1.8)
         self.play(Write(Text_1_scene22), Write(Text_1_1_scene22), run_time=3)
-        self.play(Unwrite(Text_1_1_scene22), Unwrite(Text_1_scene22))
+        self.play(FadeOut(Text_1_1_scene22), FadeOut(Text_1_scene22))
         self.play(LaggedStart(FadeIn(background_box_dohoamaytinh), Write(Text_2_scene22), lag_ratio=0.3), run_time=2)
         self.play(background_box_dohoamaytinh.animate.move_to(UP * 3), Text_2_scene22.animate.move_to(UP * 3))
         self.play(Write(Text_2_2_scene22), run_time=2)
@@ -985,6 +1008,14 @@ class ChiaNho(MovingCameraScene):
         )
         
         self.wait(1)
+
+        def update_curve(mob):
+            mob.move_to(moving_dot.get_center())
+
+        self.camera.frame.remove_updater(update_curve)
+
+        self.play(Restore(self.camera.frame))
+
         
 
 
