@@ -260,13 +260,13 @@ class SCENE13(MovingCameraScene):
         Text_3_scene13[4].set_color(YELLOW)
 
 
-        Text_3_scene13[0].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[1].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[2].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[3].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[4].shift(RIGHT * -0.3 + UP * 1.64)
-        Text_3_scene13[5].shift(RIGHT * -0.25 + UP * 1.64)
-        Text_3_scene13[6].shift(RIGHT * 5.3 + UP * 2.02)
+        Text_3_scene13[0].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[1].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[2].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[3].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[4].shift(RIGHT * -0.3 + UP * 1.14)
+        Text_3_scene13[5].shift(RIGHT * -0.25 + UP * 1.14)
+        Text_3_scene13[6].shift(RIGHT * 5.3 + UP * 1.52)
 
         Text_4_scene13 = MathTex(r"r^2=x_1^2+y_1^2").scale(1)
         Text_4_scene13.shift(RIGHT * 3.5)
@@ -284,15 +284,15 @@ class SCENE13(MovingCameraScene):
 
         #CHẠY ANIMATION
         self.play(Write(Text_1_scene13[0]), Write(Text_1_scene13[1]), run_time=2)
-        self.play(Write(Text_1_scene13[2]), Write(Text_1_scene13[3]), Write(Text1_scene13), run_time=2)
+        self.play(Write(Text_1_scene13[2]), Write(Text_1_scene13[3]), Write(Text1_scene13), run_time=1)
         self.play(Write(Text_1_scene13[4]), Write(Text_1_scene13[5]))
         self.wait(1)
-        self.play(Create(axes_scene13), Write(axes_labels_scene13))
+        self.play(Create(axes_scene13), Write(axes_labels_scene13), run_time=1)
         self.wait(1)
         self.play(Create(dot_scene13))
         self.play(Create(dashed_line_y_scene13), Create(dashed_line_x_scene13), Create(Px1y1_scene13))
         self.wait(1)
-        self.play(Unwrite(Text_1_scene13[0]), Unwrite(Text_1_scene13[1]), Unwrite(Text_1_scene13[2]), Unwrite(Text_1_scene13[3]), Unwrite(Text_1_scene13[4]), Unwrite(Text_1_scene13[5]) )
+        self.play(Unwrite(Text_1_scene13[0]), Unwrite(Text_1_scene13[1]), Unwrite(Text_1_scene13[2]), Unwrite(Text_1_scene13[3]), Unwrite(Text_1_scene13[4]), Unwrite(Text_1_scene13[5]), run_time=1 )
         self.play(Write(Text_2_scene13[0]), Write(Text_2_scene13[1]), Write(Text_2_scene13[2]), Write(Text_2_scene13[3]), Write(Text_2_scene13[4]), 
                 Write(Text_2_scene13[5]), Write(Text_2_scene13[6]), Write(Text_2_scene13[7]), Write(Text_2_scene13[8]),
                  run_time=2)
@@ -303,11 +303,12 @@ class SCENE13(MovingCameraScene):
         self.play(Write(TEXT_scene13), Write(TEXT_1_scene13), run_time=2)
         self.wait(1)
         self.add(Text_1_scene13, axes_scene13, axes_labels_scene13, x_numbers_scene13, y_numbers_scene13, dot_scene13, Px1y1_scene13, dashed_line_y_scene13, dashed_line_y_scene13, dashed_line_x_scene13, Text1_scene13)
-        self.play(Transform(TEXT_scene13, TEXT_small_scene13), Transform(TEXT_1_scene13, TEXT_small_1_scene13), run_time=2)
-        self.play(Create(line1_scene13), Create(r_scene13), FadeOut(x_numbers_scene13), FadeOut(y_numbers_scene13), Create(axes1_scene13), Create(x_1_scene13), Create(y_1_scene13) )
+        self.play(Transform(TEXT_scene13, TEXT_small_scene13), Transform(TEXT_1_scene13, TEXT_small_1_scene13), run_time=1)
+        self.play(Create(line1_scene13), Create(r_scene13), FadeOut(x_numbers_scene13), FadeOut(y_numbers_scene13), Create(axes1_scene13), Create(x_1_scene13), Create(y_1_scene13), run_time=2 )
         self.play(Write(Text_3_scene13[0]), Write(Text_3_scene13[1]), Write(Text_3_scene13[2]), Write(Text_3_scene13[3]), Create(Px1y1_copy_scene13),
                 Transform(Px1y1_scene13, Text_3_scene13[4]), Write(Text_3_scene13[5]), Write(Text_3_scene13[6]),
                 run_time=2)
+        self.wait(1)
         self.play(Unwrite(Text_3_scene13[0]), Unwrite(Text_3_scene13[1]), Unwrite(Text_3_scene13[2]), Unwrite(Text_3_scene13[3]), Uncreate(Px1y1_scene13),
                 Unwrite(Text_3_scene13[4]), Unwrite(Text_3_scene13[5]), Unwrite(Text_3_scene13[6]))
         self.play(Write(Text_4_scene13), run_time=1)
@@ -319,7 +320,7 @@ class SCENE13(MovingCameraScene):
         self.wait(1)
         self.play(Unwrite(sin_scene13), Unwrite(cos_scene13), Uncreate(angle_label1_scene13), Uncreate(angle_label2_scene13), Unwrite(r1_scene13), Unwrite(r2_scene13))
         self.play(Transform(dot_scene13, dot1_scene13), Uncreate(dashed_line_x_scene13), Uncreate(dashed_line_y_scene13), Transform(line1_scene13, line11_scene13), angle_label_scene13.animate.move_to([-1.4, 0.3, 0]), r_scene13.animate.move_to([-1.4, 0.8, 0]), Transform(angle_scene13, angle1_scene13))
-        self.play(Create(circle1_scene13), Create(circle2_scene13), Create(circle3_scene13), Create(circle4_scene13), Transform(Text1_scene13, Text2_scene13), Create(dot1_scene13))
+        self.play(Create(circle1_scene13), Create(circle2_scene13), Create(circle3_scene13), Create(circle4_scene13), Transform(Text1_scene13, Text2_scene13), Create(dot1_scene13), TEXT_1_scene13.animate.shift(RIGHT * 0.5 + DOWN * 1.1), TEXT_scene13.animate.shift(RIGHT * 0.5 + DOWN * 1.1))
         self.play(Create(pi4_scene13), Create(pi34_scene13), Create(pi54_scene13), Create(pi74_scene13))
         self.play(Write(textpi4_scene13), Write(textpi34_scene13), Write(textpi54_scene13), Write(textpi74_scene13), Write(textpi2_scene13), Write(textpi_scene13), Write(textpi32_scene13), Write(text0_scene13))
         self.wait(1)
@@ -366,7 +367,7 @@ class SCENE13(MovingCameraScene):
         self.play(Uncreate(moving_part_scene13), Unwrite(textpi4_scene13), Unwrite(textpi34_scene13), Unwrite(textpi54_scene13), Unwrite(textpi74_scene13), Unwrite(textpi2_scene13), Unwrite(textpi_scene13), Unwrite(textpi32_scene13), Unwrite(text0_scene13),
                 Uncreate(circle1_scene13), Uncreate(circle2_scene13), Uncreate(circle3_scene13), Uncreate(circle4_scene13),
                 Unwrite(Text1_scene13), Unwrite(Text_5_scene13), Unwrite(Text_6_scene13), Unwrite(Text_7_scene13), Uncreate(axes1_scene13), Unwrite(axes_labels_scene13),
-                Uncreate(pi4_scene13), Uncreate(pi34_scene13), Uncreate(pi54_scene13), Uncreate(pi74_scene13), Unwrite(Text_4_scene13)
+                Uncreate(pi4_scene13), Uncreate(pi34_scene13), Uncreate(pi54_scene13), Uncreate(pi74_scene13), Unwrite(Text_4_scene13), Unwrite(TEXT_scene13), Unwrite(TEXT_1_scene13), run_time=0.5
          )
 
 
