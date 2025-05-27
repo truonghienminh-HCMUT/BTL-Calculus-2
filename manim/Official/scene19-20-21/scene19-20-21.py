@@ -68,7 +68,7 @@ class ChiaNho(MovingCameraScene):
         CongThucToaDoCuc = VGroup(Text_4, Text_3)
 
         Text_6 = Tex(
-            r"Định thức Jacobian khi chuyển sang hệ toạ độ cực là:",
+            r"Khi đó, định thức Jacobian khi chuyển sang hệ toạ độ cực là:",
             font_size=40
         ).shift(UP * 3)
 
@@ -86,18 +86,25 @@ class ChiaNho(MovingCameraScene):
             r"= r",
             font_size=55
         )
+        HeToaDoCuc_scene19 = VGroup(Text_3, Text_4, Text_5)
 
 
         self.play(Write(Text_1), run_time=3)
-        self.play(Unwrite(Text_1), Transform(ToaDoCuc, Text_2[1]), Write(Text_2[0]), run_time=1)
+        self.wait(1)
+        self.play(Unwrite(Text_1), Transform(ToaDoCuc, Text_2[1]), Write(Text_2[0]), run_time=2)
         self.play(Write(Text_3), run_time=2)
         self.play(Text_3.animate.move_to(UP * 1), Write(Text_4))
-        self.play(r1.animate.move_to(DOWN * 1), r2.animate.move_to(DOWN * 1), Write(Text_5[1]), run_time=1)
+        self.play(r1.animate.move_to(DOWN * 1), r2.animate.move_to(DOWN * 1), run_time=2)
+        self.play(Write(Text_5[1]))
+        self.play(Circumscribe(HeToaDoCuc_scene19))
         self.wait(1)
-        self.play(Unwrite(r1), Unwrite(r2), Unwrite(Text_5))
+        self.play(Unwrite(r1), Unwrite(r2), Unwrite(Text_5[1]))
         self.remove(ToaDoCuc)
-        self.play(Transform(Text_2, Text_6), run_time=2)
+        self.play(Transform(Text_2, Text_6), run_time=1)
         self.play(Transform(CongThucToaDoCuc, Jacobian), run_time=2)
+        self.play(Circumscribe(CongThucToaDoCuc))
+        self.wait(1)
+        self.remove(CongThucToaDoCuc, Text_2)
 
         def update_curve(mob):
             mob.move_to(moving_dot.get_center())
