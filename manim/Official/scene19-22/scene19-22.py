@@ -28,7 +28,9 @@ class ChiaNho(MovingCameraScene):
         color_7fb663 = "#7fb663"
         color_ff8d28 = "#ff8d28"
 
-        Text_1_scene19 = Tex(
+        #SCENE19
+
+        Text_1 = Tex(
             r"Khi đổi biến trong \textbf{tích phân đôi} (ví dụ như",
             r" $\iint_R f(x, y) \, dxdy$)",
             r", nếu chuyển sang",
@@ -38,44 +40,44 @@ class ChiaNho(MovingCameraScene):
             r":",
             font_size=40
         )
-        ToaDoCuc = Text_1_scene19[3].copy()
+        ToaDoCuc = Text_1[3].copy()
         ToaDoCuc.set_color(BLUE)
 
-        Text_1_scene19[3].set_color(BLUE)
-        Text_1_scene19[5].set_color(YELLOW)
+        Text_1[3].set_color(BLUE)
+        Text_1[5].set_color(YELLOW)
 
-        Text_2_scene19 = Tex(
+        Text_2 = Tex(
             r"Công thức đổi biến sang hệ",
             r" toạ độ cực:",
             font_size=40
         ).shift(UP * 3)
-        Text_2_scene19[1].set_color(BLUE)
+        Text_2[1].set_color(BLUE)
 
-        Text_3_scene19 = MathTex(
+        Text_3 = MathTex(
             r"x=",
             r"r",
             r"\cos\varphi",
             font_size=80
         )
-        r1_scene19 = Text_3_scene19[1].copy()
-        Text_4_scene19 = MathTex(
+        r1 = Text_3[1].copy()
+        Text_4 = MathTex(
             r"y=",
             r"r",
             r"\sin\varphi", 
             font_size=80
         )
-        r2_scene19 = Text_4_scene19[1].copy()
-        Text_5_scene19 = MathTex(
+        r2 = Text_4[1].copy()
+        Text_5 = MathTex(
             r"r",
             r" \ge 0",
             font_size=80
         )
-        Text_5_scene19[1].shift(RIGHT * 1 + DOWN * 1)
+        Text_5[1].shift(RIGHT * 1 + DOWN * 1)
 
-        CongThucToaDoCuc = VGroup(Text_4_scene19, Text_3_scene19)
+        CongThucToaDoCuc = VGroup(Text_4, Text_3)
 
-        Text_6_scene19 = Tex(
-            r"Định thức Jacobian khi chuyển sang hệ toạ độ cực là:",
+        Text_6 = Tex(
+            r"Khi đó, định thức Jacobian khi chuyển sang hệ toạ độ cực là:",
             font_size=40
         ).shift(UP * 3)
 
@@ -93,19 +95,27 @@ class ChiaNho(MovingCameraScene):
             r"= r",
             font_size=55
         )
+        HeToaDoCuc_scene19 = VGroup(Text_3, Text_4, Text_5)
 
 
-        self.play(Write(Text_1_scene19), run_time=3)
-        self.play(Unwrite(Text_1_scene19), Transform(ToaDoCuc, Text_2_scene19[1]), Write(Text_2_scene19[0]), run_time=1)
-        self.play(Write(Text_3_scene19), run_time=2)
-        self.play(Text_3_scene19.animate.move_to(UP * 1), Write(Text_4_scene19))
-        self.play(r2_scene19.animate.move_to(DOWN * 1), Write(Text_5_scene19[1]), run_time=1)
+        self.play(Write(Text_1), run_time=3)
         self.wait(1)
-        self.play(Unwrite(r2_scene19), Unwrite(Text_5_scene19[1]))
+        self.play(Unwrite(Text_1), Transform(ToaDoCuc, Text_2[1]), Write(Text_2[0]), run_time=2)
+        self.play(Write(Text_3), run_time=2)
+        self.play(Text_3.animate.move_to(UP * 1), Write(Text_4))
+        self.play(r1.animate.move_to(DOWN * 1), r2.animate.move_to(DOWN * 1), run_time=2)
+        self.play(Write(Text_5[1]))
+        self.play(Circumscribe(HeToaDoCuc_scene19))
+        self.wait(1)
+        self.play(Unwrite(r1), Unwrite(r2), Unwrite(Text_5[1]))
         self.remove(ToaDoCuc)
-        self.play(Transform(Text_2_scene19, Text_6_scene19), run_time=2)
+        self.play(Transform(Text_2, Text_6), run_time=1)
         self.play(Transform(CongThucToaDoCuc, Jacobian), run_time=2)
-        self.play(Unwrite(Jacobian), Unwrite(Text_6_scene19), Unwrite(Text_2_scene19), Unwrite(CongThucToaDoCuc))
+        self.play(Circumscribe(CongThucToaDoCuc))
+        self.wait(1)
+        self.remove(CongThucToaDoCuc, Text_2)
+
+        #SCENE22
 
         Text_1_scene22 = Tex(
             r"III. ỨNG DỤNG CỦA TÍCH PHÂN KÉP",
