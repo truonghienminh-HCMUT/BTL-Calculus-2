@@ -115,7 +115,8 @@ class Main(CustomThreeDScene):
         set_fixed(equation)
 
         self.set_camera_orientation(phi = 70 * DEGREES, theta = 45 * DEGREES, frame_center = axes_center, zoom = 0.7)
-        self.play(Write(axes), Write(x_label), Write(y_label), Write(z_label), Write(equation), run_time = 1)
+        self.add(equation)
+        self.play(Write(axes), Write(x_label), Write(y_label), Write(z_label), run_time = 1)
         self.wait(1.2)
 
         surface_over_D = Surface(
