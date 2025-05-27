@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/720p30/partial_movie_files/Main/1972464728_3802346885_223132457.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/720p30/partial_movie_files/Main/2592582220_2629789273_3284563148.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/720p30/partial_movie_files/Main/2592582220_4121075019_1427411379.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/720p30/partial_movie_files/Main/2592582220_2840115676_1921102248.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/720p30/partial_movie_files/Main/2592582220_2882543197_630168859.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/720p30/partial_movie_files/Main/1932905884_835786751_498814320.mp4'
