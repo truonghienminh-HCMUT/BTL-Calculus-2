@@ -49,13 +49,11 @@ class Main(CustomThreeDScene):
 
 
         title = Tex(r"\textbf{I. ĐỊNH NGHĨA TÍCH PHÂN KÉP}", font_size=70)
-        subtitle = Tex(r"\textbf{1.1 Đặt vấn đề}", font_size=60)
         title.set_color_by_gradient(color_03ffff, color_cc00ff)
-        title_group = VGroup(title, subtitle).arrange(DOWN, buff=0.5)
         
-        self.play(Write(title_group), run_time=1)
+        self.play(Write(title), run_time=1)
         self.wait(1)
-        self.play(FadeOut(title_group), run_time=0.5)
+        self.play(FadeOut(title), run_time=0.5)
         self.wait(0.5)
 
         # miền D
@@ -220,11 +218,6 @@ class Main(CustomThreeDScene):
         self.wait(0.5)
 
         # self.play(FadeOut(group3d))
-        sub_1_2 = Tex(r"\textbf{1.2 Giải quyết bài toán}", font_size=60)
-        set_fixed(sub_1_2)
-        self.play(Write(sub_1_2), run_time=1)
-        self.wait(1)
-        self.play(FadeOut(sub_1_2), run_time=0.5)
         self.wait(0.5)
         self.play(FadeIn(group3d))
 
