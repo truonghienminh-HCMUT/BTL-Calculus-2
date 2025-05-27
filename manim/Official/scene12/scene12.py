@@ -17,7 +17,7 @@ config.tex_template = VIETNAMESE_TEMPLATE
 
 config.frame_rate = 60
 
-class ChiaNho(MovingCameraScene):
+class SCENE12(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
         
@@ -73,6 +73,9 @@ class ChiaNho(MovingCameraScene):
             font_size=36
         ).shift(UP * 3)
 
+        text_scene12[0].shift(DOWN * 3)
+        text_scene12[1].shift(DOWN * 3)
+
         text_6_copy_scene12 = text_scene12[6].copy()
         text_8_copy_scene12 = text_scene12[8].copy()
 
@@ -111,8 +114,9 @@ class ChiaNho(MovingCameraScene):
 
 
         #CHẠY SCENE12
-        self.play(Write(text_scene12[0]), run_time=2)
-        self.play(FadeIn(text_scene12[1]), Write(text_scene12[2]), run_time=1)
+        self.play(Write(text_scene12[0]), Write(text_scene12[1]), run_time=2)
+        self.play(Write(text_scene12[2]), run_time=0.5)
+        self.play(text_scene12[0].animate.shift(UP * 3), text_scene12[1].animate.shift(UP * 3), run_time=1)
         self.play(
             LaggedStart(
                 Create(axes1_scene12),
@@ -126,14 +130,17 @@ class ChiaNho(MovingCameraScene):
             Write(axes2_labels_scene12)
         )
         self.wait(0.5)
-        self.play(Write(text_scene12[3]), Write(text_scene12[4]), Write(text_scene12[5]), Write(text_scene12[6]), run_time=2)
+        self.play(Write(text_scene12[3]), Write(text_scene12[4]), Write(text_scene12[5]), Write(text_scene12[6]), run_time=1.5)
         self.wait(0.5)
-        self.play(Write(text_6_copy_scene12), Transform(text_scene12[6], circle_scene12), Write(equation_scene12), run_time=2)
-        self.wait(0.5)
+        self.play(Write(text_6_copy_scene12), Transform(text_scene12[6], circle_scene12), Write(equation_scene12), run_time=1)
         self.play(Write(text_scene12[7]), Write(text_scene12[8]), run_time=2)
-        self.play(Write(text_8_copy_scene12), Transform(text_scene12[8], half_circle_scene12), Write(half_circle_equation1_scene12), Write(half_circle_equation2_scene12), run_time=2)
-        self.play(Write(text_cuoi_scene12),  run_time=2)
+        self.play(Write(text_8_copy_scene12), Transform(text_scene12[8], half_circle_scene12), Write(half_circle_equation1_scene12), Write(half_circle_equation2_scene12), run_time=1)
+        self.play(Write(text_cuoi_scene12),  run_time=2.5)
         self.wait(0.5)
+        self.remove(text_6_copy_scene12, text_8_copy_scene12, text_scene12, text_cuoi_scene12, 
+                axes1_labels_scene12, axes2_labels_scene12, axes1_scene12, axes2_scene12, 
+                equation_scene12, half_circle_equation1_scene12, half_circle_equation2_scene12, text_scene12[0], text_scene12[1], text_scene12[2], text_scene12[7], text_scene12[8], text_scene12[6],
+                text_scene12[3], text_scene12[4], text_scene12[5])
 
         def update_curve(mob):
             mob.move_to(moving_dot.get_center())

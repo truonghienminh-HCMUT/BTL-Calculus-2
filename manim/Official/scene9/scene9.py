@@ -330,7 +330,7 @@ class ChiaNho(MovingCameraScene):
             r"\ \text{m}",                    # 3
             r"\text{ đoạn nhỏ với độ dài}",   # 4
             font_size=30
-        ).shift(UP * 1 + RIGHT * 1.7)
+        ).shift(UP * 1 + RIGHT * 1)
 
         Text_2_scene9[3].set_color(YELLOW)
         Text_3_scene9 = MathTex(
@@ -342,7 +342,7 @@ class ChiaNho(MovingCameraScene):
             r"\text{ đoạn nhỏ với độ dài}",   # 5
             r"\ \Delta y = \frac{d - c}{n} .",# 6
             font_size=30
-        ).shift(RIGHT * 1.7)
+        ).shift(RIGHT * 1)
         Text_3_scene9[0].set_color(RED)
         Text_3_scene9[4].set_color(YELLOW)
         Text_3_scene9[6].set_color(RED)
@@ -371,7 +371,7 @@ class ChiaNho(MovingCameraScene):
         self.wait(0.5)
         self.play(Create(top_bar_y), Create(bottom_bar_y), Create(arrow_y), run_time=1)
         self.play(Transform(Text_3_6_copy_scene9, (text22)), run_time=1)
-        self.wait(0.5)
+        self.wait(2)
         self.play(Uncreate(left_bar_x), Uncreate(right_bar_x), Uncreate(arrow_x), Uncreate(text11),Uncreate(top_bar_y), Uncreate(bottom_bar_y), Uncreate(arrow_y), Uncreate(text22),
                 Unwrite(Text_2_scene9), Unwrite(Text_3_scene9), Unwrite(Text_3_0_copy_scene9), Unwrite(Text_3_6_copy_scene9), run_time=1)
         self.wait(0.5) 
@@ -407,16 +407,26 @@ class ChiaNho(MovingCameraScene):
         self.play(Create(rect), Create(rect1), Create(dotxiyi), run_time=2)
         self.wait(0.5)
         self.play(Unwrite(Text_4_scene9))
-        self.play(rect.animate.move_to(UP*3), run_time=2)
-        self.play(FadeIn(tex1), run_time=2)
+        self.play(rect.animate.move_to(UP*3), run_time=0.5)
+        self.play(FadeIn(tex1), run_time=0.5)
         self.wait(0.5)
         self.play(Transform(dotxiyi, dotxiyi1), run_time=2)
-        self.play(dotxiyi1.animate.move_to(UP*3 + RIGHT*2.5), run_time=2)
-        self.play(FadeIn(text2), run_time=2)
+        self.play(dotxiyi1.animate.move_to(UP*3 + RIGHT*2.5), run_time=0.5)
+        self.play(FadeIn(text2), run_time=0.5)
         self.wait(0.5)
-        self.play(dot29.animate.move_to(UP*3 + RIGHT*5.2), run_time=2)
-        self.play(FadeIn(text3), run_time=2)
-        self.wait(0.5)
+        self.play(dot29.animate.move_to(UP*3 + RIGHT*5.2), run_time=0.5)
+        self.play(FadeIn(text3), run_time=0.5)
+        self.wait(2)
+        self.remove(text3, dotxiyi1, text2, tex1, rect, rect1,
+                dot1, dot2, dot3, dot4, dot5, dot6, dot7, dot8, dot9, dot10, dot11, dot12, dot13, dot14, dot15, dot16, dot17, dot18, dot19, dot20, 
+                dot21, dot22, dot23, dot24, dot25, dot26, dot27, dot28, dot29, dot30, dot31, dot32, dot33, dot34, dot35, dot36, dot37, dot38, dot39, dot40,
+                dot41, dot42, dot43, dot44, dot45, dot46, dot47, dot48, dot49, dot50, dot51, dot52, dot53, dot54, dot55, dot56, dot57, dot58, dot59, dot60,
+                dot61, dot62, dot63, dot64, 
+                x_labels, y_labels, labels, x_labels1, y_labels1, ax, dotxiyi,
+                verticalline11, verticalline22, verticalline33, verticalline44, verticalline55, verticalline66, verticalline77, verticalline88, verticalline99, 
+                horizontalline11, horizontalline22, horizontalline33, horizontalline44, horizontalline55, horizontalline66, horizontalline77, horizontalline88, horizontalline99, Text_1_scene9
+                )
+        
 
 
         def update_curve(mob):
