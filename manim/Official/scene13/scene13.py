@@ -21,6 +21,7 @@ class SCENE13(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
         
+        #SCENE13
         #ĐỊNH NGHĨA MÀU
         color_00ffff = "#00ffff"
         color_7cfc00 = "#cc00ff"

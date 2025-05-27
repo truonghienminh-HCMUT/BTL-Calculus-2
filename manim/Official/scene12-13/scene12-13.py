@@ -22,7 +22,7 @@ class ChiaNho(MovingCameraScene):
         self.camera.frame.save_state()
 
         #SCENE12
-        #TRỤC TỌA ĐỘ BÊN TRÁI
+       #TRỤC TỌA ĐỘ BÊN TRÁI
         axes1_scene12 = Axes(
             x_range=[-3, 3, 1],
             y_range=[-3, 3, 1],
@@ -74,6 +74,9 @@ class ChiaNho(MovingCameraScene):
             font_size=36
         ).shift(UP * 3)
 
+        text_scene12[0].shift(DOWN * 3)
+        text_scene12[1].shift(DOWN * 3)
+
         text_6_copy_scene12 = text_scene12[6].copy()
         text_8_copy_scene12 = text_scene12[8].copy()
 
@@ -112,8 +115,9 @@ class ChiaNho(MovingCameraScene):
 
 
         #CHẠY SCENE12
-        self.play(Write(text_scene12[0]), run_time=2)
-        self.play(FadeIn(text_scene12[1]), Write(text_scene12[2]), run_time=1)
+        self.play(Write(text_scene12[0]), Write(text_scene12[1]), run_time=2)
+        self.play(Write(text_scene12[2]), run_time=0.5)
+        self.play(text_scene12[0].animate.shift(UP * 3), text_scene12[1].animate.shift(UP * 3), run_time=1)
         self.play(
             LaggedStart(
                 Create(axes1_scene12),
@@ -127,16 +131,20 @@ class ChiaNho(MovingCameraScene):
             Write(axes2_labels_scene12)
         )
         self.wait(0.5)
-        self.play(Write(text_scene12[3]), Write(text_scene12[4]), Write(text_scene12[5]), Write(text_scene12[6]), run_time=2)
+        self.play(Write(text_scene12[3]), Write(text_scene12[4]), Write(text_scene12[5]), Write(text_scene12[6]), run_time=1.5)
         self.wait(0.5)
-        self.play(Write(text_6_copy_scene12), Transform(text_scene12[6], circle_scene12), Write(equation_scene12), run_time=2)
-        self.wait(0.5)
+        self.play(Write(text_6_copy_scene12), Transform(text_scene12[6], circle_scene12), Write(equation_scene12), run_time=1)
         self.play(Write(text_scene12[7]), Write(text_scene12[8]), run_time=2)
-        self.play(Write(text_8_copy_scene12), Transform(text_scene12[8], half_circle_scene12), Write(half_circle_equation1_scene12), Write(half_circle_equation2_scene12), run_time=2)
-        self.play(Write(text_cuoi_scene12),  run_time=2)
+        self.play(Write(text_8_copy_scene12), Transform(text_scene12[8], half_circle_scene12), Write(half_circle_equation1_scene12), Write(half_circle_equation2_scene12), run_time=1)
+        self.play(Write(text_cuoi_scene12),  run_time=2.5)
         self.wait(0.5)
-        self.play(Unwrite(text_6_copy_scene12), Unwrite(text_8_copy_scene12), Uncreate(axes1_labels_scene12), Uncreate(axes2_labels_scene12), Unwrite(half_circle_equation1_scene12),
-                Unwrite(half_circle_equation2_scene12), Unwrite(equation_scene12), Uncreate(axes1_labels_scene12), Uncreate(axes2_labels_scene12), Uncreate(axes1_scene12), Uncreate(axes2_scene12), Uncreate(half_circle_scene12), Uncreate(circle_scene12), Unwrite(text_cuoi_scene12), Unwrite(text_scene12))
+        self.remove(text_6_copy_scene12, text_8_copy_scene12, text_scene12, text_cuoi_scene12, 
+                axes1_labels_scene12, axes2_labels_scene12, axes1_scene12, axes2_scene12, 
+                equation_scene12, half_circle_equation1_scene12, half_circle_equation2_scene12, text_scene12[0], text_scene12[1], text_scene12[2], text_scene12[7], text_scene12[8], text_scene12[6],
+                text_scene12[3], text_scene12[4], text_scene12[5])
+        
+
+
 
         #SCENE13
         #ĐỊNH NGHĨA MÀU
@@ -144,6 +152,22 @@ class ChiaNho(MovingCameraScene):
         color_7cfc00 = "#cc00ff"
 
         #TEXT CỦA HÌNH MÔ PHỎNG BÊN TRÁI
+        TEXT_scene13 = Tex(
+            r"\textbf{CÁCH CHUYỂN TỪ TỌA ĐỘ DESCARTES", 
+            font_size=45
+        ).shift(UP * 0.5)
+        TEXT_small_scene13 = Tex(
+            r"\textbf{CÁCH CHUYỂN TỪ TỌA ĐỘ DESCARTES", 
+            font_size=30
+        ).shift(UP * 3 + RIGHT * 3)
+        TEXT_1_scene13 = Tex(
+            r"\textbf{SANG TỌA ĐỘ CỰC}",#0"
+            font_size=45
+        ).shift(DOWN * 0.5)
+        TEXT_small_1_scene13 = Tex(
+            r"\textbf{SANG TỌA ĐỘ CỰC}",#0"
+            font_size=30
+        ).shift(UP * 2.5 + RIGHT * 3)
         Text1_scene13 = Tex("Tọa độ Descartes").to_edge(UP * 7,  buff=0.5).scale(1)
         Text1_scene13.shift((UP * 3), LEFT * 3)
         Text1_scene13.shift(LEFT * 2)
@@ -189,7 +213,7 @@ class ChiaNho(MovingCameraScene):
 
         dashed_line_y_scene13 = DashedLine(start=LEFT*3, end=RIGHT*3, dash_length=0.2)
         dashed_line_y_scene13 = DashedLine(start=[2.197,1.46,0], end=[2.197,-0,0])
-        dashed_line_y_scene13.set_color(RED)
+        dashed_line_y_scene13.set_color(RED) 
         dashed_line_y_scene13.shift(LEFT * 2.5)
 
         dashed_line_y1_scene13 = DashedLine(start=LEFT*3, end=RIGHT*3, dash_length=0.2)
@@ -255,7 +279,7 @@ class ChiaNho(MovingCameraScene):
 
         dotxoay_scene13 = Dot(line2_scene13.get_start(), color=RED)  # Đánh dấu điểm cần xoay
         
-        #NHÓM ĐƯỜNG THẲNG VÀ DẤU CHẤM ĐỂ DI CHUYỂN 
+        #NHÓM ĐƯỜNG THẲNG VÀ DẤU CHẤM ĐỂ DUY CHUYỂN 
         moving_part_scene13 = VGroup(line2_scene13.copy(), dot_scene13)
 
         #VẼ GÓC
@@ -362,13 +386,13 @@ class ChiaNho(MovingCameraScene):
         Text_3_scene13[4].set_color(YELLOW)
 
 
-        Text_3_scene13[0].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[1].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[2].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[3].shift(RIGHT * 4.5 + UP * 2)
-        Text_3_scene13[4].shift(RIGHT * -0.3 + UP * 1.64)
-        Text_3_scene13[5].shift(RIGHT * -0.25 + UP * 1.64)
-        Text_3_scene13[6].shift(RIGHT * 5.3 + UP * 2.02)
+        Text_3_scene13[0].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[1].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[2].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[3].shift(RIGHT * 4.5 + UP * 1.5)
+        Text_3_scene13[4].shift(RIGHT * -0.3 + UP * 1.14)
+        Text_3_scene13[5].shift(RIGHT * -0.25 + UP * 1.14)
+        Text_3_scene13[6].shift(RIGHT * 5.3 + UP * 1.52)
 
         Text_4_scene13 = MathTex(r"r^2=x_1^2+y_1^2").scale(1)
         Text_4_scene13.shift(RIGHT * 3.5)
@@ -384,27 +408,33 @@ class ChiaNho(MovingCameraScene):
         Text_7_scene13.shift(RIGHT * 3.5 + UP * -0.9)
         Text_7_scene13.set_color(WHITE)
 
-        #CHẠY SCENE13
+        #CHẠY ANIMATION
         self.play(Write(Text_1_scene13[0]), Write(Text_1_scene13[1]), run_time=2)
-        self.play(Write(Text_1_scene13[2]), Write(Text_1_scene13[3]), Write(Text1_scene13), run_time=2)
+        self.play(Write(Text_1_scene13[2]), Write(Text_1_scene13[3]), Write(Text1_scene13), run_time=1)
         self.play(Write(Text_1_scene13[4]), Write(Text_1_scene13[5]))
         self.wait(1)
-        self.play(Create(axes_scene13), Write(axes_labels_scene13))
+        self.play(Create(axes_scene13), Write(axes_labels_scene13), run_time=1)
         self.wait(1)
         self.play(Create(dot_scene13))
         self.play(Create(dashed_line_y_scene13), Create(dashed_line_x_scene13), Create(Px1y1_scene13))
         self.wait(1)
-        self.play(Unwrite(Text_1_scene13[0]), Unwrite(Text_1_scene13[1]), Unwrite(Text_1_scene13[2]), Unwrite(Text_1_scene13[3]), Unwrite(Text_1_scene13[4]), Unwrite(Text_1_scene13[5]) )
+        self.play(Unwrite(Text_1_scene13[0]), Unwrite(Text_1_scene13[1]), Unwrite(Text_1_scene13[2]), Unwrite(Text_1_scene13[3]), Unwrite(Text_1_scene13[4]), Unwrite(Text_1_scene13[5]), run_time=1 )
         self.play(Write(Text_2_scene13[0]), Write(Text_2_scene13[1]), Write(Text_2_scene13[2]), Write(Text_2_scene13[3]), Write(Text_2_scene13[4]), 
                 Write(Text_2_scene13[5]), Write(Text_2_scene13[6]), Write(Text_2_scene13[7]), Write(Text_2_scene13[8]),
                  run_time=2)
-        self.play(Create(line1_scene13), Create(r_scene13), FadeOut(x_numbers_scene13), FadeOut(y_numbers_scene13), Create(axes1_scene13), Create(x_1_scene13), Create(y_1_scene13) )
-        self.play(Unwrite(Text_2_scene13[0]), Unwrite(Text_2_scene13[1]), Unwrite(Text_2_scene13[2]), Unwrite(Text_2_scene13[3]), Unwrite(Text_2_scene13[4]), 
-                Unwrite(Text_2_scene13[5]), Unwrite(Text_2_scene13[6]), Unwrite(Text_2_scene13[7]), Unwrite(Text_2_scene13[8]),
-                run_time=2)
+        self.wait(1)
+        self.remove(Text_1_scene13, Text_2_scene13, axes_scene13, axes_labels_scene13, x_numbers_scene13, y_numbers_scene13, dot_scene13, Px1y1_scene13, dashed_line_y_scene13, dashed_line_y_scene13,
+                Text_2_scene13[0], Text_2_scene13[1], Text_2_scene13[2], Text_2_scene13[3], Text_2_scene13[4], 
+                Text_2_scene13[5], Text_2_scene13[6], Text_2_scene13[7], Text_2_scene13[8], dashed_line_x_scene13, Text1_scene13)
+        self.play(Write(TEXT_scene13), Write(TEXT_1_scene13), run_time=2)
+        self.wait(1)
+        self.add(Text_1_scene13, axes_scene13, axes_labels_scene13, x_numbers_scene13, y_numbers_scene13, dot_scene13, Px1y1_scene13, dashed_line_y_scene13, dashed_line_y_scene13, dashed_line_x_scene13, Text1_scene13)
+        self.play(Transform(TEXT_scene13, TEXT_small_scene13), Transform(TEXT_1_scene13, TEXT_small_1_scene13), run_time=1)
+        self.play(Create(line1_scene13), Create(r_scene13), FadeOut(x_numbers_scene13), FadeOut(y_numbers_scene13), Create(axes1_scene13), Create(x_1_scene13), Create(y_1_scene13), run_time=2 )
         self.play(Write(Text_3_scene13[0]), Write(Text_3_scene13[1]), Write(Text_3_scene13[2]), Write(Text_3_scene13[3]), Create(Px1y1_copy_scene13),
                 Transform(Px1y1_scene13, Text_3_scene13[4]), Write(Text_3_scene13[5]), Write(Text_3_scene13[6]),
                 run_time=2)
+        self.wait(1)
         self.play(Unwrite(Text_3_scene13[0]), Unwrite(Text_3_scene13[1]), Unwrite(Text_3_scene13[2]), Unwrite(Text_3_scene13[3]), Uncreate(Px1y1_scene13),
                 Unwrite(Text_3_scene13[4]), Unwrite(Text_3_scene13[5]), Unwrite(Text_3_scene13[6]))
         self.play(Write(Text_4_scene13), run_time=1)
@@ -416,7 +446,7 @@ class ChiaNho(MovingCameraScene):
         self.wait(1)
         self.play(Unwrite(sin_scene13), Unwrite(cos_scene13), Uncreate(angle_label1_scene13), Uncreate(angle_label2_scene13), Unwrite(r1_scene13), Unwrite(r2_scene13))
         self.play(Transform(dot_scene13, dot1_scene13), Uncreate(dashed_line_x_scene13), Uncreate(dashed_line_y_scene13), Transform(line1_scene13, line11_scene13), angle_label_scene13.animate.move_to([-1.4, 0.3, 0]), r_scene13.animate.move_to([-1.4, 0.8, 0]), Transform(angle_scene13, angle1_scene13))
-        self.play(Create(circle1_scene13), Create(circle2_scene13), Create(circle3_scene13), Create(circle4_scene13), Transform(Text1_scene13, Text2_scene13), Create(dot1_scene13))
+        self.play(Create(circle1_scene13), Create(circle2_scene13), Create(circle3_scene13), Create(circle4_scene13), Transform(Text1_scene13, Text2_scene13), Create(dot1_scene13), TEXT_1_scene13.animate.shift(RIGHT * 0.5 + DOWN * 1.1), TEXT_scene13.animate.shift(RIGHT * 0.5 + DOWN * 1.1))
         self.play(Create(pi4_scene13), Create(pi34_scene13), Create(pi54_scene13), Create(pi74_scene13))
         self.play(Write(textpi4_scene13), Write(textpi34_scene13), Write(textpi54_scene13), Write(textpi74_scene13), Write(textpi2_scene13), Write(textpi_scene13), Write(textpi32_scene13), Write(text0_scene13))
         self.wait(1)
@@ -424,7 +454,7 @@ class ChiaNho(MovingCameraScene):
         self.add(moving_part_scene13)
         self.play(Uncreate(line1_scene13), Uncreate(angle_label_scene13), Uncreate(r_scene13), Uncreate(angle_scene13))
         self.play(Uncreate(dot1_scene13), Transform(xy, Text_7_scene13))
-        
+
         #BẮT ĐẦU QUAY
         diem_quay_scene13 = ORIGIN + LEFT * 2.5
 
@@ -460,6 +490,11 @@ class ChiaNho(MovingCameraScene):
                 rate_func=rush_from,  # Nhanh dần về cuối
            )
        )
+        self.play(Uncreate(moving_part_scene13), Unwrite(textpi4_scene13), Unwrite(textpi34_scene13), Unwrite(textpi54_scene13), Unwrite(textpi74_scene13), Unwrite(textpi2_scene13), Unwrite(textpi_scene13), Unwrite(textpi32_scene13), Unwrite(text0_scene13),
+                Uncreate(circle1_scene13), Uncreate(circle2_scene13), Uncreate(circle3_scene13), Uncreate(circle4_scene13),
+                Unwrite(Text1_scene13), Unwrite(Text_5_scene13), Unwrite(Text_6_scene13), Unwrite(Text_7_scene13), Uncreate(axes1_scene13), Unwrite(axes_labels_scene13),
+                Uncreate(pi4_scene13), Uncreate(pi34_scene13), Uncreate(pi54_scene13), Uncreate(pi74_scene13), Unwrite(Text_4_scene13), Unwrite(TEXT_scene13), Unwrite(TEXT_1_scene13), run_time=0.5
+         )
 
         def update_curve(mob):
             mob.move_to(moving_dot.get_center())

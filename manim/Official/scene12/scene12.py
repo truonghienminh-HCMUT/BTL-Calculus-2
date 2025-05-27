@@ -21,6 +21,7 @@ class SCENE12(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
         
+        #SCENE12
         #TRỤC TỌA ĐỘ BÊN TRÁI
         axes1_scene12 = Axes(
             x_range=[-3, 3, 1],
