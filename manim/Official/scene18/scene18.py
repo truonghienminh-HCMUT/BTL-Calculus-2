@@ -82,7 +82,8 @@ class ChiaNho(MovingCameraScene):
         inner_arc_scene18.set_color(RED)
 
         Text_1_scene18 = Tex(
-            r"Khi chuyển từ hệ toạ độ Descartes sang hệ toạ độ cực bằng cách đổi \textbf{$x=rcos\varphi$}, \textbf{$y=rsin\varphi$} sử dụng tính gần đúng của giới hạn khi tính tích phân đối với \textbf{$r$} và \textbf{$\varphi$}, ta có thể viết lại \textbf{$dA = rdrd\varphi$}.",
+            r"Khi chuyển từ hệ toạ độ Descartes sang hệ toạ độ cực bằng cách đổi \textbf{$x=rcos\varphi$}, \textbf{$y=rsin\varphi$} sử dụng tính gần đúng của giới hạn khi tính tích phân đối với \textbf{$r$} và \textbf{$\varphi$}, ta có thể viết lại ",
+            r"\textbf{$dA = rdrd\varphi$}.",
             font_size=35
         ).shift(UP * 3)
 
@@ -128,13 +129,15 @@ class ChiaNho(MovingCameraScene):
         part_scene18 = VGroup(outer_arc_scene18, inner_arc_scene18, left_line_scene18, right_line_scene18, region_scene18)
         self.play(Create(ax_scene18), run_time=2)
         self.play(Create(labels_scene18), run_time=1)
-        self.play(Create(part_scene18), Create(angle_scene18), Write(Text_1_scene18), run_time=4)
-        self.play(Create(d_phi_scene18), Create(d_A_scene18), Create(d_r_scene18), Create(r_d_phi_scene18), Write(d_r_text_scene18), Write(d_phi_text_scene18), Write(d_A_text_scene18), Write(r_d_phi_text_scene18), run_time=2)
+        self.play(Write(Text_1_scene18), run_time=4)
+        self.play(Create(part_scene18), Create(angle_scene18), run_time=4)
+        self.play(Create(d_phi_scene18), Create(d_A_scene18), Create(d_r_scene18), Create(r_d_phi_scene18), Write(d_r_text_scene18), Write(d_phi_text_scene18), Write(d_A_text_scene18), Write(r_d_phi_text_scene18), Wiggle(Text_1_scene18[1]), run_time=2)
         self.wait(2)
         self.play(Uncreate(d_phi_scene18), Uncreate(d_A_scene18), Uncreate(r_d_phi_scene18), Uncreate(d_r_text_scene18), Unwrite(r_d_phi_text_scene18), Unwrite(d_A_text_scene18), Unwrite(r_d_phi_text_scene18), Unwrite(d_r_scene18), Uncreate(part_scene18), Unwrite(labels_scene18), Uncreate(ax_scene18), Transform(Text_1_scene18, Text_2_scene18[0]), 
-                  Uncreate(angle_scene18), Unwrite(d_phi_text_scene18), run_time=2)
+                  Uncreate(angle_scene18), Unwrite(d_phi_text_scene18), run_time=1)
         self.play(Write(Text_2_scene18[1]), run_time=2)
         self.play(Write(Text_3_scene18), run_time=2)
+        self.play(Circumscribe(Text_3_scene18))
         self.wait(2)
         self.play(Unwrite(Text_2_scene18[1]), Unwrite(Text_3_scene18), Unwrite(Text_1_scene18), run_time=2)
 
