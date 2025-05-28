@@ -167,6 +167,52 @@ class Main(CustomThreeDScene):
         set_fixed(theory_tex_0)
 
         self.play(Write(theory_tex_0), run_time=2)
+        self.wait(1)
+        self.play(Unwrite(theory_tex_0), run_time=1.5)
+        self.wait(0.5)
+
+        theory_description_1 = Tex(
+            r"\parbox{6cm}{"
+            r"Vậy ta muốn tìm thể tích của vật thể $\Omega$ thì xử lí bài toán như thế nào ?"
+            r"}",
+            font_size=40,
+            color=WHITE,
+            tex_environment=None
+        )
+        theory_group_1 = VGroup(theory_description_1).arrange(
+            DOWN,
+            aligned_edge=LEFT,
+            buff=0.3
+        )
+        theory_group_1.to_edge(RIGHT, buff=1)
+        set_fixed(theory_group_1)
+
+        self.play(Write(theory_group_1), run_time=2)
+        self.wait(5)
+        self.play(Unwrite(theory_group_1), run_time=0.5)
+        self.wait(0.5)
+
+        theory_description_2 = Tex(
+            r"\parbox{6cm}{" 
+            r"Hãy nhìn vào miền $\mathcal{D}$ là hình chiếu vuông góc của hàm $z = f(x, y)$ lên mặt phẳng Oxy. "
+            r"Tại đây chiếu vuông góc miền $\mathcal{D}$ lên trục Ox ta có được miền $[a, b]$, và chiếu lên Oy, ta có được miền $[c, d]$."
+            r"}",
+            font_size=40,
+            color=WHITE,
+            tex_environment=None
+        )
+
+        theory_group_2 = VGroup(theory_description_2).arrange(
+            DOWN,
+            aligned_edge=LEFT,
+            buff=0.3
+        )
+        theory_group_2.to_edge(RIGHT, buff=1)
+        set_fixed(theory_group_2)
+        self.play(Write(theory_group_2), run_time=2)
+        
+
+
 
         # Vẽ các điểm a, b, c, d
         pt_a = axes.c2p(a, 0, 0)
@@ -239,6 +285,8 @@ class Main(CustomThreeDScene):
         )
         group3d.add(surface_over_D, dashed_lines_to_D, projection_lines, label_domain_D, domain_D, label_a, label_b, label_c, label_d)
         self.wait(1.5)
+        self.play(Unwrite(theory_group_2), run_time=1.5)
+        self.wait(2)
 
 
         # In chữ
@@ -255,33 +303,12 @@ class Main(CustomThreeDScene):
         # )
 
         # self.wait(7)
-        self.play(Unwrite(theory_tex_0), run_time=1.5)
-        self.wait(0.5)
+        
 
         # self.play(FadeOut(group3d))
         # self.wait(0.5)
         # self.play(FadeIn(group3d))
 
-        theory_description_1 = Tex(
-            r"\parbox{6cm}{"
-            r"Vậy ta muốn tìm thể tích của vật thể $\Omega$ thì xử lí bài toán như thế nào ?"
-            r"}",
-            font_size=40,
-            color=WHITE,
-            tex_environment=None
-        )
-        theory_group_1 = VGroup(theory_description_1).arrange(
-            DOWN,
-            aligned_edge=LEFT,
-            buff=0.3
-        )
-        theory_group_1.to_edge(RIGHT, buff=1)
-        set_fixed(theory_group_1)
-
-        self.play(Write(theory_group_1), run_time=2)
-        self.wait(5)
-        self.play(Unwrite(theory_group_1), run_time=0.5)
-        self.wait(0.5)
         # self.play(Uncreate(group3d), run_time=0.5)
 
 
@@ -326,32 +353,6 @@ class Main(CustomThreeDScene):
 
 
 
-        theory_description_2 = Tex(
-            r"\parbox{6cm}{" 
-            r"Hãy nhìn vào miền $\mathcal{D}$ là hình chiếu vuông góc của hàm $z = f(x, y)$ lên mặt phẳng Oxy. "
-            r"Tại đây chiếu vuông góc miền $\mathcal{D}$ lên trục Ox ta có được miền $[a, b]$, và chiếu lên Oy, ta có được miền $[c, d]$."
-            r"}",
-            font_size=40,
-            color=WHITE,
-            tex_environment=None
-        )
-
-        theory_group_2 = VGroup(theory_description_2).arrange(
-            DOWN,
-            aligned_edge=LEFT,
-            buff=0.3
-        )
-        theory_group_2.to_edge(RIGHT, buff=1)
-
-        set_fixed(theory_group_2)
-
-        self.play(Write(theory_group_2), run_time=2)
-
-        self.wait(8)
-
-        self.play(Unwrite(theory_group_2), run_time=1.5)
-
-        self.wait(2)
 
 
 
