@@ -123,78 +123,33 @@ class Main(CustomThreeDScene):
 
         # Di chuyển sao cho trục về bên trái màn hình (vẫn quay)
         # Để phần bên phải màn hình có thể viết lý thuyết
-        self.stop_ambient_camera_rotation()
+        # self.stop_ambient_camera_rotation()
         self.move_camera(phi=70 * DEGREES, theta=0 * DEGREES, zoom=0.7)
         # self.set_camera_orientation(phi=70 * DEGREES, theta=0 * DEGREES, frame_center = axes_center, zoom=0.7)
 
         
         # --- Vẽ hình các kiểu ---
-        # Vẽ các điểm a, b, c, d
-        pt_a = axes.c2p(a, 0, 0)
-        pt_b = axes.c2p(b, 0, 0)
-        pt_c = axes.c2p(0, c, 0)
-        pt_d = axes.c2p(0, d, 0)
-        label_a = Tex(r"a", font_size = 30).next_to(pt_a, DOWN, buff = 0.2)
-        label_b = Tex(r"b", font_size = 30).next_to(pt_b, DOWN, buff = 0.2)
-        label_c = Tex(r"c", font_size = 30).next_to(pt_c, LEFT, buff = 0.2)
-        label_d = Tex(r"d", font_size = 30).next_to(pt_d, LEFT, buff = 0.2)
-        for label in [label_a, label_b, label_c, label_d]:
-            self.add_fixed_orientation_mobjects(label)
+        
         # đã di chuyển xuống dưới
 
         # Vẽ các đường chiếu từ các điểm a, b, c, d xuống mặt cong
-        P1 = axes.c2p(a, c, 0)
-        P2 = axes.c2p(b, c, 0)
-        P3 = axes.c2p(b, d, 0)
-        P4 = axes.c2p(a, d, 0)
 
-        dashed_lines_to_D = VGroup(
-            DashedLine(pt_a, P1, stroke_width = 1.5),
-            DashedLine(pt_a, P4, stroke_width = 1.5),
-            DashedLine(pt_b, P2, stroke_width = 1.5),
-            DashedLine(pt_b, P3, stroke_width = 1.5),
-            DashedLine(pt_c, P1, stroke_width = 1.5),
-            DashedLine(pt_c, P2, stroke_width = 1.5),
-            DashedLine(pt_d, P3, stroke_width = 1.5),
-            DashedLine(pt_d, P4, stroke_width = 1.5),
-        )
         # đã di chuyển xuống dưới
 
-        # Vẽ miền D
-        domain_D = Polygon(P1, P2, P3, P4, color = color_db5897, fill_opacity = 0.5, stroke_width = 2, stroke_color = RED)
-        label_domain_D = MathTex(r"\mathcal{D}", font_size = 30).move_to(domain_D.get_center())
-        self.add_fixed_orientation_mobjects(label_domain_D)
 
         # Chiếu rồi cắt hình
-        P1z = axes.c2p(a, c, func_z(a, c))
-        P2z = axes.c2p(b, c, func_z(b, c))
-        P3z = axes.c2p(b, d, func_z(b, d))
-        P4z = axes.c2p(a, d, func_z(a, d))
-
-        projection_lines = VGroup(
-            DashedLine(P1, P1z, stroke_width = 1.5),
-            DashedLine(P2, P2z, stroke_width = 1.5),
-            DashedLine(P3, P3z, stroke_width = 1.5),
-            DashedLine(P4, P4z, stroke_width = 1.5),
-        )
-
-        surface_over_D = Surface(
-            lambda u, v: axes.c2p(u, v, func_z(u, v)),
-            u_range=[a, b],
-            v_range=[c, d],
-            resolution=(32, 16),
-            fill_opacity=0.5,
-            color=color_db5897,
-            stroke_width=1.5
-        )
-        self.add(surface_over_D)
-        self.play(
-            FadeOut(surface, shift = DOWN * 5, run_time = 1.5),
-            # FadeIn(surface_over_D, shift = DOWN * 0.5),
-        )
-        self.wait(1.5)
+        
 
         # self.begin_ambient_camera_rotation(rate = PI/10)
+    
+        # Group lại để di chuyển
+        # label_domain_D.clear_updaters()
+        group3d = VGroup(axes, x_label, y_label, z_label, surface)
+        scale = 1
+        self.play(
+            group3d.animate.scale(scale).to_edge(DOWN, buff = -5),
+            run_time=2
+        )
         theory_description_0 = r"""
         \begin{minipage}{0.64\textwidth}
         Cho $z = f(x, y)$ là hàm số xác định trên miền đóng
@@ -210,49 +165,11 @@ class Main(CustomThreeDScene):
         )
         theory_tex_0.to_edge(RIGHT, buff=0.5)
         set_fixed(theory_tex_0)
-    
-        # Group lại để di chuyển
-        # label_domain_D.clear_updaters()
-        group3d = VGroup(axes, x_label, y_label, z_label, domain_D, label_a, label_b, label_c, label_d, label_domain_D, surface_over_D, dashed_lines_to_D, projection_lines)
-        scale = 1
-        self.play(
-            group3d.animate.scale(scale).to_edge(DOWN, buff = -5),
-            run_time=2
-        )
 
         self.play(Write(theory_tex_0), run_time=2)
-
-        self.wait(0.5)
-        self.play(Write(label_a), Write(label_b), Write(label_c), Write(label_d), run_time=0.5)
-        self.wait(0.5)
-        self.play(Write(dashed_lines_to_D), run_time=1)
-        self.wait(0.5)
-        self.play(Create(projection_lines), run_time=1)
-        self.play(Create(domain_D), Write(label_domain_D), run_time=1)
         self.wait(1)
-
-
-
-        # In chữ
-
-        # theory_description_0 = Tex(
-        #     r"\parbox{6cm}{"
-        #     r"Cho $z = f(x, y)$ là hàm số xác định trên miền đóng $\mathcal{D} = \{(x,y), \mathbb{R}^2 : a \leq x \leq b, c \leq y \leq d\}$. "
-        #     r"$\Omega$ là vật thể được giới hạn bởi:\\ ",
-        #     r"$$\Omega = \{(x,y,z) \in \mathbb{R}^3 : 0 \leq z \leq f(x,y), (x,y) \in \mathcal{D}\}$$"
-        #     r"}",
-        #     font_size=40,
-        #     color=WHITE,
-        #     tex_environment=None,
-        # )
-
-        self.wait(7)
         self.play(Unwrite(theory_tex_0), run_time=1.5)
         self.wait(0.5)
-
-        # self.play(FadeOut(group3d))
-        # self.wait(0.5)
-        # self.play(FadeIn(group3d))
 
         theory_description_1 = Tex(
             r"\parbox{6cm}{"
@@ -274,6 +191,124 @@ class Main(CustomThreeDScene):
         self.wait(5)
         self.play(Unwrite(theory_group_1), run_time=0.5)
         self.wait(0.5)
+
+        theory_description_2 = Tex(
+            r"\parbox{6cm}{" 
+            r"Hãy nhìn vào miền $\mathcal{D}$ là hình chiếu vuông góc của hàm $z = f(x, y)$ lên mặt phẳng Oxy. "
+            r"Tại đây chiếu vuông góc miền $\mathcal{D}$ lên trục Ox ta có được miền $[a, b]$, và chiếu lên Oy, ta có được miền $[c, d]$."
+            r"}",
+            font_size=40,
+            color=WHITE,
+            tex_environment=None
+        )
+
+        theory_group_2 = VGroup(theory_description_2).arrange(
+            DOWN,
+            aligned_edge=LEFT,
+            buff=0.3
+        )
+        theory_group_2.to_edge(RIGHT, buff=1)
+        set_fixed(theory_group_2)
+        self.play(Write(theory_group_2), run_time=2)
+        
+
+
+
+        # Vẽ các điểm a, b, c, d
+        pt_a = axes.c2p(a, 0, 0)
+        pt_b = axes.c2p(b, 0, 0)
+        pt_c = axes.c2p(0, c, 0)
+        pt_d = axes.c2p(0, d, 0)
+        label_a = Tex(r"a", font_size = 30).next_to(pt_a, DOWN, buff = 0.2)
+        label_b = Tex(r"b", font_size = 30).next_to(pt_b, DOWN, buff = 0.2)
+        label_c = Tex(r"c", font_size = 30).next_to(pt_c, LEFT, buff = 0.2)
+        label_d = Tex(r"d", font_size = 30).next_to(pt_d, LEFT, buff = 0.2)
+        for label in [label_a, label_b, label_c, label_d]:
+            self.add_fixed_orientation_mobjects(label)
+        self.play(Write(label_a), Write(label_b), Write(label_c), Write(label_d), run_time=0.5)
+        self.wait(0.5)
+
+
+
+        P1 = axes.c2p(a, c, 0)
+        P2 = axes.c2p(b, c, 0)
+        P3 = axes.c2p(b, d, 0)
+        P4 = axes.c2p(a, d, 0)
+
+        dashed_lines_to_D = VGroup(
+            DashedLine(pt_a, P1, stroke_width = 1.5),
+            DashedLine(pt_a, P4, stroke_width = 1.5),
+            DashedLine(pt_b, P2, stroke_width = 1.5),
+            DashedLine(pt_b, P3, stroke_width = 1.5),
+            DashedLine(pt_c, P1, stroke_width = 1.5),
+            DashedLine(pt_c, P2, stroke_width = 1.5),
+            DashedLine(pt_d, P3, stroke_width = 1.5),
+            DashedLine(pt_d, P4, stroke_width = 1.5),
+        )
+        self.play(Write(dashed_lines_to_D), run_time=1)
+        self.wait(0.5)
+
+        # Vẽ miền D
+        domain_D = Polygon(P1, P2, P3, P4, color = color_db5897, fill_opacity = 0.5, stroke_width = 2, stroke_color = RED)
+        label_domain_D = MathTex(r"\mathcal{D}", font_size = 30).move_to(domain_D.get_center())
+        self.add_fixed_orientation_mobjects(label_domain_D)
+        self.play(Create(domain_D), Write(label_domain_D), run_time=1)
+        self.wait(0.5)
+
+        P1z = axes.c2p(a, c, func_z(a, c))
+        P2z = axes.c2p(b, c, func_z(b, c))
+        P3z = axes.c2p(b, d, func_z(b, d))
+        P4z = axes.c2p(a, d, func_z(a, d))
+
+        projection_lines = VGroup(
+            DashedLine(P1, P1z, stroke_width = 1.5),
+            DashedLine(P2, P2z, stroke_width = 1.5),
+            DashedLine(P3, P3z, stroke_width = 1.5),
+            DashedLine(P4, P4z, stroke_width = 1.5),
+        )
+        self.play(Create(projection_lines), run_time=1)
+        self.wait(0.5)
+
+        surface_over_D = Surface(
+            lambda u, v: axes.c2p(u, v, func_z(u, v)),
+            u_range=[a, b],
+            v_range=[c, d],
+            resolution=(32, 16),
+            fill_opacity=0.5,
+            color=color_db5897,
+            stroke_width=1.5
+        )
+        self.add(surface_over_D)
+        self.play(
+            FadeOut(surface, shift = DOWN * 5, run_time = 1.5),
+            # FadeIn(surface_over_D, shift = DOWN * 0.5),
+        )
+        group3d.add(surface_over_D, dashed_lines_to_D, projection_lines, label_domain_D, domain_D, label_a, label_b, label_c, label_d)
+        self.wait(1.5)
+        self.play(Unwrite(theory_group_2), run_time=1.5)
+        self.wait(2)
+
+
+        # In chữ
+
+        # theory_description_0 = Tex(
+        #     r"\parbox{6cm}{"
+        #     r"Cho $z = f(x, y)$ là hàm số xác định trên miền đóng $\mathcal{D} = \{(x,y), \mathbb{R}^2 : a \leq x \leq b, c \leq y \leq d\}$. "
+        #     r"$\Omega$ là vật thể được giới hạn bởi:\\ ",
+        #     r"$$\Omega = \{(x,y,z) \in \mathbb{R}^3 : 0 \leq z \leq f(x,y), (x,y) \in \mathcal{D}\}$$"
+        #     r"}",
+        #     font_size=40,
+        #     color=WHITE,
+        #     tex_environment=None,
+        # )
+
+        # self.wait(7)
+        
+
+        # self.play(FadeOut(group3d))
+        # self.wait(0.5)
+        # self.play(FadeIn(group3d))
+
         # self.play(Uncreate(group3d), run_time=0.5)
 
 
@@ -318,32 +353,6 @@ class Main(CustomThreeDScene):
 
 
 
-        theory_description_2 = Tex(
-            r"\parbox{6cm}{" 
-            r"Hãy nhìn vào miền $\mathcal{D}$ là hình chiếu vuông góc của hàm $z = f(x, y)$ lên mặt phẳng Oxy. "
-            r"Tại đây chiếu vuông góc miền $\mathcal{D}$ lên trục Ox ta có được miền $[a, b]$, và chiếu lên Oy, ta có được miền $[c, d]$."
-            r"}",
-            font_size=40,
-            color=WHITE,
-            tex_environment=None
-        )
-
-        theory_group_2 = VGroup(theory_description_2).arrange(
-            DOWN,
-            aligned_edge=LEFT,
-            buff=0.3
-        )
-        theory_group_2.to_edge(RIGHT, buff=1)
-
-        set_fixed(theory_group_2)
-
-        self.play(Write(theory_group_2), run_time=2)
-
-        self.wait(8)
-
-        self.play(Unwrite(theory_group_2), run_time=1.5)
-
-        self.wait(2)
 
 
 
