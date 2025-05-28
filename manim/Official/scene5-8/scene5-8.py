@@ -89,9 +89,45 @@ class Main(CustomThreeDScene):
         self.add_fixed_orientation_mobjects(x_label, y_label, z_label)
         self.play(Write(x_label), Write(y_label), Write(z_label), run_time=1)
         self.wait(1)
-        self.begin_ambient_camera_rotation(rate = PI/5)
-        self.wait(5)
+        # self.begin_ambient_camera_rotation(rate = PI/5)
+        # self.wait(5)
+        # bỏ để quay về một góc cụ thể
+        # Vẽ mặt cong
+        surface = Surface(
+            lambda u, v: axes.c2p(u, v, func_z(u, v)),
+            u_range=[axes.x_range[0], axes.x_range[1]],
+            v_range=[axes.y_range[0], axes.y_range[1]],
+            resolution=(48, 24),
+            fill_opacity = 0.5,
+            stroke_width = 1.5
+        )
+        self.play(Create(surface), run_time=2)
+        self.wait(1)
+        self.move_camera(phi=70 * DEGREES, theta = -70 * DEGREES, frame_center = axes_center, zoom=0.7)
+        target_point_coords = (0, d / 2, func_z(0, d / 2))
+        target_point = axes.c2p(*target_point_coords)
+        start_point = target_point + UP * 1.5 + LEFT * 2.5 + OUT * 3.6
+        arrow = Arrow(
+            start_point,
+            target_point,
+            buff = 0,
+            stroke_width = 1,
+            stroke_color = WHITE
+        )
+        surface_label = MathTex(r"z = f(x, y)", font_size = 30, color = YELLOW)
+        surface_label.next_to(arrow.get_start(), UP, buff = 0.2)
+        self.add_fixed_orientation_mobjects(surface_label)
+        self.play(FadeIn(arrow), Write(surface_label), run_time = 1)
+        self.wait(1.5)
+        self.play(FadeOut(arrow), FadeOut(surface_label), run_time = 1)
 
+        # Di chuyển sao cho trục về bên trái màn hình (vẫn quay)
+        # Để phần bên phải màn hình có thể viết lý thuyết
+        self.stop_ambient_camera_rotation()
+        self.move_camera(phi=70 * DEGREES, theta=0 * DEGREES, zoom=0.7)
+        # self.set_camera_orientation(phi=70 * DEGREES, theta=0 * DEGREES, frame_center = axes_center, zoom=0.7)
+
+        
         # --- Vẽ hình các kiểu ---
         # Vẽ các điểm a, b, c, d
         pt_a = axes.c2p(a, 0, 0)
@@ -104,21 +140,7 @@ class Main(CustomThreeDScene):
         label_d = Tex(r"d", font_size = 30).next_to(pt_d, LEFT, buff = 0.2)
         for label in [label_a, label_b, label_c, label_d]:
             self.add_fixed_orientation_mobjects(label)
-        
-        self.play(Write(label_a), Write(label_b), Write(label_c), Write(label_d), run_time=0.5)
-        self.wait(0.5)
-
-        # Vẽ mặt cong
-        surface = Surface(
-            lambda u, v: axes.c2p(u, v, func_z(u, v)),
-            u_range=[axes.x_range[0], axes.x_range[1]],
-            v_range=[axes.y_range[0], axes.y_range[1]],
-            resolution=(48, 24),
-            fill_opacity = 0.5,
-            stroke_width = 1.5
-        )
-        self.play(Create(surface), run_time=2)
-        self.wait(1)
+        # đã di chuyển xuống dưới
 
         # Vẽ các đường chiếu từ các điểm a, b, c, d xuống mặt cong
         P1 = axes.c2p(a, c, 0)
@@ -136,17 +158,12 @@ class Main(CustomThreeDScene):
             DashedLine(pt_d, P3, stroke_width = 1.5),
             DashedLine(pt_d, P4, stroke_width = 1.5),
         )
-
-        self.play(Write(dashed_lines_to_D), run_time=1)
-        self.wait(0.5)
+        # đã di chuyển xuống dưới
 
         # Vẽ miền D
         domain_D = Polygon(P1, P2, P3, P4, color = color_db5897, fill_opacity = 0.5, stroke_width = 2, stroke_color = RED)
         label_domain_D = MathTex(r"\mathcal{D}", font_size = 30).move_to(domain_D.get_center())
         self.add_fixed_orientation_mobjects(label_domain_D)
-
-        self.play(Create(domain_D), Write(label_domain_D), run_time=1)
-        self.wait(1)
 
         # Chiếu rồi cắt hình
         P1z = axes.c2p(a, c, func_z(a, c))
@@ -160,7 +177,6 @@ class Main(CustomThreeDScene):
             DashedLine(P3, P3z, stroke_width = 1.5),
             DashedLine(P4, P4z, stroke_width = 1.5),
         )
-        self.play(Create(projection_lines), run_time=1)
 
         surface_over_D = Surface(
             lambda u, v: axes.c2p(u, v, func_z(u, v)),
@@ -171,55 +187,72 @@ class Main(CustomThreeDScene):
             color=color_db5897,
             stroke_width=1.5
         )
+        self.add(surface_over_D)
         self.play(
             FadeOut(surface, shift = DOWN * 5, run_time = 1.5),
-            FadeIn(surface_over_D, shift = DOWN * 0.5),
+            # FadeIn(surface_over_D, shift = DOWN * 0.5),
         )
-        self.wait(5)
+        self.wait(1.5)
 
-        # Di chuyển sao cho trục về bên trái màn hình (vẫn quay)
-        # Để phần bên phải màn hình có thể viết lý thuyết
-        self.move_camera(phi=70 * DEGREES, theta=0 * DEGREES, zoom=0.7)
-        self.stop_ambient_camera_rotation()
-        # self.set_camera_orientation(phi=70 * DEGREES, theta=0 * DEGREES, frame_center = axes_center, zoom=0.7)
+        # self.begin_ambient_camera_rotation(rate = PI/10)
+        theory_description_0 = r"""
+        \begin{minipage}{0.64\textwidth}
+        Cho $z = f(x, y)$ là hàm số xác định trên miền đóng
+        $\mathcal{D} = \{(x,y), \mathbb{R}^2 : a \leq x \leq b, c \leq y \leq d\}$.
+        \indent $\Omega$ là vật thể được giới hạn bởi:\\[1em]
+        $\Omega = \{(x,y,z) \in \mathbb{R}^3 : 0 \leq z \leq f(x,y), (x,y) \in \mathcal{D}\}$
+        \end{minipage}
+        """
+        theory_tex_0 = Tex(
+            theory_description_0,
+            font_size = 33,
+            tex_template=VIETNAMESE_TEMPLATE
+        )
+        theory_tex_0.to_edge(RIGHT, buff=0.5)
+        set_fixed(theory_tex_0)
     
         # Group lại để di chuyển
-        label_domain_D.clear_updaters()
+        # label_domain_D.clear_updaters()
         group3d = VGroup(axes, x_label, y_label, z_label, domain_D, label_a, label_b, label_c, label_d, label_domain_D, surface_over_D, dashed_lines_to_D, projection_lines)
         scale = 1
         self.play(
             group3d.animate.scale(scale).to_edge(DOWN, buff = -5),
             run_time=2
         )
-        # self.begin_ambient_camera_rotation(rate = PI/10)
+
+        self.play(Write(theory_tex_0), run_time=2)
+
         self.wait(0.5)
+        self.play(Write(label_a), Write(label_b), Write(label_c), Write(label_d), run_time=0.5)
+        self.wait(0.5)
+        self.play(Write(dashed_lines_to_D), run_time=1)
+        self.wait(0.5)
+        self.play(Create(projection_lines), run_time=1)
+        self.play(Create(domain_D), Write(label_domain_D), run_time=1)
+        self.wait(1)
+
+
+
         # In chữ
 
-        theory_description_0 = Tex(
-            r"\parbox{6cm}{"
-            r"Cho $z = f(x, y)$ là hàm số xác định trên miền đóng $\mathcal{D} = \{(x,y), \mathbb{R}^2 : a \leq x \leq b, c \leq y \leq d\}$. "
-            r"$\Omega$ là vật thể được giới hạn bởi:\\ $\Omega = \{(x,y,z) \in \mathbb{R}^3 : 0 \leq z \leq f(x,y), (x,y) \in \mathcal{D}\}$"
-            r"}",
-            font_size=40,
-            color=WHITE,
-            tex_environment=None
-        )
-        theory_group_0 = VGroup(theory_description_0).arrange(
-            DOWN,
-            aligned_edge=LEFT,
-            buff=0.3
-        )
-        theory_group_0.to_edge(RIGHT, buff=1)
-        set_fixed(theory_group_0)
+        # theory_description_0 = Tex(
+        #     r"\parbox{6cm}{"
+        #     r"Cho $z = f(x, y)$ là hàm số xác định trên miền đóng $\mathcal{D} = \{(x,y), \mathbb{R}^2 : a \leq x \leq b, c \leq y \leq d\}$. "
+        #     r"$\Omega$ là vật thể được giới hạn bởi:\\ ",
+        #     r"$$\Omega = \{(x,y,z) \in \mathbb{R}^3 : 0 \leq z \leq f(x,y), (x,y) \in \mathcal{D}\}$$"
+        #     r"}",
+        #     font_size=40,
+        #     color=WHITE,
+        #     tex_environment=None,
+        # )
 
-        self.play(Write(theory_group_0), run_time=2)
         self.wait(7)
-        self.play(Unwrite(theory_group_0), FadeOut(group3d), run_time=1.5)
+        self.play(Unwrite(theory_tex_0), run_time=1.5)
         self.wait(0.5)
 
         # self.play(FadeOut(group3d))
-        self.wait(0.5)
-        self.play(FadeIn(group3d))
+        # self.wait(0.5)
+        # self.play(FadeIn(group3d))
 
         theory_description_1 = Tex(
             r"\parbox{6cm}{"
