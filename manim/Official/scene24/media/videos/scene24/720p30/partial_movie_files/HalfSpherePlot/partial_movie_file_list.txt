@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene24/media/videos/scene24/720p30/partial_movie_files/HalfSpherePlot/1543315250_1657545628_3515611701.mp4'

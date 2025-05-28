@@ -29,12 +29,15 @@ class ChiaNho(MovingCameraScene):
         NoiDung3_1 = Tex( r"TRONG TỌA ĐỘ CỰC VỚI ĐỜI SỐNG", font_size=40).shift(DOWN * 0.5 + RIGHT * 0.08 + DOWN * 0.5)
         NoiDung4 = Tex(r"4. GIẢI QUYẾT VÍ DỤ THỰC TIỄN", font_size=40).shift(DOWN * 1.5 + LEFT * 0.7 + DOWN * 0.5)
 
+        MucLuc = VGroup(TEXT_scene4, NoiDung1, NoiDung2, NoiDung3, NoiDung3_1, NoiDung4)
+
         self.play(Write(TEXT_scene4), run_time=2)
         self.play(TEXT_scene4.animate.move_to(UP * 3), run_time=1)
         self.play(Write(NoiDung1), run_time=2)
         self.play(Write(NoiDung2), run_time=2)
         self.play(Write(NoiDung3), Write(NoiDung3_1), run_time=2)
         self.play(Write(NoiDung4), run_time=2)
+        self.play(FadeOut(MucLuc))
 
 
         def update_curve(mob):
