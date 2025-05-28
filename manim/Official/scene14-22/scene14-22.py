@@ -878,7 +878,7 @@ class ChiaNho(MovingCameraScene):
             font_size=35
         ).shift(UP * 1.8)
         self.play(Write(Text_1_scene22), Write(Text_1_1_scene22), run_time=3)
-        self.play(FadeOut(Text_1_1_scene22), FadeOut(Text_1_scene22))
+        self.play(FadeOut(Text_1_1_scene22), FadeOutgti(Text_1_scene22))
         self.play(LaggedStart(FadeIn(background_box_dohoamaytinh), Write(Text_2_scene22), lag_ratio=0.3), run_time=2)
         self.play(background_box_dohoamaytinh.animate.move_to(UP * 3), Text_2_scene22.animate.move_to(UP * 3))
         self.play(Write(Text_2_2_scene22), run_time=2)
