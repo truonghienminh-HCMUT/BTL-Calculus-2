@@ -82,7 +82,7 @@ class SCENE14_16(MovingCameraScene):
 
         big_arc = Arc(radius=3, start_angle=alpha, angle=beta - alpha, arc_center=origin2)
         big_arc.set_color(RED)
-        small_arc = Arc(radius=2.5, start_angle=beta, angle=-(beta - alpha), arc_center=origin2)
+        small_arc = Arc(radius=2.5, start_angle=alpha, angle= (beta - alpha), arc_center=origin2)
         small_arc.set_color(RED)
 
         # Tính điểm đầu dựa trên góc alpha
@@ -208,6 +208,46 @@ class SCENE14_16(MovingCameraScene):
             font_size=35
         ).shift(LEFT * 3)
 
+        r1 = 2.5
+        r2 = 3
+
+        a = 2  # bán kính trong
+        b = 3.5
+
+        big_arc_small = Arc(radius=r2, start_angle=alpha, angle=beta - alpha, arc_center=origin2)
+        big_arc_small.set_color(RED)
+        small_arc_small = Arc(radius=r1, start_angle=alpha, angle= (beta - alpha), arc_center=origin2)
+        small_arc_small.set_color(RED)
+
+        # Tính điểm đầu dựa trên góc alpha
+        left_point_arc = origin2 + 3 * np.array([np.cos(alpha), np.sin(alpha), 0])
+        right_point_arc = origin2 + 3 * np.array([np.cos(beta), np.sin(beta), 0])
+
+        # Tạo các đoạn thẳng từ origin
+        left_line_arc = Line(start= axes2.c2p(0, 0), end=axes2.c2p(2.5, 3.6), color=BLUE, stroke_width=4)
+        right_line_arc = Line(start= axes2.c2p(0, 0), end=axes2.c2p(3.3, 2.9), color=BLUE, stroke_width=4)
+
+        alpha = 0.3  # góc alpha (rad)
+        beta = 1.2   # góc beta (rad)
+
+        outer_points_arc = [origin2 + 3 * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(0.72, 0.96, 30)]
+        inner_points_arc = [origin2 + 2.5 * np.array([np.cos(t), np.sin(t), 0]) for t in np.linspace(0.96, 0.72, 30)]
+
+        regionnew_points = outer_points_arc + inner_points_arc
+        regionnew = VMobject()
+        regionnew.set_points_as_corners(regionnew_points)
+        regionnew.set_fill(RED, opacity=0.5)
+
+        dot_scene16 = Circle(radius=0.07, color=YELLOW, fill_opacity=1)
+        dot_scene16.move_to(RIGHT * 2.9 + UP *0.2)
+
+        Text_7_scene16 = Tex(r"$\varphi_{j}$", font_size=40).shift(RIGHT * 3.4 + UP *1.1)
+        Text_8_scene16 = Tex(r"$\varphi_{j - 1}$", font_size=40).shift(RIGHT * 4.2 + UP * 0.5 )
+        Text_9_scene16 = Tex(r"$r_{i}$", font_size=40).shift(RIGHT * 3.5 + DOWN *1.4)
+        Text_10_scene16 = Tex(r"$r_{i - 1}$", font_size=40).shift(RIGHT * 4.2 + DOWN * 1.3 )
+        Text_11_scene16 = Tex(r"$D_{ij}$", font_size=40).shift(LEFT * 3)
+        Text_12_scene16 = Tex(r"$(r_{i}\*, \varphi_{j}\*)$", font_size=40).shift(LEFT * 3 + UP *1)
+
 
 
         self.play(Write(Text_1_scene15), run_time=2)
@@ -224,17 +264,23 @@ class SCENE14_16(MovingCameraScene):
         self.add(part_copy)
         self.play(part1.animate.move_to(RIGHT * 3.05 + DOWN * 0.3), x_axes1_labels_copy.animate.move_to(RIGHT * 5.1 + UP * (-1.5)), y_axes1_labels_copy.animate.move_to(RIGHT * 1.7 + UP * 2), run_time=2)
         self.wait(1)
-        self.play(Uncreate(region), Uncreate(angle_alpha), Uncreate(angle_beta), Unwrite(alpha_label_old), Unwrite(beta_label_old), Unwrite(ra), Unwrite(rb), Unwrite(D))
+        self.remove(region)
+        self.play( Uncreate(angle_alpha), Uncreate(angle_beta), Unwrite(alpha_label_old), Unwrite(beta_label_old), Unwrite(ra), Unwrite(rb), Unwrite(D))
         self.play(Create(line_1), Create(line_2), Create(line_3), run_time=2)
         self.play(Create(big_arc), Create(small_arc), run_time=2)
-        self.remove(part_copy, axes1, x_axes1_labels, y_axes1_labels, Text0)
-        self.play(
-                  part1.animate.move_to(DOWN * 0.3 + RIGHT * 4), axes2.animate.move_to(RIGHT * 4), line_1.animate.move_to(RIGHT * 4), line_2.animate.move_to(RIGHT * 4),
-                  line_3.animate.move_to(RIGHT * 4), big_arc.animate.move_to(RIGHT * 4), small_arc.animate.move_to(RIGHT * 4), x_axes1_labels_copy.animate.move_to(RIGHT * 4), y_axes1_labels_copy.animate.move_to(RIGHT * 4), Text01.animate.move_to(RIGHT * 4), Unwrite(Text_1_scene15),
-                  Write(Text_1_scene16), Write(TamCuaPhanTuCon),
-                  run_time=3   
-        )
+        self.add(regionnew)
+        self.wait(1)
+
+
+
+
+        self.play(FadeOut(part_copy), FadeOut(axes1), FadeOut(x_axes1_labels), FadeOut(y_axes1_labels), FadeOut(Text0))
+        self.play(Create(dot_scene16), run_time=1)
+        self.play(Write(Text_7_scene16), Write(Text_8_scene16), Write(Text_9_scene16), Write(Text_10_scene16), run_time=1)
+        self.play(dot_scene16.animate.move_to(LEFT * 2 +UP *1), regionnew.animate.move_to(LEFT * 2))
+        self.play(Write(Text_11_scene16), Write(Text_12_scene16), run_time=2)
         self.wait(1.5)
+        self.play(dot_scene16.animate.move_to(RIGHT * 2.9 + UP *0.2), regionnew.animate.move_to(RIGHT * 2.9 + UP *0.15), FadeOut(Text_11_scene16), FadeOut(Text_12_scene16), FadeOut(Text_1_scene15))
         self.play(Transform(Text_1_scene16, Text_2_scene16), Transform(TamCuaPhanTuCon, LayMotDiem), run_time=1)
         self.wait(1.5)
         self.play(Transform(Text_1_scene16, Text_3_scene16), Transform(TamCuaPhanTuCon, DienTichCuaMienD_1), Write(DienTichCuaMienD_2), run_time=1)
@@ -244,7 +290,7 @@ class SCENE14_16(MovingCameraScene):
         self.play(Transform(Text_1_scene16, Text_5_scene16), Transform(TamCuaPhanTuCon, Text_5_scene16_2), Transform(DienTichCuaMienD_2, NeuTaDat), run_time=1)
         self.play(Uncreate(part1),  Uncreate(axes2), Uncreate(line_1), Uncreate(line_2),
                   Uncreate(line_3), Uncreate(big_arc), Uncreate(small_arc), Uncreate(x_axes1_labels_copy), Uncreate(y_axes1_labels_copy), Unwrite(Text01),
-                  Unwrite(DienTichCuaMienD_2), Unwrite(Text_1_scene16), Unwrite(TamCuaPhanTuCon),
+                  Unwrite(DienTichCuaMienD_2), Unwrite(Text_1_scene16), Unwrite(TamCuaPhanTuCon), Unwrite(Text_7_scene16), Unwrite(Text_8_scene16), Unwrite(Text_9_scene16), Unwrite(Text_10_scene16), Unwrite(Text_11_scene16), Unwrite(Text_12_scene16), Uncreate(regionnew), Uncreate(dot_scene16),
                   run_time=1   )
         
         
