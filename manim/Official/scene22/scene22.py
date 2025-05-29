@@ -338,10 +338,10 @@ class ChiaNho(MovingCameraScene):
         self.play(Uncreate(robot), Uncreate(shadow))
         self.add(Text_7_box_scene22)
         self.play(Write(Text_8_scene22), run_time=2)
-        circle1_scene13 = Circle(radius=2, color=WHITE).shift(DOWN * 1)
+        circle1_scene22 = Circle(radius=2, color=WHITE).shift(DOWN * 1)
         line2_scene13 = Line(start=[2.5, 0, 0], end=[0, 0, 0], color=YELLOW, stroke_width=5).shift(LEFT * 2.5 + DOWN * 1)
         diem_quay_scene13 = ORIGIN + DOWN * 1
-        self.add(circle1_scene13)
+        self.add(circle1_scene22)
         angle_tracker = ValueTracker(0)
         center = ORIGIN + DOWN * 1
 
@@ -381,6 +381,8 @@ class ChiaNho(MovingCameraScene):
         )
         
         self.wait(1)
+        self.remove(dynamic_sector, rotating_line, circle, circle1_scene22, Text_7_box_scene22, Text_8_scene22)
+
 
 
 
