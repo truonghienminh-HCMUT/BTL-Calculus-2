@@ -289,6 +289,8 @@ class ChiaNho(MovingCameraScene):
         self.wait(1.5)
         self.play(dot_scene16.animate.move_to(RIGHT * 2.9 + UP *0.2), regionnew.animate.move_to(RIGHT * 2.9 + UP *0.15), FadeOut(Text_11_scene16), FadeOut(Text_12_scene16), FadeOut(Text_1_scene15))
         self.wait(1)
+        self.play(Write(Text_1_scene16),  Write(TamCuaPhanTuCon), run_time=2)
+        self.wait(1.5)
         self.play(Transform(Text_1_scene16, Text_2_scene16), Transform(TamCuaPhanTuCon, LayMotDiem), run_time=2)
         self.wait(1.5)
         self.play(Transform(Text_1_scene16, Text_3_scene16), Transform(TamCuaPhanTuCon, DienTichCuaMienD_1), Write(DienTichCuaMienD_2), run_time=1)
