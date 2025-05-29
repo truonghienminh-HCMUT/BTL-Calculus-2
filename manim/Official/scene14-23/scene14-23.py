@@ -296,7 +296,7 @@ class ChiaNho(MovingCameraScene):
         self.play(Transform(Text_1_scene16, Text_4_scene16), Transform(TamCuaPhanTuCon, TongRiemann_1), Transform(DienTichCuaMienD_2, TongRiemann_2), run_time=1)
         self.wait(1.5)
         self.play(Transform(Text_1_scene16, Text_5_scene16), Transform(TamCuaPhanTuCon, Text_5_scene16_2), Transform(DienTichCuaMienD_2, NeuTaDat), run_time=1)
-        self.play(1.5)
+        self.wait(1.5)
         self.play(Uncreate(part1),  Uncreate(axes2), Uncreate(line_1), Uncreate(line_2),
                   Uncreate(line_3), Uncreate(big_arc), Uncreate(small_arc), Uncreate(x_axes1_labels_copy), Uncreate(y_axes1_labels_copy), Unwrite(Text01),
                   Unwrite(DienTichCuaMienD_2), Unwrite(Text_1_scene16), Unwrite(TamCuaPhanTuCon), Unwrite(Text_7_scene16), Unwrite(Text_8_scene16), Unwrite(Text_9_scene16), Unwrite(Text_10_scene16), Unwrite(Text_11_scene16), Unwrite(Text_12_scene16), Uncreate(regionnew), Uncreate(dot_scene16),
