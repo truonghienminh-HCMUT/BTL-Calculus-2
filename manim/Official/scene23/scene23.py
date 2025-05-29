@@ -46,6 +46,11 @@ class SCENE_23(MovingCameraScene):
         ViDu_9_scene23 = MathTex(r"f(x,y)=z=a(x^2+y^2)+b", font_size=40).shift(DOWN * 0.5)
         ViDu_10_scene23 = Tex(r"Sau khi dùng các số liệu thực tế để tính toán, ta có:", font_size=35).shift(UP * 1)
         ViDu_11_scene23 = MathTex(r"f(x,y)=z=\frac{-3}{8}(x^2+y^2)+9", font_size=40).shift(DOWN * 0.5)
+        ViDu_12_scene23 = Tex(r"TÍNH TOÁN", font_size=50)
+        ViDu_13_scen23 = Tex(r"TÍNH TOÁN", font_size=40).shift(UP * 3)
+        ViDu_14_scen23 = Tex(r"Diện tích khối cầu có phương trình $f(x, y)=\sqrt{5^2-x^2-y^2}$, giới hạn bởi mặt phẳng $z = 3$:", font_size=35).shift(UP*2)
+        ViDu_15_scen23 = MathTex(r"S_c = \iint\limits_D \sqrt{1^2 + f_x^2 + f_y^2}\, dA", font_size=40).shift(UP * 0.8)
+
 
         self.play(Write(Text_1_scene23), run_time=2)
         self.wait(1)
@@ -78,6 +83,12 @@ class SCENE_23(MovingCameraScene):
         self.play(Transform(ViDu_9_scene23, ViDu_11_scene23), run_time=1)
         self.wait(1)
         self.remove(ViDu_9_scene23, ViDu_10_scene23)
+        self.wait(1)
+        self.play(Write(ViDu_12_scene23), run_time=2)
+        self.play(Transform(ViDu_12_scene23, ViDu_13_scen23), run_time=1)
+        self.play(Write(ViDu_14_scen23), run_time=2)
+        self.play(Write(ViDu_15_scen23), run_time=2)
+
 
 
 
