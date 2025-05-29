@@ -46,10 +46,59 @@ class SCENE_23(MovingCameraScene):
         ViDu_9_scene23 = MathTex(r"f(x,y)=z=a(x^2+y^2)+b", font_size=40).shift(DOWN * 0.5)
         ViDu_10_scene23 = Tex(r"Sau khi dùng các số liệu thực tế để tính toán, ta có:", font_size=35).shift(UP * 1)
         ViDu_11_scene23 = MathTex(r"f(x,y)=z=\frac{-3}{8}(x^2+y^2)+9", font_size=40).shift(DOWN * 0.5)
-        ViDu_12_scene23 = Tex(r"TÍNH TOÁN", font_size=50)
-        ViDu_13_scen23 = Tex(r"TÍNH TOÁN", font_size=40).shift(UP * 3)
+        ViDu_12_scene23 = Tex(r"TÍNH TOÁN", font_size=50).set_color(YELLOW)
+        ViDu_13_scen23 = Tex(r"TÍNH TOÁN", font_size=40).shift(UP * 3).set_color(YELLOW)
         ViDu_14_scen23 = Tex(r"Diện tích khối cầu có phương trình $f(x, y)=\sqrt{5^2-x^2-y^2}$, giới hạn bởi mặt phẳng $z = 3$:", font_size=35).shift(UP*2)
         ViDu_15_scen23 = MathTex(r"S_c = \iint\limits_D \sqrt{1^2 + f_x^2 + f_y^2}\, dA", font_size=40).shift(UP * 0.8)
+        ViDu_16_scene23 = MathTex(r" = \iint\limits_D \sqrt{\frac{25}{5^2-x^2-y^2}}\, dA", font_size=40).shift(DOWN * 0.5)
+        ViDu_17_scene23 = Tex(r"Thay vào tọa độ cực: $x=rcos\varphi,y=rsin\varphi,dA=rdrd\varphi$", font_size=35).shift(DOWN * 1.5)
+        ViDu_18_scene23 = MathTex(r"S_c = \iint\limits_D \sqrt{\frac{25}{25 - r^2}} \, r \, dr \, d\varphi", font_size=40).shift(DOWN * 3)
+        ViDu_19_scene23 = Tex(r"Do đồ thị khối cầu phần trên bị giới hạn bởi đường $z=3$ do khoảng cách tới tâm từ đáy là 3 và không có điều kiện về góc nên ta có", font_size=35).shift(UP * 0.8)
+        ViDu_20_scene23 = MathTex(
+            r"\left\{ \begin{array}{l}"
+            r"4 \leq r \leq 5 \\"
+            r"0 \leq \varphi \leq 2"
+            r"\end{array} \right.", 
+            font_size=40
+        ).shift(DOWN * 0.3)
+        ViDu_21_scene23 = MathTex(r"S_c = \int_0^{2\pi} d\varphi \int_4^5 r\,dr\, \sqrt{\frac{25}{25 - r^2}}", font_size=40).shift(UP * 0.8)
+        ViDu_23_scene23 = MathTex(r"= 5 \int_0^{2\pi} d\varphi \int_4^5 r\,dr\, \sqrt{\frac{1}{25 - r^2}}", font_size=40).shift(DOWN * 0.5)
+        ViDu_24_scene23 = Tex(r"Đặt $u = 25-r^2$ $\Rightarrow$ $du = -2rdr$", font_size=35).shift(UP * 0)
+        ViDu_25_scen23 = MathTex( r"S_c = \frac{5}{2} \int_0^{2\pi} d\varphi \int_0^9 du\, \sqrt{\frac{1}{u}}", font_size=40).shift(DOWN * 1)
+        ViDu_26_scene23 = MathTex(r"= \frac{5}{2} \int_0^{2\pi} 6\, d\varphi =",r"30\pi", font_size=40).shift(DOWN * 2.2)
+        ViDu_27_scene23 = Tex(r"Lấy đối xứng lên trên.", font_size=35).shift(UP*1.2)
+        ViDu_28_scene23 = Tex(r"$\Rightarrow$ Diện tích khối cầu ở đáy là", r" $60\pi$", font_size=40)
+        ViDu_29_scene23 = Tex(r"Tiếp theo là phần đỉnh. Ta có phần đỉnh là một paraboloid tròn tiếp xúc với hình cầu đáy. Phần tiếp xúc là một đường tròn có bán kính là $4 m$. Ứng với:", font_size=35).shift(UP*2)
+        ViDu_30_scene23 = MathTex(
+            r"\left\{ \begin{array}{l}"
+            r"0 \leq r \leq 4 \\"
+            r"0 \leq \varphi \leq 2"
+            r"\end{array} \right.", 
+            font_size=40
+        ).shift(UP * 1)
+        ViDu_31_scene23 = Tex(r"Thay phương trình của paraboloid vào công thức, ta có:", font_size=35)
+        ViDu_32_scene23 = MathTex(
+            "S_p = \\int_0^{2\\pi} d\\varphi \\int_0^4 r \\sqrt{1 + \\frac{9}{16} r^2} \\, dr", font_size=40).shift(DOWN * 1)
+        ViDu_33_scene23 = MathTex(
+            "\\text{- Đặt } u = 1 + \\frac{9}{16}r^2 \\Rightarrow du = \\frac{9}{8}r\\,dr "
+            "\\Rightarrow r\\,dr = \\frac{8}{9}du", font_size=35
+        ).shift(UP * 0.7)
+        ViDu_34_scene23 = MathTex(
+            "\\Rightarrow S_p = \\int_0^{2\\pi} d\\varphi \\int_1^{10} "
+            "\\frac{8}{9} \\sqrt{u} \\, du", font_size=40).shift(DOWN * 0.5)
+        ViDu_35_scene23 = MathTex(
+            "= \\int_0^{2\\pi} d\\varphi \\, \\frac{16}{27} \\left( 10\\sqrt{10} - 1 \\right)", font_size=40
+        ).shift(DOWN * 1.6)
+        ViDu_36_scene23 = MathTex(
+            "=", "\\frac{32\\pi}{27} \\left( 10\\sqrt{10} - 1 \\right)", font_size=40
+        ).shift(DOWN * 2.7)
+        ViDu_37_scene23 = Tex(r"Anh cho biết anh sẽ dùng kính để làm tòa nhà, vậy diện tích kính cần sử dụng là:", font_size=35).shift(UP * 1.5)
+        ViDu_38_scene23 = MathTex("\\frac{32\\pi}{27}(10\\sqrt{10} - 1) + 60\\pi\\,(m^2)", font_size=40)
+        ViDu_39_scene23 = Tex(r"Anh sử dụng kính cường lực $10 mm$ Việt Nhật $480.000$ VNĐ$/m^2$, vậy số tiền cần sử dụng là:", font_size=35).shift(UP * 0.8)
+        ViDu_40_scene23 = MathTex(
+            "\\left[ \\frac{32\\pi}{27}(10\\sqrt{10} - 1) + 60\\pi \\right]"
+            " \\times 480\\,000 \\approx 145\\,154\\,000 \\ (\\text{VNĐ})", font_size=40
+        ).shift(DOWN * 0.7)
 
 
         self.play(Write(Text_1_scene23), run_time=2)
@@ -65,10 +114,10 @@ class SCENE_23(MovingCameraScene):
         self.remove(ViDu_1_scene23, ViDu_2_scene23, ViDu_3_scene23)
         self.wait(1)
         self.play(ViDu_4_scene23.animate.move_to(UP * 5), ViDu_5_scene23.animate.move_to(UP * 3))
-        self.wait(1)
+        self.wait(3)
         self.remove(ViDu_4_scene23)
         self.play(Transform(ViDu_5_scene23, ViDu_6_scene23), run_time=1)
-        self.wait(1)
+        self.wait(3)
         self.remove(ViDu_5_scene23)
         self.play(Write(ViDu_7_scene23), run_time=3)
         self.wait(1)
@@ -88,9 +137,46 @@ class SCENE_23(MovingCameraScene):
         self.play(Transform(ViDu_12_scene23, ViDu_13_scen23), run_time=1)
         self.play(Write(ViDu_14_scen23), run_time=2)
         self.play(Write(ViDu_15_scen23), run_time=2)
-
-
-
+        self.play(Write(ViDu_16_scene23), run_time=2)
+        self.wait(1)
+        self.play(Write(ViDu_17_scene23), run_time=2)
+        self.play(Transform(ViDu_16_scene23, ViDu_18_scene23), run_time=1)
+        self.wait(1)
+        self.play(FadeOut(ViDu_14_scen23), FadeOut(ViDu_15_scen23), FadeOut(ViDu_17_scene23), ViDu_16_scene23.animate.move_to(UP * 2), run_time=2)
+        self.play(Write(ViDu_19_scene23), run_time=2)
+        self.play(Write(ViDu_20_scene23), run_time=2)
+        self.play(FadeOut(ViDu_19_scene23), Transform(ViDu_20_scene23, ViDu_21_scene23), run_time=2)
+        self.play(Write(ViDu_23_scene23), run_time=2)
+        self.play(FadeOut(ViDu_16_scene23), ViDu_20_scene23.animate.move_to(UP* 2), ViDu_23_scene23.animate.move_to(UP * 0.8))
+        self.play(Write(ViDu_24_scene23), run_time=2)
+        self.play(Write(ViDu_25_scen23), run_time=2)
+        self.play(Write(ViDu_26_scene23), run_time=2)
+        self.play(Circumscribe(ViDu_26_scene23[1]))
+        self.play(FadeOut(ViDu_26_scene23), FadeOut(ViDu_25_scen23), FadeOut(ViDu_24_scene23), FadeOut(ViDu_20_scene23), FadeOut(ViDu_23_scene23))
+        self.play(Write(ViDu_27_scene23), run_time=2)
+        self.play(Write(ViDu_28_scene23), run_time=2)
+        self.play(Circumscribe(ViDu_28_scene23[1]))
+        self.wait(1)
+        self.play(FadeOut(ViDu_27_scene23), FadeOut(ViDu_28_scene23))
+        self.play(Write(ViDu_29_scene23), run_time=2)
+        self.play(Write(ViDu_30_scene23), run_time=2)
+        self.play(Write(ViDu_31_scene23), run_time=2)
+        self.play(Write(ViDu_32_scene23), run_time=2)
+        self.play(FadeOut(ViDu_29_scene23), FadeOut(ViDu_30_scene23), FadeOut(ViDu_31_scene23), ViDu_32_scene23.animate.move_to(UP * 2), run_time=2)
+        self.play(Write(ViDu_33_scene23), run_time=2)
+        self.play(Write(ViDu_34_scene23), run_time=2)
+        self.play(Write(ViDu_35_scene23), run_time=2)
+        self.play(Write(ViDu_36_scene23), run_time=2)
+        self.play(FadeOut(ViDu_32_scene23), FadeOut(ViDu_33_scene23), FadeOut(ViDu_34_scene23), FadeOut(ViDu_35_scene23))
+        self.play(ViDu_36_scene23.animate.move_to(UP * 1), Write(ViDu_37_scene23), Transform(ViDu_36_scene23, ViDu_38_scene23), run_time=2)
+        self.play(Circumscribe(ViDu_36_scene23))
+        self.wait(1)
+        self.play(FadeOut(ViDu_36_scene23), FadeOut(ViDu_37_scene23))
+        self.play(Write(ViDu_39_scene23), run_time=2)
+        self.play(Write(ViDu_40_scene23), run_time=2)
+        self.play(Circumscribe(ViDu_40_scene23))
+        self.wait(1)
+        self.play(FadeOut(ViDu_39_scene23), FadeOut(ViDu_40_scene23))
 
         def update_curve(mob):
             mob.move_to(moving_dot.get_center())
