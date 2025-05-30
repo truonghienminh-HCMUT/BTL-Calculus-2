@@ -166,8 +166,8 @@ class Main(CustomThreeDScene):
         theory_tex_0.to_edge(RIGHT, buff=0.5)
         set_fixed(theory_tex_0)
 
-        self.play(Write(theory_tex_0), run_time=2)
-        self.wait(1)
+        self.play(Write(theory_tex_0), run_time=5)
+        self.wait(3)
         self.play(Unwrite(theory_tex_0), run_time=1.5)
         self.wait(0.5)
 
@@ -283,9 +283,9 @@ class Main(CustomThreeDScene):
             FadeOut(surface, shift = DOWN * 5, run_time = 1.5),
             # FadeIn(surface_over_D, shift = DOWN * 0.5),
         )
-        group3d.add(surface_over_D, dashed_lines_to_D, projection_lines, label_domain_D, domain_D, label_a, label_b, label_c, label_d)
+        group3d.add(surface, surface_over_D, dashed_lines_to_D, projection_lines, label_domain_D, domain_D, label_a, label_b, label_c, label_d)
         self.wait(1.5)
-        self.play(Unwrite(theory_group_2), run_time=1.5)
+        self.play(Unwrite(theory_group_2), FadeOut(group3d), run_time=1.5)
         self.wait(2)
 
 

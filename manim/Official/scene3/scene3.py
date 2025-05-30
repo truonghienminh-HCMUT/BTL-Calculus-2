@@ -62,7 +62,7 @@ def get_artichoke_radius(v, H_total, R_base, R_max_bulge, H_max_bulge, R_top_tip
                 radius = b * (v - H_max_bulge)**2 + R_max_bulge
     return max(0.001, radius)
 
-class Main(CustomThreeDScene):
+class scene3(CustomThreeDScene):
     def construct(self):
         # General param
         H_total = 4.0
@@ -159,5 +159,5 @@ class Main(CustomThreeDScene):
         self.play(Uncreate(horizontal_lines_vgroup), run_time=1)
 
         self.begin_ambient_camera_rotation(rate=PI/4, about="theta")
-        self.wait(20)
+        self.wait(7)
         self.stop_ambient_camera_rotation()
