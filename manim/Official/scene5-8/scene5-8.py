@@ -56,6 +56,12 @@ class scene5_8(CustomThreeDScene):
         self.play(FadeOut(title), run_time=0.5)
         self.wait(0.5)
 
+        sentence = Tex(r"Ta có vật thể $\Omega$", font_size = 50)
+        self.play(Write(sentence), run_time=1)
+        self.wait(1)
+        self.play(FadeOut(sentence), run_time=0.5)
+        self.wait(0.5)
+
         # miền D
         a = 2
         b = 8

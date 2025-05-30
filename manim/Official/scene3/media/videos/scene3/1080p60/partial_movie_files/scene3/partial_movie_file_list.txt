@@ -4,4 +4,4 @@ file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/10
 file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/1080p60/partial_movie_files/scene3/3027385329_2549688290_1427411379.mp4'
 file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/1080p60/partial_movie_files/scene3/3027385329_233831863_1921102248.mp4'
 file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/1080p60/partial_movie_files/scene3/3027385329_1718987564_630168859.mp4'
-file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/1080p60/partial_movie_files/scene3/1196302325_3841189508_498814320.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene3/media/videos/scene3/1080p60/partial_movie_files/scene3/1196302325_1731284256_498814320.mp4'
