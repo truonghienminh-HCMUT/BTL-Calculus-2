@@ -1097,7 +1097,7 @@ class ChiaNho(MovingCameraScene):
         ViDu_20_scene23 = MathTex(
             r"\left\{ \begin{array}{l}"
             r"4 \leq r \leq 5 \\"
-            r"0 \leq \varphi \leq 2"
+            r"0 \leq \varphi \leq 2\pi"
             r"\end{array} \right.", 
             font_size=40
         ).shift(DOWN * 0.3)
@@ -1112,7 +1112,7 @@ class ChiaNho(MovingCameraScene):
         ViDu_30_scene23 = MathTex(
             r"\left\{ \begin{array}{l}"
             r"0 \leq r \leq 4 \\"
-            r"0 \leq \varphi \leq 2"
+            r"0 \leq \varphi \leq 2\pi"
             r"\end{array} \right.", 
             font_size=40
         ).shift(UP * 1)

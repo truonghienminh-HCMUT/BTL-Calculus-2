@@ -20,7 +20,7 @@ class ChiaNho(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
          
-        TEXT_scene25 = Tex(r"\textbf{CẢM ƠN CÁC BẠN ĐÃ CHÚ Ý XEM VIDEO}", font_size=40).shift(UP * 0.5)
+        TEXT_scene25 = Tex(r"\textbf{CẢM ƠN MỌI NGƯỜI ĐÃ XEM}", font_size=40).shift(UP * 0.5)
 
         self.play(Write(TEXT_scene25), run_time=2)
         self.play(FadeOut(TEXT_scene25))

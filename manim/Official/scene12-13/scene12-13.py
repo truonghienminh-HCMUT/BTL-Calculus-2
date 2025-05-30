@@ -17,7 +17,7 @@ config.tex_template = VIETNAMESE_TEMPLATE
 
 config.frame_rate = 60
 
-class ChiaNho(MovingCameraScene):
+class scene12_13(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
 
@@ -301,7 +301,7 @@ class ChiaNho(MovingCameraScene):
         )
            
         #NHÃN CỦA GÓC
-        angle_label_scene13 = MathTex(r"\theta").scale(0.7).set_color_by_gradient(BLUE)
+        angle_label_scene13 = MathTex(r"\varphi").scale(0.7).set_color_by_gradient(BLUE)
         angle_label_scene13.move_to([1.2, 0.3, 0])
         angle_label_scene13.shift(LEFT * 2.5)
         angle_label1_scene13 = angle_label_scene13.copy()

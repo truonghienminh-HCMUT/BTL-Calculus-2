@@ -17,7 +17,7 @@ config.tex_template = VIETNAMESE_TEMPLATE
 
 config.frame_rate = 60
 
-class ChiaNho(MovingCameraScene):
+class thanhvien_new(MovingCameraScene):
     def construct(self):
         self.camera.frame.save_state()
          
@@ -39,7 +39,7 @@ class ChiaNho(MovingCameraScene):
         self.play(FadeOut(TEXT_scene24))
         self.play(Write(TEXT_1_scene24), run_time=2)
         self.wait(1)
-        self.play(Transform(TEXT_1_scene24, TEXT_2_scene24), run_time=2)
+        self.play(Transform(TEXT_1_scene24, TEXT_2_scene24), run_time=1)
         self.play(Write(ThanhVien1), Write(ThanhVien2), Write(ThanhVien3), Write(ThanhVien4), Write(ThanhVien5), Write(ThanhVien6),  run_time=2)
         self.play(FadeOut(MucLuc))
 
@@ -49,4 +49,4 @@ class ChiaNho(MovingCameraScene):
 
         self.camera.frame.remove_updater(update_curve)
 
-        self.play(Restore(self.camera.frame))
+        # self.play(Restore(self.camera.frame))
