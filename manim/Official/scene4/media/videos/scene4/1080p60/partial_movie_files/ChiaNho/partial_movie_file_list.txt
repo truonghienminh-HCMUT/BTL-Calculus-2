@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/2501320873_4074444780_223132457.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/1526178179_981136548_426005524.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/1526178179_294296956_2136909257.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/1526178179_2539505950_1038708923.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/1526178179_908957809_2554424655.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/1526178179_180458552_3629728578.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/1526178179_2830525725_2023860264.mp4'
+file 'file:D:/GitHub/BTL-Calculus-2/manim/Official/scene4/media/videos/scene4/1080p60/partial_movie_files/ChiaNho/1526178179_2646869730_877267901.mp4'
