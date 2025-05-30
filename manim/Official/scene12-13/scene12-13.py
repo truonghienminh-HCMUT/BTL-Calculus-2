@@ -301,7 +301,7 @@ class scene12_13(MovingCameraScene):
         )
            
         #NHÃN CỦA GÓC
-        angle_label_scene13 = MathTex(r"\theta").scale(0.7).set_color_by_gradient(BLUE)
+        angle_label_scene13 = MathTex(r"\varphi").scale(0.7).set_color_by_gradient(BLUE)
         angle_label_scene13.move_to([1.2, 0.3, 0])
         angle_label_scene13.shift(LEFT * 2.5)
         angle_label1_scene13 = angle_label_scene13.copy()
