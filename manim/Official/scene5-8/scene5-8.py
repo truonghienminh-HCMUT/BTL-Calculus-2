@@ -37,7 +37,7 @@ def set_fixed(*mobjects):
 def func_z(x, y):
     return 0.05 * x**2 + 0.5 * y
 
-class Main(CustomThreeDScene):
+class scene5_8(CustomThreeDScene):
     def construct(self):
         # INIT
         color_db5897 = "#db5897"
@@ -283,9 +283,9 @@ class Main(CustomThreeDScene):
             FadeOut(surface, shift = DOWN * 5, run_time = 1.5),
             # FadeIn(surface_over_D, shift = DOWN * 0.5),
         )
-        group3d.add(surface, surface_over_D, dashed_lines_to_D, projection_lines, label_domain_D, domain_D, label_a, label_b, label_c, label_d)
-        self.wait(1.5)
-        self.play(Unwrite(theory_group_2), FadeOut(group3d), run_time=1.5)
+        # self.remove(surface)
+        group3d.add(surface_over_D, dashed_lines_to_D, projection_lines, label_domain_D, domain_D, label_a, label_b, label_c, label_d)
+        # self.wait(1.5)
         self.wait(2)
 
 
