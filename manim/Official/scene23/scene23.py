@@ -143,8 +143,6 @@ class SCENE_23(MovingCameraScene):
         self.play(Write(ViDu_10_scene23), run_time=2)
         self.play(Transform(ViDu_9_scene23, ViDu_11_scene23), run_time=1)
         self.wait(1)
-        self.play(ViDu_19_scene23.animate.move_to(UP * 3), run_time=2)
-        self.wait(3)
         self.remove(ViDu_9_scene23, ViDu_10_scene23)
         self.wait(1)
         self.play(Write(ViDu_12_scene23), run_time=2)
