@@ -159,5 +159,5 @@ class scene3(CustomThreeDScene):
         self.play(Uncreate(horizontal_lines_vgroup), run_time=1)
 
         self.begin_ambient_camera_rotation(rate=PI/4, about="theta")
-        self.wait(7)
+        self.wait(9)
         self.stop_ambient_camera_rotation()
