@@ -22,7 +22,7 @@ class ChiaNho(MovingCameraScene):
         self.camera.frame.save_state()
          
         #SCENE 2: TABLE OF CONTENTS
-        TEXT_scene24 = Tex(r"\textbf{VIDEO ĐƯỢC THỰC HIỆN BỞI NHÓM NM02 LỚP CN01 DƯỚI SỰ HƯỚNG DẪN CỦA THẦY TRÍ ĐẸP TRAI}", font_size=35)
+        TEXT_scene24 = Tex(r"\textbf{VIDEO ĐƯỢC THỰC HIỆN BỞI NHÓM NM02 LỚP CN01 DƯỚI SỰ HƯỚNG DẪN CỦA THẦY TRƯƠNG VĂN TRÍ}", font_size=35)
         TEXT_1_scene24 = Tex(r"THÀNH VIÊN NHÓM NM02", font_size=50)
         TEXT_2_scene24 = Tex(r"THÀNH VIÊN NHÓM NM02", font_size=40).shift(UP * 3)
         ThanhVien1 = Tex(r"Phạm Nguyễn Thiên Ân - 2452112", font_size=40).shift(UP * 2)

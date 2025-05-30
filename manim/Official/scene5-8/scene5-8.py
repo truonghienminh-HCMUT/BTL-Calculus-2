@@ -48,7 +48,7 @@ class Main(CustomThreeDScene):
         color_88bdef = "#88bdef"
 
 
-        title = Tex(r"\textbf{I. ĐỊNH NGHĨA TÍCH PHÂN KÉP}", font_size=70)
+        title = Tex(r"\textbf{1.TÍCH PHÂN KÉP}", font_size=70)
         title.set_color_by_gradient(color_03ffff, color_cc00ff)
         
         self.play(Write(title), run_time=1)

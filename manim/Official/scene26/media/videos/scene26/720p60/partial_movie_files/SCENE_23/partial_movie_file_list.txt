@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene26/media/videos/scene26/720p60/partial_movie_files/SCENE_23/4193198211_855555047_223132457.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene26/media/videos/scene26/720p60/partial_movie_files/SCENE_23/501858615_548731573_2341826046.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene26/media/videos/scene26/720p60/partial_movie_files/SCENE_23/501858615_4227676439_3118007578.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene26/media/videos/scene26/720p60/partial_movie_files/SCENE_23/501858615_3450124778_1666280314.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene26/media/videos/scene26/720p60/partial_movie_files/SCENE_23/501858615_548731573_3526085838.mp4'
+file 'file:C:/Users/hp/AppData/Local/GitHubDesktop/app-3.4.19/BTL-Calculus-2/manim/Official/scene26/media/videos/scene26/720p60/partial_movie_files/SCENE_23/501858615_2566152641_1845659402.mp4'
